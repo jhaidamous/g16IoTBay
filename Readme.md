@@ -3,7 +3,7 @@ some text
 <<<<<<< HEAD
 
 sup this is vu
-
+sup my name is vu and fuck ya
 
 
 =======
