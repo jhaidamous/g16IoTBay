@@ -1,0 +1,152 @@
+* {
+	margin: 0;
+	padding: 0;
+}
+.navclass {
+	float: right;
+	line-height: 100px;
+	padding-right: 5%;
+}
+
+.navclass a:hover {
+	color: #3fbab6;
+	transition: color .25s;
+}
+
+.navclass a:active{
+	color: #3fbab6;
+}
+
+.navclass a{
+	text-decoration: none;
+	font-family: monospace;
+	font-weight: bold;
+	letter-spacing: 1px;
+	font-size: 1.5em;
+	margin: 10px;
+	color: #fff;
+}
+
+.toparea{
+	height: 100px;
+	top: 0;
+	background: #262626;
+	width: 100%;
+	position: fixed;
+	z-index: 1;
+
+}
+.title{
+	width: 35%;
+        padding-left: 1%;
+        padding-top: 1%;
+	float: left;
+}
+
+.bodyclass {
+	text-align: left;
+	position: relative;
+    background: #ededed;
+    height: 100%;
+}
+.mainsite{
+    width: 100%;
+    position:  relative;
+    background: #ededed;
+    height: 100%;
+    top: 100px;
+    padding-bottom: 70px;
+
+}
+.mainsite h1 {
+    font-family: Arial;
+    letter-spacing: 1.7px;
+    color: #2a76a1;
+    font-size: 2em;
+    font-weight: 800;
+    margin-left: 2%;
+    margin-top: 2%;
+}
+
+.mainsite h2 {
+    font-family: Arial;
+    letter-spacing: 1.7px;
+    color: #659DBD;
+    font-size: 1.5em;
+    font-weight: 700;
+    text-transform: uppercase;
+    margin-left: 2%;
+    margin-top: 2%;
+}
+
+.mainsite p {
+    font-family: sans-serif;
+    line-height: 25px;
+    margin-left: 2%;
+    font-size: 1.3em;
+    width: 52%;
+    margin-top: 1%;
+}
+
+.mainsite li {
+    list-style-type: disc;
+    font-family: sans-serif;
+    line-height: 20px;
+    margin-left: 3%;
+    font-size: 1.3em;
+    width: 52%;
+    margin-top: 1%;
+}
+
+#picsdiv {
+	float: right;
+	position: static;
+	padding-right: 5%;
+	width: 25%;
+}
+
+.bottomarea {
+  position: fixed;
+  bottom: 0;
+  height: 70px;
+  width: 100%;
+  background-color: #262626;
+  color: #fff;
+  text-align: center;
+}
+
+.bottomarea p {
+	font-family: sans-serif;
+	line-height: 25px;
+	font-size: 1.3em;
+	margin-top: 27px;
+}
+
+.bottomarea a {
+	text-decoration: none;
+	text-transform: uppercase;
+	font-family: monospace;
+	font-weight: bold;
+	letter-spacing: 1px;
+	font-size: 1.5em;
+	color: #3fbab6;
+}
+
+.table {
+	font-family: sans-serif;
+	line-height: 25px;
+	margin-left: 2%;
+	font-size: 1.3em;
+	margin-top: 1%;
+}
+
+.table th, td {
+        border:none;
+	padding: 2px;
+	padding-left: 7px;
+	padding-right: 7px;
+}
+
+.bold {
+	font-weight: bold;
+}
