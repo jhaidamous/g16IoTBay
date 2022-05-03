@@ -75,6 +75,7 @@
         <nav class="navclass">
         <a href="index.jsp">Home</a>
         <%if (success == 1 || success == 2) { %>
+        <a href="store.jsp">Store</a>
         <a href="logout.jsp">Logout</a>
         <% } %>
         </nav>

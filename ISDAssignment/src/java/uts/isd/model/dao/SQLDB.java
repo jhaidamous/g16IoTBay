@@ -1,45 +1,28 @@
-package uts.isd.model;
+package uts.isd.model.dao;
 
 import java.io.Serializable;
 import java.util.Random;
 /**
  *
- * @author g16
+ * @author george
  */
-public class User implements Serializable{
+public class SQLDB implements Serializable{
     //Fields or properties
-    private int userID;
+    private int ID;
     private String email;
     private String name;
-    private String username;
     private String password;
     private String phone;
 
-    public User() {
+    public SQLDB() {
     }
 
-    public User(String email, String name, String username, String password, String phone) {
-        ID = (new Random()).nextInt(999999);
+    public SQLDB(int ID, String email, String name, String password, String phone) {
+        this.ID = ID;
         this.email = email;
         this.name = name;
-        this.username = username;
         this.password = password;
         this.phone = phone;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-    
-    public boolean login(String username, String password) {
-        if (username == this.username && password == this.password) {
-            return true;
-        }
-        else return false;
     }
 
     public int getID() {

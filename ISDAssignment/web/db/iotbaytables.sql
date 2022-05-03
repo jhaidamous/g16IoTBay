@@ -7,8 +7,6 @@
  * Author:  navid
  * Created: 19/04/2022
 --  */
-begin;
-
 create table users (
     userID integer primary key not null generated always as identity(start with 1, increment by 1),
     firstname varchar(20) not null,
@@ -40,12 +38,79 @@ create table customer_user(
 
 create table staff_user (
     userID integer primary key not null,
-    role varchar(20) not null,
+    staff_role varchar(20) not null,
     password varchar(30) not null,
     foreign key (userID) references users(userID)
 );
 
+create table guest_user (
+    userID integer primary key not null,
+    guest_address varchar(100),
+    guest_street_number varchar(10),
+    guest_street_name varchar(30),
+    guest_suburb varchar(50),
+    guest_post_code varchar(6),
+    guest_state varchar(10),
+    guest_country varchar(20),
+    foreign key (userID) references users(userID)
+);
+
+create table cart (
+    cartID integer primary key not null generated always as identity(start with 1, increment by 1),
+    total_items float,
+    shipping_price float,
+    userID integer not null,
+    foreign key (userID) references users(userID)
+);
 
 
+create table orders (
+    orderID integer primary key not null generated always as identity(start with 1, increment by 1),
+    tracking_number integer,
+    arrival_date date,
+    order_date date,
+    order_status varchar(15),
+    userID integer not null,
+    cartID integer not null,
+    foreign key (userID) references users(userID),
+    foreign key (cartID) references cart(cartID)
+);
 
-commit;
+create table notification (
+    notificationID integer primary key not null generated always as identity(start with 1, increment by 1),
+    notif_type varchar(25),
+    notif_status varchar(15),
+    orderID integer not null,
+    foreign key (orderID) references orders(orderID)
+);
+
+create table catalog_item (
+    itemID integer primary key not null generated always as identity(start with 1, increment by 1),
+    item_name varchar(150) not null,
+    item_price float,
+    item_stock integer,
+    item_status varchar(20),
+    cost_per_item float,
+    item_category varchar(20),
+    item_image_path varchar(100)
+);
+
+create table payment (
+    paymentID integer primary key not null generated always as identity(start with 1, increment by 1),
+    payment_error varchar(20),
+    payment_status varchar(20),
+    temp_CVC varchar(20),
+    temp_card_number varchar(20),
+    temp_expiry_date date,
+    orderID integer not null,
+    foreign key (orderID) references orders(orderID)
+);
+
+create table line_item (
+    lineID integer primary key not null generated always as identity(start with 1, increment by 1),
+    itemID integer not null,
+    item_quantity integer,
+    cartID integer not null,
+    foreign key (itemID) references catalog_item(itemID),
+    foreign key (cartID) references cart(cartID)
+);

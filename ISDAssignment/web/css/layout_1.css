@@ -150,3 +150,16 @@
 .bold {
 	font-weight: bold;
 }
+
+.container {
+  display: grid;
+  grid-auto-columns: max-content; 
+  grid-auto-flow: dense; 
+  grid-auto-rows: minmax(100px, auto);
+  grid-gap: 25px;
+  grid-template-columns: repeat(3, 1fr);
+}
+.grid-item {
+  grid-column: span 1;
+  grid-row: span 1;
+}
