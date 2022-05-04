@@ -42,7 +42,7 @@
     <p>
         These are all the items we have for sale 
         <div class="collection">
-            <% for (Item items : ItemDAO().fetch)//
+             <!--for (Item items : ItemDAO().fetch)//-->
             <div class="product">
               <a class="product__image" href="#"></a>
               <div class="product__name">

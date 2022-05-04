@@ -17,7 +17,7 @@ import java.sql.SQLException;
 public class SQLDBConnecter extends SQLDB {
     public SQLDBConnecter() throws ClassNotFoundException, SQLException {
         Class.forName(driver);
-        super.connection = DriverManager.getConnection(URL+db, dbuser, dbpassword);
+        super.connection = DriverManager.getConnection(URL+db, dbuser, dbpass);
     }
     
     public Connection connection() {

@@ -54,6 +54,15 @@ create table staff_user (
     foreign key (userID) references users(userID)
 );
 
+create table user_zlogs (
+    userID integer not null,
+    logDate date not null,
+    logTime time not null,
+    message varchar(100),
+    primary key(userID, logDate, logTime)
+);
+
+
 -- create table guest_user (
 --     userID integer primary key not null,
 --     guest_address varchar(100),

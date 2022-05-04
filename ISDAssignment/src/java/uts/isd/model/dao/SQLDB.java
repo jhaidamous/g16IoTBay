@@ -1,70 +1,20 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
 package uts.isd.model.dao;
 
-import java.io.Serializable;
-import java.util.Random;
+import java.sql.Connection;
+
 /**
  *
- * @author george
  */
-public class SQLDB implements Serializable{
-    //Fields or properties
-    private int ID;
-    private String email;
-    private String name;
-    private String password;
-    private String phone;
-
-    public SQLDB() {
-    }
-
-    public SQLDB(int ID, String email, String name, String password, String phone) {
-        this.ID = ID;
-        this.email = email;
-        this.name = name;
-        this.password = password;
-        this.phone = phone;
-    }
-
-    public int getID() {
-        return ID;
-    }
-
-    public void setID(int ID) {
-        this.ID = ID;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
-    
-    
+public abstract class SQLDB {
+    protected String URL = "jdbc:derby://localhost:/1527/";
+    protected String db = "iotdb";
+    protected String dbuser = "iotadmin";
+    protected String dbpass = "admin";
+    protected String driver = "org.apache.derby.jdbc.ClientDriver";
+    protected Connection connection;
     
 }

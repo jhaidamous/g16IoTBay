@@ -19,7 +19,7 @@ public class User implements Serializable{
     }
 
     public User(String email, String name, String username, String password, String phone) {
-        ID = (new Random()).nextInt(999999);
+        userID = (new Random()).nextInt(999999);
         this.email = email;
         this.name = name;
         this.username = username;
@@ -43,11 +43,11 @@ public class User implements Serializable{
     }
 
     public int getID() {
-        return ID;
+        return userID;
     }
 
     public void setID(int ID) {
-        this.ID = ID;
+        this.userID = ID;
     }
 
     public String getEmail() {
