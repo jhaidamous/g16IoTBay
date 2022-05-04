@@ -109,6 +109,7 @@ create table payment (
     paymentID integer primary key not null generated always as identity(start with 1, increment by 1),
     payment_error varchar(20),
     payment_status varchar(20),
+    paymentDate date,
     orderID integer not null,
     foreign key (orderID) references orders(orderID)
 );

@@ -20,15 +20,16 @@ public class Payment implements Serializable{
     private String temp_expiry_date;
     private int orderID;
 // to modify
-    public Payment(int paymentID, String payment_error, String payment_status, String temp_CVC, String temp_card_number, String temp_expiry_date, int orderID) {
+    public PaymentDetails() {
         
-        this.paymentID = paymentID;
-        this.payment_error = payment_error;
-        this.payment_status = payment_status;
-        this.temp_CVC = temp_CVC;
-        this.temp_card_number = temp_card_number;
-        this.temp_expiry_date = temp_expiry_date;
-        this.orderID = orderID;
+//        this.paymentID = paymentID;
+//        this.payment_error = payment_error;
+//        this.payment_status = payment_status;
+//        this.temp_CVC = temp_CVC;
+//        this.temp_card_number = temp_card_number;
+//        this.temp_expiry_date = temp_expiry_date;
+//        this.orderID = orderID;
     }
+
 
 }

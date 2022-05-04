@@ -48,7 +48,7 @@ public class PaymentDetailsDAO {
     }
 
 
-    //Update Operation: update patment details
+    //Update Operation: update patment details by custID + paydetnum
     public void update(int userID, String firstname, String lastname, String middlename, String emailaddress, String phone, String dob, String password) throws SQLException {
 //        updateSt.setString(1, emailaddress);
 //        updateSt.setString(2, password);
@@ -62,7 +62,7 @@ public class PaymentDetailsDAO {
 //        System.out.println("row "+row+" updated successfuly");
     }
 
-    //Delete Operation: delete a payment details
+    //Delete Operation: delete a payment details by custID and paydetnum
     public void delete(int ID) throws SQLException {
 //        deleteSt.setString(1, Integer.toString(ID));
 //        int row = deleteSt.executeUpdate();
