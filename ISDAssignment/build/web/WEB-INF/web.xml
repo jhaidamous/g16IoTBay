@@ -4,9 +4,17 @@
         <servlet-name>ConnServlet</servlet-name>
         <servlet-class>uts.isd.controller.ConnServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ItemViewServlet</servlet-name>
+        <servlet-class>uts.isd.controller.ItemViewServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ConnServlet</servlet-name>
         <url-pattern>/ConnServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ItemViewServlet</servlet-name>
+        <url-pattern>/ItemViewServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

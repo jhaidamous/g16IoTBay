@@ -163,3 +163,8 @@
   grid-column: span 1;
   grid-row: span 1;
 }
+
+.product_image {
+    width: 10%;
+    height: 10%
+}

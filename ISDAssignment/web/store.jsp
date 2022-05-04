@@ -4,6 +4,7 @@
     Author     : g16
 --%>
 
+<%@page import="java.util.ArrayList"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="java.util.Random"%>
 <%@page import="uts.isd.model.*" %>
@@ -28,7 +29,15 @@
         <a href="logout.jsp">Logout</a>
         </nav>
     </header>
+        <% String test3 = "sending session to servlet";
+            session.setAttribute("test3", test3);%>
+    <jsp:include page="/ItemViewServlet" flush="true" />
         <%
+            ArrayList<Item> items = (ArrayList<Item>)session.getAttribute("items");
+            String test = (String)session.getAttribute("test");
+            String test2 = (String)session.getAttribute("test2");
+            String test4 = (String)session.getAttribute("test4");
+            
             User user = new User();
             if ((User)session.getAttribute("login") == null) {
                 user = new User("dont try navigate to main","cause you're not logged in","not","logged","and it wont work");
@@ -38,22 +47,31 @@
             }
         %>
     <div class="mainsite">
+    
     <h1>Welcome to IoTBay Store</h1>
     <p>
         These are all the items we have for sale 
         <div class="collection">
-             <!--for (Item items : ItemDAO().fetch)//-->
+             <% if (items == null) {
+                 out.print("is null");
+                 out.print(test);
+                 out.print(test2);
+                 out.print(test4);
+             }
+             else {
+                 for (Item item : items) { %>
             <div class="product">
-              <a class="product__image" href="#"></a>
+              <img class="product_image" src="<%=item.getItem_image_path()%>"></a>
               <div class="product__name">
                 <p>
-                  <a href="#">Product Name</a>
+                  <a href="#"><%=item.getItem_name()%></a>
                 </p>
               </div>
               <div class="product__price">
-                <p>$10.00  
+                <p>$<%=item.getItem_price()%>  
               </div>
             </div>
+              <% } }%>
           </div>
     </p>
 

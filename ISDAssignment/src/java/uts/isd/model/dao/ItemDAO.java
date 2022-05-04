@@ -21,10 +21,11 @@ public class ItemDAO {
     private Statement st;
     
     public ItemDAO(Connection connection) throws SQLException {
+        connection.setAutoCommit(true);
         st = connection.createStatement();
     }
     
-    //Create Operation: create a user
+    //Create Operation: create an item
     public void createItem(String item_name, String item_price, String item_stock, String item_status, String cost_per_item, String item_category, String item_image_path) throws SQLException {
         String columns = "INSERT INTO iotadmin.catalog_item(item_name,item_price,item_stock,item_status,cost_per_item,item_category,item_image_path)";
         String values = "VALUES('"+item_name+"','"+item_price+"','"+item_stock+"','"+item_status+"','"+cost_per_item+"','"+item_category+"','"+item_image_path+"')";
@@ -48,7 +49,7 @@ public class ItemDAO {
 //        return null;
 //    }
     
-    //Fetch All: list all users
+    //Fetch All: list all items
     public ArrayList<Item> fetchItems() throws SQLException {
         String fetch = "SELECT * FROM iotadmin.catalog_item";
         ResultSet rs = st.executeQuery(fetch);
