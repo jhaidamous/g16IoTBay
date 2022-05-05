@@ -22,7 +22,7 @@ import uts.isd.model.dao.*;
 public class ConnServlet extends HttpServlet {
 
     private SQLDBConnecter db;
-    private UserDAO userDAO;
+    private CustomerDAO customerDAO;
     private ItemDAO itemDAO;
     private Connection conn;
 
@@ -42,13 +42,13 @@ public class ConnServlet extends HttpServlet {
         HttpSession session = request.getSession();
         conn = db.connection();
         try {
-            //userDAO = new UserDAO(conn);
+            customerDAO = new CustomerDAO(conn);
             itemDAO = new ItemDAO(conn);
         } catch (SQLException ex) {
             Logger.getLogger(ConnServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
         //export the DB manager to the view-session (JSPs)
-        session.setAttribute("userDAO", userDAO);
+        session.setAttribute("customerDAO", customerDAO);
         session.setAttribute("itemDAO", itemDAO);
     }
 

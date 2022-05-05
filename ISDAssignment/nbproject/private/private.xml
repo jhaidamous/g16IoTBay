@@ -3,13 +3,12 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/JHUTS/Documents/2022%20Autumn/Introduction%20to%20Software%20Development/Assignment2/g16IoTBay/ISDAssignment/web/db/iotbaytables.sql</file>
-            <file>file:/C:/Users/JHUTS/Documents/2022%20Autumn/Introduction%20to%20Software%20Development/Assignment2/g16IoTBay/ISDAssignment/src/java/uts/isd/controller/ItemViewServlet.java</file>
-            <file>file:/C:/Users/JHUTS/Documents/2022%20Autumn/Introduction%20to%20Software%20Development/Assignment2/g16IoTBay/ISDAssignment/web/index.jsp</file>
-            <file>file:/C:/Users/JHUTS/Documents/2022%20Autumn/Introduction%20to%20Software%20Development/Assignment2/g16IoTBay/ISDAssignment/web/db/iotbayvalues.sql</file>
             <file>file:/C:/Users/JHUTS/Documents/2022%20Autumn/Introduction%20to%20Software%20Development/Assignment2/g16IoTBay/ISDAssignment/src/java/uts/isd/model/dao/SQLDB.java</file>
             <file>file:/C:/Users/JHUTS/Documents/2022%20Autumn/Introduction%20to%20Software%20Development/Assignment2/g16IoTBay/ISDAssignment/src/java/uts/isd/controller/ConnServlet.java</file>
-            <file>file:/C:/Users/JHUTS/Documents/2022%20Autumn/Introduction%20to%20Software%20Development/Assignment2/g16IoTBay/ISDAssignment/web/store.jsp</file>
+            <file>file:/C:/Users/JHUTS/Documents/2022%20Autumn/Introduction%20to%20Software%20Development/Assignment2/g16IoTBay/ISDAssignment/src/java/uts/isd/model/dao/SQLDBConnecter.java</file>
+            <file>file:/C:/Users/JHUTS/Documents/2022%20Autumn/Introduction%20to%20Software%20Development/Assignment2/g16IoTBay/ISDAssignment/src/java/uts/isd/controller/ItemViewServlet.java</file>
+            <file>file:/C:/Users/JHUTS/Documents/2022%20Autumn/Introduction%20to%20Software%20Development/Assignment2/g16IoTBay/ISDAssignment/web/register.jsp</file>
+            <file>file:/C:/Users/JHUTS/Documents/2022%20Autumn/Introduction%20to%20Software%20Development/Assignment2/g16IoTBay/ISDAssignment/src/java/uts/isd/model/dao/PaymentDAO.java</file>
         </group>
     </open-files>
 </project-private>

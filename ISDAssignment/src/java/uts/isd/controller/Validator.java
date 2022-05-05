@@ -10,6 +10,8 @@ public class Validator implements Serializable {
     private String emailPattern = "[A-Za-z0-9.@]+";//"([a-zA-Z0-9]+)(([._-])([a-zA-Z0-9]+))*(@)([a-z]+)(.)([a-z]{3})((([.])[a-z]{0,2})*)";
     private String namePattern = "[A-Za-z]+";//"([A-Z][a-z]+[\\s])+[A-Z][a-z]*";
     private String passwordPattern = "[a-z0-9]{5,}";
+    private String phonePattern = "/^\\({0,1}((0|\\+61)(2|4|3|7|8)){0,1}\\){0,1}(\\ |-){0,1}[0-9]{2}(\\ |-){0,1}[0-9]{2}(\\ |-){0,1}[0-9]{1}(\\ |-){0,1}[0-9]{3}$/;";
+    private String dobPattern = "^(0[1-9]|[12][0-9]|3[01])[- /.](0[1-9]|1[012])[- /.]((19|20)\\d\\d)$";
 
     public Validator() {
     }
@@ -36,11 +38,21 @@ public class Validator implements Serializable {
         return validate(passwordPattern, password);
     }
     
-    public static void clear(HttpSession session) {
+    public boolean validatePhone(String phone){
+        return validate(phonePattern, phone);
+    }
+    
+    public boolean validateDob (String dob){
+        return validate(dobPattern, dob);
+    }
+    
+    public static void clearRegister(HttpSession session) {
         session.setAttribute("emailErr", "Enter email");
         session.setAttribute("passErr", "Enter password");
         session.setAttribute("existErr", "");
         session.setAttribute("nameErr", "Enter name");
-        session.setAttribute("updated", "");
+        session.setAttribute("phoneErr", "Enter phone");
+        session.setAttribute("dobErr", "Enter DOB");
+        session.setAttribute("registration", "");
     }
 }

@@ -26,15 +26,24 @@
         </nav>
     </header>
     <div class="mainsite">
+        
+           <%
+            String existErr = (String) session.getAttribute("existErr");
+            String emailErr = (String) session.getAttribute("emailErr");
+            String passErr = (String) session.getAttribute("passErr");
+            String nameErr = (String) session.getAttribute("nameErr");
+        %>
     <h1>Welcome to IoTBay</h1>
     <p>Please fill in the details before to register an account</p>
-        <form method="POST" action="welcome.jsp">
+        <form method="POST" action="/RegisterServlet">
             <table class="table">
-                <tr><td>Email: </td><td><input type="text" name="email" required="true"></td></tr>
-                <tr><td>Username: </td><td><input type="text" name="username" required="true"></td></tr>
+                <tr><td>Email: </td><td><input type="text" name="emailaddress" required="true"></td></tr>
                 <tr><td>Password:</td><td><input type="password" name="password" required="true"></td></tr>
-                <tr><td>Name: </td><td><input type="text" name="name" required="true"></td></tr>
+                <tr><td>First Name: </td><td><input type="text" name="firstname" required="true"></td></tr>
+                <tr><td>Last Name: </td><td><input type="text" name="lastname" required="true"></td></tr>
+                <tr><td>Middle Name: </td><td><input type="text" name="middlename" placeholder="Optional" required="false"></td></tr>
                 <tr><td>Phone: </td><td><input type="text" name="phone" required="true"></td></tr>
+                <tr><td>Date of Birth: </td><td><input type="date" name="dob" required="true"></td></tr>
                 <tr><td></td><td><input type="hidden" value="registration" name="registration"></td></tr>
                 <tr><td></td><td><input class="button" type="submit" value="Sign Up"></td></tr>
             </table>

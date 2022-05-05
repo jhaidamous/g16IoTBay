@@ -36,11 +36,14 @@
                 <tr><td>Username: </td><td><input type="text" name="username" required="true"></td></tr>
                 <tr><td>Password:</td><td><input type="password" name="password" required="true"></td></tr>
                 <tr><td></td><td><input class="button" type="submit" value="Login"></td></tr>
-
             </table>
         </form>
-
     </div>
+        <div class ="stafflogin">
+            <form method="POST" action="stafflogin.jsp">
+                <input class="buttonn" type="submit" value="Staff Login">
+            </form>
+        </div>
     <footer class="bottomarea">
         <p id="clock" class="footer"></p>
     </footer>
