@@ -16,8 +16,8 @@ import java.sql.SQLException;
  */
 public class SQLDBConnecter extends SQLDB {
     public SQLDBConnecter() throws ClassNotFoundException, SQLException {
-        Class.forName(driver);
-        super.connection = DriverManager.getConnection("jdbc:derby://localhost:1527/iotdb;create=true", "iotadmin", "admin");
+        Class.forName(driver); 
+        super.connection = DriverManager.getConnection(super.URL+super.db,super.dbuser,super.dbpass);
     }
     
     public Connection connection() {
