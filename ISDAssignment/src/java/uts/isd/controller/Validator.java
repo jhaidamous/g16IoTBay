@@ -50,7 +50,9 @@ public class Validator implements Serializable {
         session.setAttribute("emailErr", "Enter email");
         session.setAttribute("passErr", "Enter password");
         session.setAttribute("existErr", "");
-        session.setAttribute("nameErr", "Enter name");
+        session.setAttribute("firstNameErr", "Enter first name");
+        session.setAttribute("middleNameErr", "Optional");
+        session.setAttribute("lastNameErr", "Enter last name");
         session.setAttribute("phoneErr", "Enter phone");
         session.setAttribute("dobErr", "Enter DOB");
         session.setAttribute("registration", "");

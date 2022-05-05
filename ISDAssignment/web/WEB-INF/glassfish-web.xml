@@ -16,6 +16,15 @@
     SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0
 -->
 <glassfish-web-app error-url="">
+<!--  <servlet>
+    <servlet-name>RegisterServlet</servlet-name>
+    <webservice-endpoint>
+      <port-component-name>endpoint1</port-component-name>
+    </webservice-endpoint>
+    <webservice-endpoint>
+      <port-component-name>endpoint2</port-component-name>
+    </webservice-endpoint>
+  </servlet>-->
   <class-loader delegate="true"/>
   <jsp-config>
     <property name="keepgenerated" value="true">

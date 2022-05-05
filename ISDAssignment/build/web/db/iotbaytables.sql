@@ -12,7 +12,7 @@ create table users (
     firstname varchar(20) not null,
     lastname varchar(20) not null, 
     middlename varchar(20),
-    emailadress varchar(80) unique not null,
+    emailaddress varchar(80) unique not null,
     phone varchar(20) not null,
     dob date not null,
     username varchar(15)

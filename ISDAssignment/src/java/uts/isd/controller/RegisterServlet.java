@@ -9,7 +9,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import uts.isd.controller.Validator;
 import uts.isd.model.Customer;
 import uts.isd.model.dao.*;
 
@@ -37,45 +36,57 @@ public class RegisterServlet extends HttpServlet {
         Customer customer = null;
         try {
             customer = customerDAO.login(emailaddress, password);
-        } catch (NullPointerException ex) {
+        }
+        catch (NullPointerException ex) {
             System.out.println(ex.getMessage() == null ? "User does not exist" : "Customer already exists");
-        } catch (SQLException ex) {
+        }
+        catch (SQLException ex) {
             Logger.getLogger(RegisterServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
-        validator.clearRegister(session);
+        
+        //Validator.clearRegister(session);
 
         if (!validator.validateEmail(emailaddress)) {
             session.setAttribute("emailErr", "Error: Email format is incorrect");
-            request.getRequestDispatcher("register.jsp").include(request, response);
-        } else if (!validator.validateName(firstname)) {
+        }
+        if (!validator.validateName(firstname)) {
+            session.setAttribute("firstNameErr", "Error: Name format is incorrect");
+        }
+        if (middlename != null) {
+            if (!validator.validateName(middlename)) {
+            session.setAttribute("middleNameErr", "Error: Name format is incorrect");
+            }
+        }
+        if (!validator.validateName(lastname)) {
             session.setAttribute("nameErr", "Error: Name format is incorrect");
-            request.getRequestDispatcher("register.jsp").include(request, response);
-        } else if (!validator.validateName(lastname)) {
-            session.setAttribute("nameErr", "Error: Name format is incorrect");
-            request.getRequestDispatcher("register.jsp").include(request, response);
-        } else if (!validator.validatePassword(password)) {
+        }
+        if (!validator.validatePassword(password)) {
             session.setAttribute("passErr", "Error: Password format is incorrect");
-            request.getRequestDispatcher("register.jsp").include(request, response);
-        }else if (!validator.validatePhone(phone)) {
+        }
+        if (!validator.validatePhone(phone)) {
             session.setAttribute("phoneErr", "Error: Phone format is incorrect");
-            request.getRequestDispatcher("register.jsp").include(request, response);
-        }else if (!validator.validateDob(dob)) {
+        }
+        if (!validator.validateDob(dob)) {
             session.setAttribute("dobErr", "Error: Date format is incorrect");
             request.getRequestDispatcher("register.jsp").include(request, response);
-        } else {
+        } 
+        else {
             try {
                 if (customer != null) {
                     session.setAttribute("existErr", "Customer already exists in the Database!");
                     request.getRequestDispatcher("register.jsp").include(request, response);
-                } else {
+                } 
+                else {
                     customerDAO.createCustomer(firstname, lastname, middlename, emailaddress, phone, dob, password);
                     customer = customerDAO.login(emailaddress, password);
                     session.setAttribute("customer", customer);
                     request.getRequestDispatcher("welcome.jsp").include(request, response);
                 }
-            } catch (NullPointerException ex) {
+            }
+            catch (NullPointerException ex) {
                 System.out.println(ex.getMessage() == null ? "Cannot open JDBC connection" : "Customer Retrieved from DB");
-            } catch (SQLException ex) {
+            }
+            catch (SQLException ex) {
                 Logger.getLogger(RegisterServlet.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
