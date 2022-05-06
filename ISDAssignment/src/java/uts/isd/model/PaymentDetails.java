@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package uts.isd.model;
 
 import java.io.Serializable;
@@ -10,26 +6,61 @@ import java.util.Random;
  *
  * @author Anas Awais
  */
-public class Payment implements Serializable{
+public class PaymentDetails implements Serializable{
     //Fields or properties to modify
-    private int paymentID;
-    private String payment_error;
-    private String payment_status;
-    private String temp_CVC;
-    private String temp_card_number;
-    private String temp_expiry_date;
-    private int orderID;
+    private int custID;
+    private int pay_det_num;
+    private int cvc;
+    private String cardnum;
+    private String expirydate;
+    
 // to modify
-    public PaymentDetails() {
-        
-//        this.paymentID = paymentID;
-//        this.payment_error = payment_error;
-//        this.payment_status = payment_status;
-//        this.temp_CVC = temp_CVC;
-//        this.temp_card_number = temp_card_number;
-//        this.temp_expiry_date = temp_expiry_date;
-//        this.orderID = orderID;
+public PaymentDetails(int custID, int pay_det_num, int cvc, String cardnum, String expirydate) {
+    
+        this.custID = custID;
+        this.pay_det_num = pay_det_num;
+        this.cvc = cvc;
+        this.cardnum = cardnum;
     }
 
+    public int getCustID() {
+        return custID;
+    }
+
+    public void setCustID(int custID) {
+        this.custID = custID;
+    }
+
+    public int getPay_det_num() {
+        return pay_det_num;
+    }
+
+    public void setPay_det_num(int pay_det_num) {
+        this.pay_det_num = pay_det_num;
+    }
+
+    public int getCvc() {
+        return cvc;
+    }
+
+    public void setCvc(int cvc) {
+        this.cvc = cvc;
+    }
+
+    public String getCardnum() {
+        return cardnum;
+    }
+
+    public void setCardnum(String cardnum) {
+        this.cardnum = cardnum;
+    }
+
+    public String getExpirydate() {
+        return expirydate;
+    }
+
+    public void setExpirydate(String expirydate) {
+        this.expirydate = expirydate;
+    }
 
 }

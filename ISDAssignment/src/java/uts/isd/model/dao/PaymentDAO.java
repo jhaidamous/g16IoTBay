@@ -24,16 +24,16 @@ public class PaymentDAO {
     }
     
     //Create Operation: create a payment record
-    public void createPayment(String payment_error, String payment_status, String temp_CVC, String temp_card_number, String temp_expiry_date, int orderID) throws SQLException {
-        String columns = "INSERT INTO iotadmin.catalog_item(item_name,item_price,item_stock,item_status,cost_per_item,item_category,item_image_path)";
-        String values = "VALUES('"+payment_error+"','"+payment_status+"','"+temp_CVC+"','"+temp_card_number+"','"+temp_expiry_date+"','"+orderID+"')";
+    public void createPayment(String payment_error, String payment_status, int orderID) throws SQLException {
+        String columns = "INSERT INTO iotadmin.payment(payment_error,payment_status,orderID)";
+        String values = "VALUES('"+payment_error+"','"+payment_status+"','"+orderID+"')";
         st.executeUpdate(columns+values);      
     }
     
 
     //Fetch All: fetch all recrods of payment, by userID
     public ArrayList<Payment> fetchPayments(String userID) throws SQLException {
-        String fetch = " SELECT * FROM payment WHERE paymentID = (SELECT paymentID FROM orders WHERE userID = '"+userID+"')"; //fetch all the orderIDs which have the UserID, fetch all the Payments against the Orders.
+        String fetch = " SELECT * FROM payment WHERE paymentID = (SELECT paymentID FROM orders WHERE custID = '"+userID+"')"; //fetch all the orderIDs which have the UserID, fetch all the Payments against the Orders.
         ResultSet rs = st.executeQuery(fetch);
         ArrayList<Payment> payment = new ArrayList<Payment>();     
         
@@ -41,11 +41,8 @@ public class PaymentDAO {
             int paymentID = Integer.parseInt(rs.getString(1));
             String payment_error =  rs.getString(2);
             String payment_status = rs.getString(3);
-            String temp_CVC = rs.getString(4);
-            String temp_card_number = rs.getString(5);
-            String temp_expiry_date = rs.getString(6);
-            int orderID = Integer.parseInt(rs.getString(7));
-            payment.add(new Payment(paymentID,payment_error,payment_status,temp_CVC,temp_card_number,temp_expiry_date,orderID));
+            int orderID = Integer.parseInt(rs.getString(4));
+            payment.add(new Payment(paymentID,payment_error,payment_status,orderID));
         }
         return payment;
             

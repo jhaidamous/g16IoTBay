@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package uts.isd.model;
 
 import java.io.Serializable;
@@ -15,19 +11,45 @@ public class Payment implements Serializable{
     private int paymentID;
     private String payment_error;
     private String payment_status;
-    private String temp_CVC;
-    private String temp_card_number;
-    private String temp_expiry_date;
     private int orderID;
 // to modify
-    public Payment(int paymentID, String payment_error, String payment_status, String temp_CVC, String temp_card_number, String temp_expiry_date, int orderID) {
-        
+    public Payment(int paymentID, String payment_error, String payment_status, int orderID) {
+    
         this.paymentID = paymentID;
         this.payment_error = payment_error;
         this.payment_status = payment_status;
-        this.temp_CVC = temp_CVC;
-        this.temp_card_number = temp_card_number;
-        this.temp_expiry_date = temp_expiry_date;
+        this.orderID = orderID;
+    }
+
+    public int getPaymentID() {
+        return paymentID;
+    }
+
+    public void setPaymentID(int paymentID) {
+        this.paymentID = paymentID;
+    }
+
+    public String getPayment_error() {
+        return payment_error;
+    }
+
+    public void setPayment_error(String payment_error) {
+        this.payment_error = payment_error;
+    }
+
+    public String getPayment_status() {
+        return payment_status;
+    }
+
+    public void setPayment_status(String payment_status) {
+        this.payment_status = payment_status;
+    }
+
+    public int getOrderID() {
+        return orderID;
+    }
+
+    public void setOrderID(int orderID) {
         this.orderID = orderID;
     }
 

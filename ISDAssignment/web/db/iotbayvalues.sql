@@ -19,4 +19,6 @@ VALUES ('John','Smith','M','john.smith@uts.com','0499999999','01/01/1990');
 INSERT INTO iotadmin.CUSTOMER_USER(CUSTID, PASSWORD, DISABLED)
 VALUES ((SELECT USERID FROM iotadmin.USERS WHERE EMAILADDRESS = 'john.smith@uts.com'),'pass123',false);
 
+-- INSERT INTO iotadmin.ORDERS(tracking_number, arrival_date, order_date, order_status)
+-- VALUES ('123','01/01/1990','01/01/1990','01/01/1990', 'Yes');
 

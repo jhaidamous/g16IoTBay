@@ -42,7 +42,7 @@ public class ConnServlet extends HttpServlet {
         HttpSession session = request.getSession();
         conn = db.connection();
         try {
-            customerDAO = new CustomerDAO(conn);
+//            customerDAO = new CustomerDAO(conn);
             itemDAO = new ItemDAO(conn);
         } catch (SQLException ex) {
             Logger.getLogger(ConnServlet.class.getName()).log(Level.SEVERE, null, ex);

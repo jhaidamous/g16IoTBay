@@ -85,8 +85,6 @@ create table cart (
 
 create table orders (
     orderID integer primary key not null generated always as identity(start with 1, increment by 1),
-    tracking_number integer,
-    arrival_date date,
     order_date date,
     order_status varchar(15),
     custID integer not null,
@@ -130,4 +128,17 @@ create table line_item (
     cartID integer not null,
     foreign key (itemID) references catalog_item(itemID),
     foreign key (cartID) references cart(cartID)
+);
+
+create table shipment
+(
+    shipmentID integer primary key not null generated always as identity(start with 1, increment by 1),
+    orderID int not null,
+    ship_method varchar(50) not null,
+    ship_date date not null,
+    ship_status varchar(50) not null,
+    custID int not null,
+    foreign key (orderID) references orders(orderID),
+    foreign key (custID) references shipment_details(custID)
+
 );
