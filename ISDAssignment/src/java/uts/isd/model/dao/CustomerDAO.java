@@ -20,31 +20,44 @@ public class CustomerDAO {
 
     private Statement st;
     private PreparedStatement readSt;
-    private PreparedStatement updateSt;
-    private PreparedStatement deleteSt;
-    private String readQuery =  "SELECT EMAILADDRESS, PASSWORD, FIRSTNAME, LASTNAME, MIDDLENAME, PHONE, DOB, DISABLED FROM USERS, CUSTOMER_USER WHERE USERS.USERID=CUSTOMER_USER.USERID AND EMAIL=? AND PASSWORD=?";
-    private String updateQuery = "UPDATE USERS SET EMAILADDRESS=?, PASSWORD=?, FIRSTNAME=?, LASTNAME=?, MIDDLENAME=?, PHONE=?, DOB=?, DISABLED=? WHERE USERID=?";
-    private String deleteQuery = "DELETE FROM USERS WHERE USERID= ?";
+    private PreparedStatement updateSt1;
+    private PreparedStatement updateSt2;
+    private PreparedStatement deleteSt1;
+    private PreparedStatement deleteSt2;
+    private PreparedStatement disabledSt;
+    private PreparedStatement enabledSt;
+    private String readQuery1 =  "SELECT USERID, EMAILADDRESS, PASSWORD, FIRSTNAME, LASTNAME, MIDDLENAME, PHONE, DOB, DISABLED FROM USERS, CUSTOMER_USER WHERE USERS.USERID=CUSTOMER_USER.CUSTID AND EMAILADDRESS=? AND PASSWORD=?";
+    private String updateQuery1 = "UPDATE USERS SET EMAILADDRESS=?, FIRSTNAME=?, LASTNAME=?, MIDDLENAME=?, PHONE=?, DOB=? WHERE USERID=?";
+    private String updateQuery2 = "UPDATE CUSTOMER_USER SET PASSWORD=? WHERE CUSTOMER_USER.CUSTID=?";
+    private String deleteQuery1 = "DELETE FROM CUSTOMER_USER WHERE CUSTID= ?";
+    private String deleteQuery2 = "DELETE FROM USERS WHERE USERID= ?";
+    private String disabledQuery = "UPDATE CUSTOMER_USER SET DISABLED=TRUE WHERE CUSTID=?";
+    private String enableQuery = "UPDATE CUSTOMER_USER SET DISABLED=FALSE WHERE CUSTID=?";
     
     public CustomerDAO(Connection connection) throws SQLException {
         connection.setAutoCommit(true);
         st = connection.createStatement();
-        readSt =  connection.prepareStatement(readQuery);
-        updateSt = connection.prepareStatement(updateQuery);
-        deleteSt = connection.prepareStatement(deleteQuery);
+        readSt =  connection.prepareStatement(readQuery1);
+        updateSt1 = connection.prepareStatement(updateQuery1);
+        updateSt2 = connection.prepareStatement(updateQuery2);
+        deleteSt1 = connection.prepareStatement(deleteQuery1);
+        deleteSt2 = connection.prepareStatement(deleteQuery1);
+        disabledSt = connection.prepareStatement(disabledQuery);
+        enabledSt = connection.prepareStatement(enableQuery);
     }
 
     //Create Operation: create a user
     public void createCustomer(String firstname, String lastname, String middlename, String emailaddress, String phone, String dob, String password) throws SQLException {
-        String columns = "INSERT INTO USERS(FIRSTNAME, LASTNAME, MIDDLENAME, EMAILADDRESS, PHONE, DOB)";
-        String values = "VALUES('" + firstname + "','" + lastname + "','" + middlename + "','" + emailaddress + "','" + phone + "','" + dob + "','" + password + "')";
+        String columns = "INSERT INTO iotadmin.USERS(FIRSTNAME, LASTNAME, MIDDLENAME, EMAILADDRESS, PHONE, DOB)";
+        String values = "VALUES('" + firstname + "','" + lastname + "','" + middlename + "','" + emailaddress + "','" + phone + "','" + dob + "')";
         st.executeUpdate(columns + values);
-        String query = "SELECT USERID FROM USERS WHERE EMAILADDRESS = '" + emailaddress + "'";
+        String query = "SELECT USERID FROM iotadmin.USERS WHERE EMAILADDRESS = '" + emailaddress + "'";
         ResultSet rs = st.executeQuery(query);
+        rs.next();
         String userID = rs.getString(1);
         boolean disabled = false;
-        String columns2 = "INSERT INTO CUSTOMER_USER(USERID, PASSWORD, DISABLED)";
-        String values2 = "VALUES('" + userID + "','" + password + "', '" + disabled + "')";
+        String columns2 = "INSERT INTO iotadmin.CUSTOMER_USER(CUSTID, PASSWORD, DISABLED)";
+        String values2 = "VALUES(" + userID + ",'" + password + "', '" + disabled + "')";
         st.executeUpdate(columns2 + values2);
     }
 
@@ -59,6 +72,7 @@ public class CustomerDAO {
             String userpass = rs.getString(2);
             
             if (emailaddress.equals(useremail) && password.equals(userpass)) {
+//                System.out.print(rs.getString(1));
                 int userID = Integer.parseInt(rs.getString(1));
                 String firstname = rs.getString(3);
                 String lastname = rs.getString(4);
@@ -71,31 +85,44 @@ public class CustomerDAO {
         }
         return null;
     }
-
+    
+    //needs some work on USERID and the SQL query needs to hit both tables -- and password
     //Update Operation: update user
     public void update(int userID, String firstname, String lastname, String middlename, String emailaddress, String phone, String dob, String password) throws SQLException {
-        updateSt.setString(1, emailaddress);
-        updateSt.setString(2, password);
-        updateSt.setString(3, firstname);
-        updateSt.setString(4, lastname);
-        updateSt.setString(5, middlename);
-        updateSt.setString(6, phone);
-        updateSt.setString(7, dob);
-        updateSt.setString(8, Integer.toString(userID));
-        int row = updateSt.executeUpdate();
+        updateSt1.setString(1, emailaddress);
+        updateSt1.setString(2, firstname);
+        updateSt1.setString(3, lastname);
+        updateSt1.setString(4, middlename);
+        updateSt1.setString(5, phone);
+        updateSt1.setString(6, dob);
+        updateSt1.setString(7, Integer.toString(userID));
+        updateSt2.setString(1, password);
+        updateSt2.setString(2, Integer.toString(userID));
+        int row = updateSt1.executeUpdate();
         System.out.println("row "+row+" updated successfuly");
     }
 
     //Delete Operation: user deletes their account after logging in 
     public void selfDelete(int ID) throws SQLException {
-        deleteSt.setString(1, Integer.toString(ID));
-        int row = deleteSt.executeUpdate();
+        deleteSt1.setString(1, Integer.toString(ID));
+        deleteSt2.setString(1, Integer.toString(ID));
+        deleteSt1.executeUpdate();
+        int row = deleteSt2.executeUpdate();
         System.out.println("row "+row+" deleted successfuly");
     }
-
+    public void disableUser(int custID) throws SQLException {
+        disabledSt.setString(1, Integer.toString(custID));
+        int row = disabledSt.executeUpdate();
+        System.out.println("customer "+row+" disabled successfuly");
+    }
+    public void enableUser(int custID) throws SQLException {
+        enabledSt.setString(1, Integer.toString(custID));
+        int row = enabledSt.executeUpdate();
+        System.out.println("customer "+row+" enabled successfuly");
+    }
     //Fetch All: List all users
     public ArrayList<Customer> fetchUsers() throws SQLException {
-        String fetch = "SELECT EMAILADDRESS, PASSWORD, FIRSTNAME, LASTNAME, MIDDLENAME, PHONE, DOB, DISABLED FROM USERS, CUSTOMER_USER WHERE USERS.USERID=CUSTOMER_USER.USERID";
+        String fetch = "SELECT EMAILADDRESS, PASSWORD, FIRSTNAME, LASTNAME, MIDDLENAME, PHONE, DOB, DISABLED FROM USERS, CUSTOMER_USER WHERE USERS.USERID=CUSTOMER_USER.CUSTID";
         ResultSet rs = st.executeQuery(fetch);
         ArrayList<Customer> users = new ArrayList();
 

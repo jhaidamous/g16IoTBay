@@ -37,20 +37,22 @@
             String dobErr = (String) session.getAttribute("dobErr");
             String phoneErr = (String) session.getAttribute("phoneErr");
         %>
+        
     <h1>Welcome to IoTBay</h1>
     <p>Please fill in the details before to register an account</p>
-        <form method="POST" action="/RegisterServlet">
+        <form method="POST" action="/ISDAssignment/RegisterServlet1">
             <table class="table">
                 <tr><td>Email: </td><td><input type="text" name="emailaddress" placeholder="<%=(emailErr != null ? emailErr : "Enter email")%>" required="true"></td></tr>
-                <tr><td>Password:</td><td><input type="password" name="password" placeholder="<%=(emailErr != null ? emailErr : "Enter password")%>" required="true"></td></tr>
-                <tr><td>First Name: </td><td><input type="text" name="firstname" placeholder="<%=(emailErr != null ? emailErr : "Enter first name")%>" required="true"></td></tr>
-                <tr><td>Last Name: </td><td><input type="text" name="lastname" placeholder="<%=(emailErr != null ? emailErr : "Enter last name")%>" required="true"></td></tr>
-                <tr><td>Middle Name: </td><td><input type="text" name="middlename" placeholder="<%=(emailErr != null ? emailErr : "Optional")%>" required="false"></td></tr>
-                <tr><td>Phone: </td><td><input type="text" name="phone" placeholder="<%=(emailErr != null ? emailErr : "Enter phone")%>" required="true"></td></tr>
-                <tr><td>Date of Birth: </td><td><input type="date" name="dob" placeholder="<%=(emailErr != null ? emailErr : "Enter DOB")%>" required="true"></td></tr>
+                <tr><td>Password:</td><td><input type="password" name="password" placeholder="<%=(passErr != null ? passErr : "Enter password")%>" required="true"></td></tr>
+                <tr><td>First Name: </td><td><input type="text" name="firstname" placeholder="<%=(firstNameErr != null ? firstNameErr : "Enter first name")%>" required="true"></td></tr>
+                <tr><td>Last Name: </td><td><input type="text" name="lastname" placeholder="<%=(lastNameErr != null ? lastNameErr : "Enter last name")%>" required="true"></td></tr>
+                <tr><td>Middle Name: </td><td><input type="text" name="middlename" placeholder="<%=(middleNameErr != null ? middleNameErr : "Optional")%>" required="false"></td></tr>
+                <tr><td>Phone: </td><td><input type="text" name="phone" placeholder="<%=(phoneErr != null ? phoneErr : "Enter phone")%>" required="true"></td></tr>
+                <tr><td>Date of Birth: </td><td><input type="text" name="dob" placeholder="hi" required="true"></td></tr>
                 <tr><td></td><td><input type="hidden" value="registration" name="registration"></td></tr>
                 <tr><td></td><td><input class="button" type="submit" value="Sign Up"></td></tr>
             </table>
+                <span class="message"> <%=(existErr != null ? existErr : "")%></span>
         </form>
     </div>
     <footer class="bottomarea">

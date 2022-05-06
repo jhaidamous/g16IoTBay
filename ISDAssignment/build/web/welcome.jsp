@@ -61,10 +61,7 @@
             }
         }
             
-        
 
-
-        
     %>
 <html>
     <body class="bodyclass" onload="startTime()">
@@ -93,7 +90,7 @@
                 <tr><td>Click <a href="main.jsp">here</a> to go to main page</td><td> </td></tr>
             </table>
         <% } else if (success == 1) { %>
-            <p>You've successfully logged in as the below user</p>
+            <p>You're successfully logged in as the below user</p>
             <table class="table">
                 <tr><td>Email: </td><td><%= email%></td></tr>
                 <tr><td>Username: </td><td><%= username%></td></tr>                    

@@ -28,7 +28,7 @@ public class Staff implements Serializable{
     public Staff() {
     }
 
-    public Staff(int userID, String firstname, String lastname, String middlename, String emailaddress, String phone, String dob, String password, boolean disabled, String role) {
+    public Staff(int userID, String firstname, String lastname, String middlename, String emailaddress, String phone, String dob, String role, String password) {
         this.userID = userID;
         this.firstname = firstname;
         this.lastname = lastname;
@@ -41,9 +41,9 @@ public class Staff implements Serializable{
         this.role = role;
     }
 
-    public Staff(int userID, String firstname, String lastname, String middlename, String emailaddress, String phone, String dob, String password, boolean disabled) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+//    public Staff(userID, firstname, lastname, middlename, emailaddress, phone, dob, role, password) {
+//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+//    }
 
     public boolean login(String emailaddress, String password) {
         if (emailaddress == this.emailaddress && password == this.password) {
@@ -122,5 +122,12 @@ public class Staff implements Serializable{
 
     public void setDisabled(boolean disabled) {
         this.disabled = disabled;
+    }
+    
+    public String getRole() {
+        return role;
+    }
+    public void setRole(String role) {
+        this.role = role;
     }
 }
