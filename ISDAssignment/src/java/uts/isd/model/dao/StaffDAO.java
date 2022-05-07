@@ -3,131 +3,54 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package uts.isd.model;
+package uts.isd.model.dao;
 
-import java.io.Serializable;
-import java.util.Random;
+import com.sun.xml.rpc.processor.modeler.j2ee.xml.string;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import uts.isd.model.Customer;
+import uts.isd.model.Staff;
+
 /**
  *
- * @author g16
+ * @author george
  */
-public class Staff implements Serializable{
+public class StaffDAO {
 
-    //Fields or properties
-    private int userID;
-    private String emailaddress;
-    private String firstname;
-    private String lastname;
-    private String password;
-    private String middlename;
-    private String phone;
-    private String dob;
-    private boolean disabled;
-    private String role;
-
-    public Staff() {
+    private Statement st;
+    private PreparedStatement readSt;
+    private String readQuery =  "SELECT USERID, FIRSTNAME, LASTNAME, MIDDLENAME, EMAILADDRESS, PHONE, DOB, STAFF_ROLE, PASSWORD, DISABLED FROM USERS, STAFF_USER WHERE USERS.USERID=STAFF_USER.USERID AND EMAILADDRESS=? AND PASSWORD=?";
+ 
+    
+    public StaffDAO (Connection connection) throws SQLException {
+        connection.setAutoCommit(true);
+        st = connection.createStatement();
+        readSt =  connection.prepareStatement(readQuery);
     }
 
-    public Staff(int userID, String firstname, String lastname, String middlename, String emailaddress, String phone, String dob, String role, String password) {
-        this.userID = userID;
-        this.firstname = firstname;
-        this.lastname = lastname;
-        this.middlename = middlename;
-        this.emailaddress = emailaddress;
-        this.phone = phone;
-        this.dob = dob;
-        this.password = password;
-        this.disabled = disabled;
-        this.role = role;
-    }
+    //Read Operation: staff login
+    public Staff login(String emailaddress, String password) throws SQLException {
+        readSt.setString(1, emailaddress);
+        readSt.setString(2, password);
+        ResultSet rs = readSt.executeQuery();
+        
+        while (rs.next()) {
 
-//    public Staff(userID, firstname, lastname, middlename, emailaddress, phone, dob, role, password) {
-//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-//    }
-
-    public boolean login(String emailaddress, String password) {
-        if (emailaddress == this.emailaddress && password == this.password) {
-            return true;
+                int userID = Integer.parseInt(rs.getString(1));
+                String firstname = rs.getString(2);
+                String lastname = rs.getString(3);
+                String middlename = rs.getString(4);
+                String phone = rs.getString(6);
+                String dob = rs.getString(7);
+                boolean disabled = Boolean.parseBoolean(rs.getString(8));
+                String role = rs.getString(9);
+                return new Staff(userID, firstname, lastname, middlename, emailaddress, phone, dob, role, password);
         }
-        else return false;
-    }
-    
-        public int getUserID() {
-        return userID;
+        return null;
     }
 
-    public void setUserID(int userID) {
-        this.userID = userID;
-    }
-
-    public String getEmailaddress() {
-        return emailaddress;
-    }
-
-    public void setEmailaddress(String emailaddress) {
-        this.emailaddress = emailaddress;
-    }
-
-    public String getFirstname() {
-        return firstname;
-    }
-
-    public void setFirstname(String firstname) {
-        this.firstname = firstname;
-    }
-
-    public String getLastname() {
-        return lastname;
-    }
-
-    public void setLastname(String lastname) {
-        this.lastname = lastname;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getMiddlename() {
-        return middlename;
-    }
-
-    public void setMiddlename(String middlename) {
-        this.middlename = middlename;
-    }
-
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
-
-    public String getDob() {
-        return dob;
-    }
-
-    public void setDob(String dob) {
-        this.dob = dob;
-    }
-
-    public boolean isDisabled() {
-        return disabled;
-    }
-
-    public void setDisabled(boolean disabled) {
-        this.disabled = disabled;
-    }
-    
-    public String getRole() {
-        return role;
-    }
-    public String setRole(String role) {
-        this.role = role;
-    }
 }

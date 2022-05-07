@@ -101,7 +101,7 @@ public class RegisterServlet1 extends HttpServlet {
                 }
             }
            catch (NullPointerException ex) {
-              System.out.println(ex.getMessage() == null ? "Cannot open JDBC connection" : "Customer Retrieved from DB");
+              System.out.println(ex.getMessage() == null ? "Customer was unable to be logged in" : "Customer Retrieved from DB");
          }
             catch (SQLException ex) {
                 Logger.getLogger(RegisterServlet1.class.getName()).log(Level.SEVERE, null, ex);
