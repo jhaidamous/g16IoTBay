@@ -17,7 +17,22 @@ import uts.isd.model.dao.*;
  *
  * @author g16
  */
-public class RegisterServlet1 extends HttpServlet {
+public class UpdateAccServlet extends HttpServlet {
+    
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        HttpSession session = request.getSession();
+        CustomerDAO customerDAO = (CustomerDAO) session.getAttribute("customerDAO");
+        Customer customer = (Customer) session.getAttribute("customer");
+        try {
+            customerDAO.selfDelete(customer.getUserID());
+        } catch (SQLException ex) {
+            Logger.getLogger(UpdateAccServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        session.invalidate();
+        request.getRequestDispatcher("index.jsp").include(request, response);
+
+    }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -33,18 +48,8 @@ public class RegisterServlet1 extends HttpServlet {
         String phone = request.getParameter("phone");    
         String dob = request.getParameter("dob");
         CustomerDAO customerDAO = (CustomerDAO) session.getAttribute("customerDAO");
-        LogsDAO logsDAO = (LogsDAO) session.getAttribute("logsDAO");
-        
-        Customer customer = null;
-        try {
-            customer = customerDAO.login(emailaddress, password);
-        }
-        catch (NullPointerException ex) {
-            System.out.println(ex.getMessage() == null ? "User does not exist" : "Customer already exists");
-        }
-        catch (SQLException ex) {
-            Logger.getLogger(RegisterServlet1.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        Customer customer = (Customer) session.getAttribute("customer");
+ 
         
         Validator.clearRegister(session);
         
@@ -83,31 +88,22 @@ public class RegisterServlet1 extends HttpServlet {
         System.out.print(firstname +" "+ lastname+" "+  middlename+" "+ emailaddress+" "+ phone+" "+ dob+" "+ password);
 
         if (error) {
-            request.getRequestDispatcher("register.jsp").include(request, response);
+            request.getRequestDispatcher("EditAccount.jsp").include(request, response);
         }
-        
 
         else {
             try {
-                if (customer != null) {
-                    session.setAttribute("existErr", "Customer already exists in the Database!");
-                    request.getRequestDispatcher("register.jsp").include(request, response);
-                } 
-                else {
-
-                    customerDAO.createCustomer(firstname, lastname, middlename, emailaddress, phone, dob, password);
+                    customerDAO.update(customer.getUserID(), firstname, lastname, middlename, emailaddress, phone, dob, password);
                     customer = customerDAO.login(emailaddress, password);
                     session.setAttribute("customer", customer);
-                    logsDAO.createLogs(customer.getUserID(),"Customer registered" );
+                    request.getRequestDispatcher("main.jsp").include(request, response);
 
-                    request.getRequestDispatcher("welcome.jsp").include(request, response);
-                }
             }
            catch (NullPointerException ex) {
-              System.out.println(ex.getMessage() == null ? "Customer was unable to be logged in" : "Customer Retrieved from DB");
+              System.out.println(ex.getMessage() == null ? "Customer was unable to be updated" : "Customer updated from DB");
          }
             catch (SQLException ex) {
-                Logger.getLogger(RegisterServlet1.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(UpdateAccServlet.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }

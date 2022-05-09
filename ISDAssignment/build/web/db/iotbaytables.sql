@@ -54,7 +54,7 @@ create table staff_user (
     foreign key (userID) references users(userID)
 );
 
-create table user_zlogs (
+create table user_logs (
     userID integer not null,
     logDate date not null,
     logTime time not null,

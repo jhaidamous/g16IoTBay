@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="css/layout_1.css">
     <script type="text/javascript" src="js/index.js"></script>
     <link href="websystems.css" rel="stylesheet">
+    <jsp:include page="/LogoutServlet" flush="true" />
 </head>
 <html>
     <body class="bodyclass" onload="startTime()">
@@ -33,9 +34,7 @@
         <p id="clock" class="footer"></p>
     </footer>
     </body>
-    <% 
-            session.invalidate();
-         %>
+
 </html>
 
         

@@ -24,6 +24,7 @@ public class ConnServlet extends HttpServlet {
     private SQLDBConnecter db;
     private CustomerDAO customerDAO;
     private ItemDAO itemDAO;
+    private LogsDAO logsDAO;
     private Connection conn;
 
     @Override //Create and instance of DBConnector for the deployment session
@@ -42,12 +43,14 @@ public class ConnServlet extends HttpServlet {
         HttpSession session = request.getSession();
         conn = db.connection();
         try {
+            logsDAO = new LogsDAO(conn);
             customerDAO = new CustomerDAO(conn);
             itemDAO = new ItemDAO(conn);
         } catch (SQLException ex) {
             Logger.getLogger(ConnServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
         //export the DB manager to the view-session (JSPs)
+        session.setAttribute("logsDAO", logsDAO);
         session.setAttribute("customerDAO", customerDAO);
         session.setAttribute("itemDAO", itemDAO);
     }

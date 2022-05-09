@@ -17,49 +17,41 @@
 </head>
 
     <% 
-        String email = request.getParameter("email");
-        String username = request.getParameter("username");
-        String name = request.getParameter("name");
-        String password = request.getParameter("password");
-        String phone = request.getParameter("phone");
+        Customer customer = (Customer) session.getAttribute("customer");
+
         String registration = request.getParameter("registration");
         int errval = 0;
         String errormsg = "";
-        int success = 0; 
+        int success = 0;
+        String emailaddress="";
+        String password="";
+        String firstname="";
         
-        if ((User)application.getAttribute(""+username+"") == null && registration == null) {
+        if (customer == null && registration == null) {
+            errormsg = "Customer was unable to be retrived";
             errval = 1;
-            errormsg = "Invalid username and/or password.";
-        }
-        else {
-            User user = (User)application.getAttribute(""+username+"");
-            if(username != null && password != null && registration == null) {
-                if(username.equals(user.getUsername()) && password.equals(user.getPassword())){
-                    success = 1; //logged in
-                    session.setAttribute("login", user);
-                    email = user.getEmail();
-                    username = user.getUsername();
-                    name = user.getName();
-                    phone = user.getPhone();
-                }
-            else {
-                errormsg = "Invalid username and/or password.";
-                errval = 1;
-                }
             }
         
+       else if(customer != null && registration == null) {
+            emailaddress = customer.getEmailaddress();
+            firstname = customer.getFirstname();
+            password = customer.getPassword();
+            String phone = customer.getPhone();
+            success = 1; //logged in
+        }
         else if(registration != null) {
-            success = 2; //registered user
-            user = new User(email,name,username,password,phone);
-            application.setAttribute(""+username+"", user);
-            session.setAttribute("login", user);            
+            emailaddress = customer.getEmailaddress();
+            firstname = customer.getFirstname();
+            password = customer.getPassword();
+            String phone = customer.getPhone();
+            success = 2; //registered customer
         }
         
         else {
-            errormsg = "Please enter your username and password.";
+            errormsg = "Please enter your emailaddress and password.";
             errval = 2;
             }
-        }
+        
             
 
     %>
@@ -71,7 +63,7 @@
         </div>
         <nav class="navclass">
         <a href="index.jsp">Home</a>
-        <%if (success == 1 || success == 2) { %>
+        <%if ( success == 1 || success == 2) { %>
         <a href="store.jsp">Store</a>
         <a href="logout.jsp">Logout</a>
         <% } %>
@@ -83,19 +75,15 @@
         <% if (success == 2) { %>
             <p>You've registered an account, please see your details below</p>
             <table class="table">
-                <tr><td>Email: </td><td><%= email%></td></tr>
-                <tr><td>Username: </td><td><%= username%></td></tr>                    
-                <tr><td>Name: </td><td><%= name%></td></tr>
-                <tr><td>Phone: </td><td><%= phone%></td></tr>
+                <tr><td>Email: </td><td><%= emailaddress%></td></tr>
+                <tr><td>Name: </td><td><%= firstname%></td></tr>
                 <tr><td>Click <a href="main.jsp">here</a> to go to main page</td><td> </td></tr>
             </table>
         <% } else if (success == 1) { %>
-            <p>You're successfully logged in as the below user</p>
+            <p>You're successfully logged in as the below customer</p>
             <table class="table">
-                <tr><td>Email: </td><td><%= email%></td></tr>
-                <tr><td>Username: </td><td><%= username%></td></tr>                    
-                <tr><td>Name: </td><td><%= name%></td></tr>
-                <tr><td>Phone: </td><td><%= phone%></td></tr>
+                <tr><td>Email: </td><td><%= emailaddress%></td></tr>
+                <tr><td>Name: </td><td><%= firstname%></td></tr>
                 <tr><td>Click <a href="main.jsp">here</a> to go to main page</td><td> </td></tr>
             </table>
         <% } else { %>

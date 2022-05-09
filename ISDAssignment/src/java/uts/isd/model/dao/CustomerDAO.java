@@ -29,7 +29,7 @@ public class CustomerDAO {
     private String readQuery1 =  "SELECT USERID, EMAILADDRESS, PASSWORD, FIRSTNAME, LASTNAME, MIDDLENAME, PHONE, DOB, DISABLED FROM USERS, CUSTOMER_USER WHERE USERS.USERID=CUSTOMER_USER.CUSTID AND EMAILADDRESS=? AND PASSWORD=?";
     private String updateQuery1 = "UPDATE USERS SET EMAILADDRESS=?, FIRSTNAME=?, LASTNAME=?, MIDDLENAME=?, PHONE=?, DOB=? WHERE USERID=?";
     private String updateQuery2 = "UPDATE CUSTOMER_USER SET PASSWORD=? WHERE CUSTOMER_USER.CUSTID=?";
-    private String deleteQuery1 = "DELETE FROM CUSTOMER_USER WHERE CUSTID= ?";
+    private String deleteQuery1 = "DELETE FROM iotadmin.CUSTOMER_USER WHERE CUSTID= ?";
     private String deleteQuery2 = "DELETE FROM USERS WHERE USERID= ?";
     private String disabledQuery = "UPDATE CUSTOMER_USER SET DISABLED=TRUE WHERE CUSTID=?";
     private String enableQuery = "UPDATE CUSTOMER_USER SET DISABLED=FALSE WHERE CUSTID=?";
@@ -41,7 +41,7 @@ public class CustomerDAO {
         updateSt1 = connection.prepareStatement(updateQuery1);
         updateSt2 = connection.prepareStatement(updateQuery2);
         deleteSt1 = connection.prepareStatement(deleteQuery1);
-        deleteSt2 = connection.prepareStatement(deleteQuery1);
+        deleteSt2 = connection.prepareStatement(deleteQuery2);
         disabledSt = connection.prepareStatement(disabledQuery);
         enabledSt = connection.prepareStatement(enableQuery);
     }
@@ -68,23 +68,31 @@ public class CustomerDAO {
         ResultSet rs = readSt.executeQuery();
         
         while (rs.next()) {
-            String useremail = rs.getString(1);
-            String userpass = rs.getString(2);
+            String useremail = rs.getString(2);
+            String userpass = rs.getString(3);
             
             if (emailaddress.equals(useremail) && password.equals(userpass)) {
 //                System.out.print(rs.getString(1));
                 int userID = Integer.parseInt(rs.getString(1));
-                String firstname = rs.getString(3);
-                String lastname = rs.getString(4);
-                String middlename = rs.getString(5);
-                String phone = rs.getString(6);
-                String dob = rs.getString(7);
-                boolean disabled = Boolean.parseBoolean(rs.getString(8));
+                String firstname = rs.getString(4);
+                String lastname = rs.getString(5);
+                String middlename = rs.getString(6);
+                String phone = rs.getString(7);
+                String dob = rs.getString(8);
+                boolean disabled = Boolean.parseBoolean(rs.getString(9));
+                System.out.print("Creating Customer");
                 return new Customer(userID, firstname, lastname, middlename, useremail, phone, dob, userpass, disabled);
             }
+            else {
+                System.out.print("Unable to Creating Customer "+useremail);
+
+            }
         }
+        
         return null;
+        
     }
+    
     
     //needs some work on USERID and the SQL query needs to hit both tables -- and password
     //Update Operation: update user
@@ -98,8 +106,10 @@ public class CustomerDAO {
         updateSt1.setString(7, Integer.toString(userID));
         updateSt2.setString(1, password);
         updateSt2.setString(2, Integer.toString(userID));
-        int row = updateSt1.executeUpdate();
-        System.out.println("row "+row+" updated successfuly");
+        updateSt1.executeUpdate();
+        updateSt2.executeUpdate();
+
+        System.out.println("row updated successfuly");
     }
 
     //Delete Operation: user deletes their account after logging in 
@@ -107,8 +117,8 @@ public class CustomerDAO {
         deleteSt1.setString(1, Integer.toString(ID));
         deleteSt2.setString(1, Integer.toString(ID));
         deleteSt1.executeUpdate();
-        int row = deleteSt2.executeUpdate();
-        System.out.println("row "+row+" deleted successfuly");
+        deleteSt2.executeUpdate();
+        System.out.println("row deleted successfuly");
     }
     public void disableUser(int custID) throws SQLException {
         disabledSt.setString(1, Integer.toString(custID));

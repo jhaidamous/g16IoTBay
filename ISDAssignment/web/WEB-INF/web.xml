@@ -16,6 +16,18 @@
         <servlet-name>RegisterServlet1</servlet-name>
         <servlet-class>uts.isd.controller.RegisterServlet1</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>UpdateAccServlet</servlet-name>
+        <servlet-class>uts.isd.controller.UpdateAccServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>LogsServlet</servlet-name>
+        <servlet-class>uts.isd.controller.LogsServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>LogoutServlet</servlet-name>
+        <servlet-class>uts.isd.controller.LogoutServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ConnServlet</servlet-name>
         <url-pattern>/ConnServlet</url-pattern>
@@ -31,6 +43,18 @@
     <servlet-mapping>
         <servlet-name>RegisterServlet1</servlet-name>
         <url-pattern>/RegisterServlet1</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateAccServlet</servlet-name>
+        <url-pattern>/UpdateAccServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LogsServlet</servlet-name>
+        <url-pattern>/LogsServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LogoutServlet</servlet-name>
+        <url-pattern>/LogoutServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
