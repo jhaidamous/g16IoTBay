@@ -10,6 +10,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import uts.isd.model.Categories;
 import uts.isd.model.Item;
 import uts.isd.model.User;
 
@@ -68,6 +69,60 @@ public class ItemDAO {
         }
         return items;
             
+    }
+    
+    public ArrayList<Item> searchItems(String searchq) throws SQLException {
+        System.out.print(searchq.toLowerCase());
+        String fetch = "SELECT * FROM iotadmin.catalog_item WHERE LOWER(item_name) LIKE '%"+searchq.toLowerCase()+"%'";
+        ResultSet rs = st.executeQuery(fetch);
+        ArrayList<Item> items = new ArrayList<Item>();
+        
+        while (rs.next()) {            
+            int itemID = Integer.parseInt(rs.getString(1));
+            String item_name =  rs.getString(2);
+            String item_price = rs.getString(3);
+            String item_stock = rs.getString(4);
+            String item_status = rs.getString(5);
+            String cost_per_item = rs.getString(6);
+            String item_category = rs.getString(7);
+            String item_image_path = rs.getString(8);
+            items.add(new Item(itemID,item_name,item_price,item_stock,item_status,cost_per_item,item_category,item_image_path));
         }
+        return items;
+            
+    }
+        
+    public ArrayList<Item> searchCategories(String searchq) throws SQLException {
+        System.out.print(searchq);
+        String fetch = "SELECT * FROM iotadmin.catalog_item WHERE item_category='"+searchq+"'";
+        ResultSet rs = st.executeQuery(fetch);
+        ArrayList<Item> items = new ArrayList<Item>();
+        
+        while (rs.next()) {            
+            int itemID = Integer.parseInt(rs.getString(1));
+            String item_name =  rs.getString(2);
+            String item_price = rs.getString(3);
+            String item_stock = rs.getString(4);
+            String item_status = rs.getString(5);
+            String cost_per_item = rs.getString(6);
+            String item_category = rs.getString(7);
+            String item_image_path = rs.getString(8);
+            items.add(new Item(itemID,item_name,item_price,item_stock,item_status,cost_per_item,item_category,item_image_path));
+        }
+        return items;
+            
+    }
+    public ArrayList<Categories> fetchCategories() throws SQLException {
+        String fetch = "SELECT distinct(item_category) FROM iotadmin.catalog_item";
+        ResultSet rs = st.executeQuery(fetch);
+        ArrayList<Categories> categories = new ArrayList<Categories>();
+        
+        while (rs.next()) {            
+            String item_category = rs.getString(1);
+            categories.add(new Categories(item_category));
+        }
+        return categories;
+            
+    }
         
 }

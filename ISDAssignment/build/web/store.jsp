@@ -17,6 +17,7 @@
     <link rel="stylesheet" href="css/layout_1.css">
     <script type="text/javascript" src="js/index.js"></script>
     <link href="websystems.css" rel="stylesheet">
+    <jsp:include page="/ItemViewServlet" flush="true" />
 </head>
 <html>
     <body class="bodyclass" onload="startTime()">
@@ -31,9 +32,9 @@
     </header>
         <% String test3 = "sending session to servlet";
             session.setAttribute("test3", test3);%>
-    <jsp:include page="/ItemViewServlet" flush="true" />
         <%
             ArrayList<Item> items = (ArrayList<Item>)session.getAttribute("items");
+            ArrayList<Categories> categories = (ArrayList<Categories>)session.getAttribute("categories");
             String test = (String)session.getAttribute("test");
             String test2 = (String)session.getAttribute("test2");
             String test4 = (String)session.getAttribute("test4");
@@ -49,17 +50,31 @@
     <div class="mainsite">
     
     <h1>Welcome to IoTBay Store</h1>
-    <p>
-        These are all the items we have for sale 
+    <p>     
+    <h2>Search current records</h2>
+    <form method="POST" action="/ISDAssignment/ItemViewServlet">
+        <table class="table">
+            <tr><td>Item Name: </td><td><input type="text" name="searchq" required="true"></td></tr>
+            <tr><td></td><td><input type="hidden" value="regsearch" name="regsearch"></td></tr>
+            <tr><td></td><td><input class="button" type="submit" value="Search"></td></tr>
+        </table>
+    </form>
+    <form method="POST" action="/ISDAssignment/ItemViewServlet" id="categoryform">
+        <label for="category">Category:</label>
+        <select name="searchq" id="category" form="categoryform">
+            <option>Category...</option>
+            <%
+            for (Categories category : categories) { %>
+            <option value="<%=category.getName()%>"><%=category.getName()%></option>
+            <%
+            }
+            %>
+            <input class="button" type="submit" value="Category Search">
+        </select>
         <div class="collection">
-             <% if (items == null) {
-                 out.print("is null");
-                 out.print(test);
-                 out.print(test2);
-                 out.print(test4);
-             }
-             else {
-                 for (Item item : items) { %>
+        These are all the items we have for sale 
+            <%
+            for (Item item : items) { %>
             <div class="product">
               <img class="product_image" src="<%=item.getItem_image_path()%>"></a>
               <div class="product__name">
@@ -68,17 +83,13 @@
                 </p>
               </div>
               <div class="product__price">
-                <p>$<%=item.getItem_price()%>  
+                  <p>$<%=item.getItem_price()%> </p>
               </div>
             </div>
-              <% } }%>
+            <%
+            } %>
           </div>
-    </p>
-
-        <% 
-            session.setAttribute("login", user);
-        %>       
-        
+    </p> 
     <footer class="bottomarea">
         <p id="clock" class="footer"></p>
     </footer>

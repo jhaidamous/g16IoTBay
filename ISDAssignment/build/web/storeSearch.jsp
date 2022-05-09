@@ -12,7 +12,7 @@
 
 <!DOCTYPE html>
 <head>
-    <title>IoTBay - Store</title>
+    <title>IoTBay - Search Results</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <link rel="stylesheet" href="css/layout_1.css">
     <script type="text/javascript" src="js/index.js"></script>
@@ -33,8 +33,7 @@
         <% String test3 = "sending session to servlet";
             session.setAttribute("test3", test3);%>
         <%
-            ArrayList<Item> items = (ArrayList<Item>)session.getAttribute("items");
-            ArrayList<Categories> categories = (ArrayList<Categories>)session.getAttribute("categories");
+            ArrayList<Item> searchItems = (ArrayList<Item>)session.getAttribute("searchItems");
             String test = (String)session.getAttribute("test");
             String test2 = (String)session.getAttribute("test2");
             String test4 = (String)session.getAttribute("test4");
@@ -55,26 +54,15 @@
     <form method="POST" action="/ISDAssignment/ItemViewServlet">
         <table class="table">
             <tr><td>Item Name: </td><td><input type="text" name="searchq" required="true"></td></tr>
-            <tr><td></td><td><input type="hidden" value="regsearch" name="regsearch"></td></tr>
             <tr><td></td><td><input class="button" type="submit" value="Search"></td></tr>
         </table>
     </form>
-    <form method="POST" action="/ISDAssignment/ItemViewServlet" id="categoryform">
-        <label for="category">Category:</label>
-        <select name="searchq" id="category" form="categoryform">
-            <option>Category...</option>
-            <%
-            for (Categories category : categories) { %>
-            <option value="<%=category.getName()%>"><%=category.getName()%></option>
-            <%
-            }
-            %>
-            <input class="button" type="submit" value="Category Search">
-        </select>
         <div class="collection">
-        These are all the items we have for sale 
             <%
-            for (Item item : items) { %>
+            if (searchItems != null && searchItems.size() > 0) { %>
+            Your search results - <a href="store.jsp">Click here to go back to store</a>
+                <%
+                for (Item item : searchItems) { %>
             <div class="product">
               <img class="product_image" src="<%=item.getItem_image_path()%>"></a>
               <div class="product__name">
@@ -86,10 +74,13 @@
                   <p>$<%=item.getItem_price()%> </p>
               </div>
             </div>
+            <% }
+            }
+            else { %>
+            Your search produced no results - <a href="store.jsp">Click here to go back to store</a>
             <%
             } %>
-          </div>
-    </p> 
+    </p>
     <footer class="bottomarea">
         <p id="clock" class="footer"></p>
     </footer>

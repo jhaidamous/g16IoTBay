@@ -48,5 +48,6 @@ public class LogoutServlet extends HttpServlet {
         } catch (SQLException ex) {
             Logger.getLogger(LogoutServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
 }
 
