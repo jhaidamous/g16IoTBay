@@ -27,10 +27,10 @@ create table customer_user(
 
 create table payment_details (
     custID integer not null,
-    pay_det_num integer not null,
+    pay_det_num integer not null generated always as identity(start with 1, increment by 1),
     cvc integer not null,
-    cardnum varchar(16) not null,
-    expirydate date not null, 
+    cardnum varchar(16) unique not null,
+    expirydate date not null,
     foreign key (custID) references customer_user(custID),
     primary key(custID, pay_det_num)
 );
