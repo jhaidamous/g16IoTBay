@@ -20,6 +20,10 @@
         <servlet-name>UpdateAccServlet</servlet-name>
         <servlet-class>uts.isd.controller.UpdateAccServlet</servlet-class>
     </servlet>
+        <servlet>
+        <servlet-name>PaymentDetailsServlet</servlet-name>
+        <servlet-class>uts.isd.controller.PaymentDetailsServlet</servlet-class>
+    </servlet>
     <servlet>
         <servlet-name>LogsServlet</servlet-name>
         <servlet-class>uts.isd.controller.LogsServlet</servlet-class>
@@ -55,6 +59,10 @@
     <servlet-mapping>
         <servlet-name>LogoutServlet</servlet-name>
         <url-pattern>/LogoutServlet</url-pattern>
+    </servlet-mapping>
+        <servlet-mapping>
+        <servlet-name>PaymentDetailsServlet</servlet-name>
+        <url-pattern>/PaymentDetailsServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
