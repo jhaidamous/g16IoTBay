@@ -20,9 +20,16 @@ INSERT INTO iotadmin.CUSTOMER_USER(CUSTID, PASSWORD, DISABLED)
 VALUES ((SELECT USERID FROM iotadmin.USERS WHERE EMAILADDRESS = 'john.smith@uts.com'),'pass123',false);
 
 INSERT INTO iotadmin.USERS(FIRSTNAME, LASTNAME, MIDDLENAME, EMAILADDRESS, PHONE, DOB)
-VALUES ('David','Frisken','M','david.frisken@uts.com','0499999999','01/01/1990');
+VALUES ('David','Frisken','M','david.frisken@uts.com','0499999999','01/01/1990'),
+       ('Jake','Doe','H','jake.doe@uts.com','0499999999','01/01/1990');
 INSERT INTO iotadmin.STAFF_USER(STAFFID, PASSWORD, STAFF_ROLE)
-VALUES ((SELECT USERID FROM iotadmin.USERS WHERE EMAILADDRESS = 'david.frisken@uts.com'),'12345','SYSTEM ADMIN');
+VALUES ((SELECT USERID FROM iotadmin.USERS WHERE EMAILADDRESS = 'david.frisken@uts.com'),'12345','SYSTEM ADMIN'),
+       ((SELECT USERID FROM iotadmin.USERS WHERE EMAILADDRESS = 'jake.doe@uts.com'),'12345','IoTBay Staff');
+
+-- INSERT INTO iotadmin.USERS(FIRSTNAME, LASTNAME, MIDDLENAME, EMAILADDRESS, PHONE, DOB)
+-- VALUES ;
+-- INSERT INTO iotadmin.STAFF_USER(STAFFID, PASSWORD, STAFF_ROLE)
+-- VALUES ;
 -- INSERT INTO iotadmin.ORDERS(tracking_number, arrival_date, order_date, order_status)
 -- VALUES ('123','01/01/1990','01/01/1990','01/01/1990', 'Yes');
 

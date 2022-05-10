@@ -78,10 +78,17 @@ public class StaffLoginServlet extends HttpServlet {
         else {
             try {
                 if (staff != null) {
-       
-                    session.setAttribute("staff", staff);
-                    String url = request.getContextPath() + "/systemadmin.jsp";
-                    response.sendRedirect(url);                } 
+                    if (staff.getRole().equals("SYSTEM ADMIN")) {
+                        session.setAttribute("systemadmin", staff);
+                        String url = request.getContextPath() + "/systemadmin.jsp";
+                        response.sendRedirect(url);                
+                    }
+                    else {
+                        session.setAttribute("staff", staff);
+                        String url = request.getContextPath() + "/staffmain.jsp";
+                        response.sendRedirect(url);                
+                    }
+                } 
                 else {
 
                     session.setAttribute("logInErr", "Email or Password Incorrect");

@@ -54,6 +54,8 @@
     <form method="POST" action="/ISDAssignment/ItemViewServlet">
         <table class="table">
             <tr><td>Item Name: </td><td><input type="text" name="searchq" required="true"></td></tr>
+            <tr><td></td><td><input type="hidden" value="regsearch" name="regsearch"></td></tr>
+            <tr><td></td><td><input type="hidden" value="/storeSearch.jsp" name="respurl"></td></tr>
             <tr><td></td><td><input class="button" type="submit" value="Search"></td></tr>
         </table>
     </form>

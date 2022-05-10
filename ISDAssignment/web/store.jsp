@@ -30,14 +30,9 @@
         <a href="logout.jsp">Logout</a>
         </nav>
     </header>
-        <% String test3 = "sending session to servlet";
-            session.setAttribute("test3", test3);%>
         <%
             ArrayList<Item> items = (ArrayList<Item>)session.getAttribute("items");
             ArrayList<Categories> categories = (ArrayList<Categories>)session.getAttribute("categories");
-            String test = (String)session.getAttribute("test");
-            String test2 = (String)session.getAttribute("test2");
-            String test4 = (String)session.getAttribute("test4");
             
             User user = new User();
             if ((User)session.getAttribute("login") == null) {
@@ -56,6 +51,7 @@
         <table class="table">
             <tr><td>Item Name: </td><td><input type="text" name="searchq" required="true"></td></tr>
             <tr><td></td><td><input type="hidden" value="regsearch" name="regsearch"></td></tr>
+            <tr><td></td><td><input type="hidden" value="/storeSearch.jsp" name="respurl"></td></tr>
             <tr><td></td><td><input class="button" type="submit" value="Search"></td></tr>
         </table>
     </form>

@@ -29,7 +29,7 @@ public class ItemDAO {
     //Create Operation: create an item
     public void createItem(String item_name, String item_price, String item_stock, String item_status, String cost_per_item, String item_category, String item_image_path) throws SQLException {
         String columns = "INSERT INTO iotadmin.catalog_item(item_name,item_price,item_stock,item_status,cost_per_item,item_category,item_image_path)";
-        String values = "VALUES('"+item_name+"','"+item_price+"','"+item_stock+"','"+item_status+"','"+cost_per_item+"','"+item_category+"','"+item_image_path+"')";
+        String values = "VALUES('"+item_name+"',"+item_price+","+item_stock+",'"+item_status+"',"+cost_per_item+",'"+item_category+"','"+item_image_path+"')";
         st.executeUpdate(columns+values);      
     }
     
@@ -69,6 +69,26 @@ public class ItemDAO {
         }
         return items;
             
+    }
+        public Item fetchItem(int itemID) throws SQLException {
+        String fetch = "SELECT * FROM iotadmin.catalog_item WHERE itemID="+itemID+"";
+        ResultSet rs = st.executeQuery(fetch);
+        rs.next();
+        String item_name =  rs.getString(2);
+        String item_price = rs.getString(3);
+        String item_stock = rs.getString(4);
+        String item_status = rs.getString(5);
+        String cost_per_item = rs.getString(6);
+        String item_category = rs.getString(7);
+        String item_image_path = rs.getString(8);
+        Item editItem = new Item(itemID,item_name,item_price,item_stock,item_status,cost_per_item,item_category,item_image_path);
+        return editItem;
+            
+    }
+        
+    public void updateItem(int itemID, String itemname, Double itemprice, int itemstock, String itemstatus, Double costperitem, String itemcategory) throws SQLException {
+        String fetch = "UPDATE iotadmin.CATALOG_ITEM SET item_name='"+itemname+"', item_price="+itemprice+", item_stock="+itemstock+", item_status='"+itemstatus+"', cost_per_item="+costperitem+", item_category='"+itemcategory+"' WHERE itemID="+itemID+"";
+        st.executeUpdate(fetch);
     }
     
     public ArrayList<Item> searchItems(String searchq) throws SQLException {

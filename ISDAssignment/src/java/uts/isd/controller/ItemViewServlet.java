@@ -20,7 +20,6 @@ import uts.isd.model.Categories;
 import uts.isd.model.Item;
 import uts.isd.model.User;
 import uts.isd.model.dao.ItemDAO;
-import uts.isd.model.dao.UserDAO;
 
 /**
  *
@@ -33,25 +32,9 @@ public class ItemViewServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession session = request.getSession();
-        
-        String test3 = (String)session.getAttribute("test3");
         ItemDAO itemDAO = (ItemDAO)session.getAttribute("itemDAO");
-        if (itemDAO == null) {
-            String test2 = "itemdao is null";
-            session.setAttribute("test2", test2);
-        }
-        if (test3 == null) {
-            String test4 = "test3 is null";
-            session.setAttribute("test4", test4);
-        }
-        else {
-            String test4 = test3;
-            session.setAttribute("test4", test4);
-        }
 
         try {
-            String test = "this istest";
-            session.setAttribute("test", test);
             ArrayList<Item> items = itemDAO.fetchItems();
             session.setAttribute("items", items);
             ArrayList<Categories> categories = itemDAO.fetchCategories();
@@ -67,10 +50,11 @@ public class ItemViewServlet extends HttpServlet {
      protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession session = request.getSession();
+        String respurl = request.getParameter("respurl");
         String searchq = request.getParameter("searchq");
         String regsearch = request.getParameter("regsearch");
         ItemDAO itemDAO = (ItemDAO)session.getAttribute("itemDAO");
-        
+        System.out.print(request.getRequestURL());
         try {
             if (regsearch != null) {
                 System.out.print(searchq);
@@ -82,7 +66,7 @@ public class ItemViewServlet extends HttpServlet {
                 ArrayList<Item> searchItems = itemDAO.searchCategories(searchq);
                 session.setAttribute("searchItems", searchItems);
             }
-            String url = request.getContextPath() + "/storeSearch.jsp";
+            String url = request.getContextPath() + respurl;
             response.sendRedirect(url);
         } catch (NullPointerException ex) {
             System.out.println(ex.getMessage() == null ? "Items not found in DB" : "Items found");

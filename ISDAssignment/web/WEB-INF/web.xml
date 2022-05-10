@@ -15,7 +15,7 @@
     <servlet>
         <servlet-name>LoginServlet</servlet-name>
         <servlet-class>uts.isd.controller.LoginServlet</servlet-class>
-    </servlet>    
+    </servlet>
     <servlet>
         <servlet-name>StaffLoginServlet</servlet-name>
         <servlet-class>uts.isd.controller.StaffLoginServlet</servlet-class>
@@ -47,6 +47,10 @@
     <servlet>
         <servlet-name>TransportPaymentDetailsServlet</servlet-name>
         <servlet-class>uts.isd.controller.TransportPaymentDetailsServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UpdateItemServlet</servlet-name>
+        <servlet-class>uts.isd.controller.UpdateItemServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>ConnServlet</servlet-name>
@@ -95,6 +99,10 @@
     <servlet-mapping>
         <servlet-name>StaffLoginServlet</servlet-name>
         <url-pattern>/StaffLoginServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateItemServlet</servlet-name>
+        <url-pattern>/UpdateItemServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

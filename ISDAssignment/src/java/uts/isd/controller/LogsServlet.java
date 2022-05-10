@@ -22,7 +22,6 @@ import uts.isd.model.Logs;
 import uts.isd.model.User;
 import uts.isd.model.dao.ItemDAO;
 import uts.isd.model.dao.LogsDAO;
-import uts.isd.model.dao.UserDAO;
 
 /**
  *
