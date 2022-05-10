@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import uts.isd.model.Customer;
 import uts.isd.model.Item;
 import uts.isd.model.Payment;
 import uts.isd.model.PaymentDetails;
@@ -48,32 +49,28 @@ public class PaymentDetailsServlet extends HttpServlet {
             Logger.getLogger(PaymentDetailsServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
     }    
-    // this method when we post the from from payment.jsp to setvlet
+    // this method when we post the from payment.jsp to setvlet
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession session = request.getSession();
+        Customer customer = (Customer)session.getAttribute("customer"); 
         //get the posted details from the request, based on "name" appropriate field in the jsp form
-        int userID = Integer.parseInt(request.getParameter("userID")) ;  // isn't it supposed to be custID?
-//        int custID = Integer.parseInt(request.getParameter("custID"))    // should add this too
-//        int pay_det_num = Integer.parseInt(request.getParameter("pay_det_num"))    // should add this too   
-        String cvc = request.getParameter("cvc");                           // should add this too
+        int userID = Integer.parseInt(request.getParameter("userID")) ;
+        int cvc = Integer.parseInt(request.getParameter("cvc"));                           
         String cardnum = request.getParameter("cardnum");
         String expirydate = request.getParameter("expirydate");
-//        String paymentID = request.getParameter("emailaddress");          // payment.jsp
-//        String payment_error = request.getParameter("password");          // payment.jsp
-//        String payment_status = request.getParameter("phone");            // payment.jsp
         //getting the dao from the session (initalised in connservlet which is run on index.jsp)
         PaymentDetailsDAO paymentDetailsDAO = (PaymentDetailsDAO)session.getAttribute("paymentDetailsDAO");
         
         //try this code,
         try {
             //create the payment details from the attributes we got above
-            paymentDetailsDAO.createPaymentDetails(userID, 0, cardnum, expirydate);
+            paymentDetailsDAO.createPaymentDetails(customer.getUserID(), cvc, cardnum, expirydate);
             PaymentDetails paymentdetails = paymentDetailsDAO.read(cardnum);
             session.setAttribute("paymentdetails", paymentdetails);
             request.getRequestDispatcher("Payment.jsp").include(request, response);
         } catch (NullPointerException ex) { //if there is error of type "x" do this
-            System.out.println(ex.getMessage() == null ? "Items not found in DB" : "Items found");
+            System.out.println(ex.getMessage() == null ? "Unable to create Payment Details" : "Payment Details Created");
         } catch (SQLException ex) {
             Logger.getLogger(PaymentDetailsServlet.class.getName()).log(Level.SEVERE, null, ex);
         }

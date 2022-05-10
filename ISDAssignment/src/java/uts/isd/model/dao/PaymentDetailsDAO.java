@@ -37,7 +37,7 @@ public class PaymentDetailsDAO {
 
     //Create Operation: create a record of payment details
     public void createPaymentDetails(int custID, int cvc, String cardnum, String expirydate) throws SQLException {
-        String columns = "INSERT INTO iotadmin.payment_details(custID,pay_det_num,cvc,cardnum,expirydate)";
+        String columns = "INSERT INTO iotadmin.payment_details(custID,cvc,cardnum,expirydate)";
         String values = "VALUES('"+custID+"','"+cvc+"','"+cardnum+"','"+expirydate+"')";
         st.executeUpdate(columns+values);      
     }
