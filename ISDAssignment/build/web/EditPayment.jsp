@@ -28,9 +28,8 @@
     <div class="mainsite">
     <h1>Edit Payment Details</h1>
     <p>Update the Payment Details</p>
-        <form method="POST" action="EditPayment.jsp">
+        <form method="POST" action="/ISDAssignment/PaymentDetailsServlet">
             <table class="table">
-                <form method="POST" action="EditPayment.jsp">
                 <tr><td>Customer ID: </td><td><input type="text" name="custID" required="true" placeholder="1234"></td></tr>
                 <tr><td>Customer Name: </td><td><input type="text" name="firstname" required="true" placeholder="John Doe"></td></tr>
                 <tr><td>Card Number: </td><td><input type="numerical" name="cardnum" required="true" placeholder="5217 0000 1234 5678" maxlength="16"></td></tr>
@@ -39,7 +38,7 @@
                 <tr><td>Expiry Date: </td><td><input autocomplete="off" class="exp" id="month" maxlength="2" pattern="[0-9]*" inputmode="numerical" placeholder="MM" type="text" data-pattern-validate /><input autocomplete="off" class="exp" id="year" maxlength="2" pattern="[0-9]*" inputmode="numerical" placeholder="YY" type="text" data-pattern-validate /></div></td></tr>
                 <tr><td></td><td><input class="button" type="submit" value="Update the Payment Details"></td></tr>
             </table>
-            </form>
+        </form>
     </div>
     <footer class="bottomarea">
         <p id="clock" class="footer"></p>

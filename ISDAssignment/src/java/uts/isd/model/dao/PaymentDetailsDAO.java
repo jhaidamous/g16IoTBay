@@ -27,6 +27,7 @@ public class PaymentDetailsDAO {
     private String deleteQuery = "DELETE FROM iotadmin.PAYMENT_DETAILS WHERE CUSTID= ? AND PAY_DET_NUM=?";
     
     public PaymentDetailsDAO(Connection connection) throws SQLException {
+        
         connection.setAutoCommit(true);
         st = connection.createStatement();
 //        readSt =  connection.prepareStatement(readQuery);
@@ -35,19 +36,19 @@ public class PaymentDetailsDAO {
     }
 
     //Create Operation: create a record of payment details
-    public void createPaymentDetails(int custID, int pay_det_num, int cvc, String cardnum, String expirydate) throws SQLException {
+    public void createPaymentDetails(int custID, int cvc, String cardnum, String expirydate) throws SQLException {
         String columns = "INSERT INTO iotadmin.payment_details(custID,pay_det_num,cvc,cardnum,expirydate)";
-        String values = "VALUES('"+custID+"','"+pay_det_num+"','"+cvc+"','"+cardnum+"','"+expirydate+"')";
+        String values = "VALUES('"+custID+"','"+cvc+"','"+cardnum+"','"+expirydate+"')";
         st.executeUpdate(columns+values);      
     }
-//Read one payment detail by a custID AND pay_det_num 
-    public PaymentDetails read(int custID, int pay_det_num) throws SQLException {
-        String fetch = " SELECT * FROM payment_details WHERE custID='"+custID+"' AND pay_det_num='"+pay_det_num+"'"; 
+//Read one payment detail by a cardno 
+    public PaymentDetails read(String cardnum) throws SQLException {
+        String fetch = " SELECT * FROM payment_details WHERE cardnum='"+cardnum+"'"; 
         ResultSet rs = st.executeQuery(fetch);
         int cvc;
-        String cardnum;
         String expirydate;
-                  
+        int pay_det_num;
+        int custID;
         custID = Integer.parseInt(rs.getString(1));
         pay_det_num =  Integer.parseInt(rs.getString(2));
         cvc =   Integer.parseInt(rs.getString(3));
