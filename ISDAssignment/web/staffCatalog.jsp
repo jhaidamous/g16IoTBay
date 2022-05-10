@@ -4,6 +4,7 @@
     Author     : g16
 --%>
 
+<%@page import="uts.isd.model.Categories"%>
 <%@page import="uts.isd.model.Item"%>
 <%@page import="uts.isd.model.Customer"%>
 <%@page import="java.util.ArrayList"%>
@@ -21,6 +22,7 @@
 <% 
 ArrayList<Item> items = (ArrayList<Item>) session.getAttribute("items"); 
 ArrayList<Item> staffsearchlist = (ArrayList<Item>) session.getAttribute("searchItems");
+ArrayList<Categories> categories = (ArrayList<Categories>)session.getAttribute("categories");
 %>
 <html>
     <body class="bodyclass" onload="startTime()">
@@ -44,6 +46,20 @@ ArrayList<Item> staffsearchlist = (ArrayList<Item>) session.getAttribute("search
             <tr><td></td><td><input type="hidden" value="/staffCatalog.jsp" name="respurl"></td></tr>
             <tr><td></td><td><input class="button" type="submit" value="Search"></td></tr>
         </table>
+    </form>
+    <form method="POST" action="/ISDAssignment/ItemViewServlet" id="categoryform">
+        <label for="category">Category:</label>
+        <select name="searchq" id="category" form="categoryform">
+            <option>Category...</option>
+            <%
+            for (Categories category : categories) { %>
+            <option value="<%=category.getName()%>"><%=category.getName()%></option>
+            <%
+            }
+            %>
+        </select>
+    <input type="hidden" value="/staffCatalog.jsp" name="respurl">
+    <input class="button" type="submit" value="Category Search">
     </form>
     <table class="table">
             <%

@@ -65,8 +65,10 @@
             <%
             }
             %>
-            <input class="button" type="submit" value="Category Search">
         </select>
+    <input type="hidden" value="/storeSearch.jsp" name="respurl">
+    <input class="button" type="submit" value="Category Search">
+    </form>
         <div class="collection">
         These are all the items we have for sale 
             <%
