@@ -53,7 +53,7 @@ ArrayList<Item> staffsearchlist = (ArrayList<Item>) session.getAttribute("search
             <%
             }
             for (Item item : items) { %>
-            <form method="GET" action="/ISDAssignment/UpdateItemServlet">
+            <form method="GET" action="/ISDAssignment/UpdateItemServlet"> 
                 <tr>
                     <td><img class="staffproduct" src="<%=item.getItem_image_path()%>"></td>
                     <td><%=item.getItem_name()%></td>

@@ -70,7 +70,7 @@ public class ItemDAO {
         return items;
             
     }
-        public Item fetchItem(int itemID) throws SQLException {
+    public Item fetchItem(int itemID) throws SQLException {
         String fetch = "SELECT * FROM iotadmin.catalog_item WHERE itemID="+itemID+"";
         ResultSet rs = st.executeQuery(fetch);
         rs.next();
@@ -84,6 +84,10 @@ public class ItemDAO {
         Item editItem = new Item(itemID,item_name,item_price,item_stock,item_status,cost_per_item,item_category,item_image_path);
         return editItem;
             
+    }
+    public void deleteItem(int itemID) throws SQLException {
+        String sql = "DELETE FROM iotadmin.catalog_item WHERE itemID="+itemID+"";
+        st.executeUpdate(sql);
     }
         
     public void updateItem(int itemID, String itemname, Double itemprice, int itemstock, String itemstatus, Double costperitem, String itemcategory) throws SQLException {

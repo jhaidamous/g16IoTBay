@@ -56,6 +56,12 @@
                 <tr><td></td><td><input class="button" type="submit" value="Update Item"></td></tr>
             </table>
         </form>
+        <form method="POST" action="/ISDAssignment/DeleteItemServlet">
+            <table class="table">
+                <tr><td><input type="hidden" value="<%=editItem.getItemID() %>" name="itemID"></td></tr>
+                <tr><td></td><td><input class="button" type="submit" value="Delete Item"></td></tr>
+            </table>
+        </form>
 
     </div>
     <footer class="bottomarea">
