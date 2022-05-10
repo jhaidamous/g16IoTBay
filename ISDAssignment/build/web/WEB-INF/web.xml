@@ -56,6 +56,10 @@
         <servlet-name>DeleteItemServlet</servlet-name>
         <servlet-class>uts.isd.controller.DeleteItemServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>CreateItemServlet</servlet-name>
+        <servlet-class>uts.isd.controller.CreateItemServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ConnServlet</servlet-name>
         <url-pattern>/ConnServlet</url-pattern>
@@ -111,6 +115,10 @@
     <servlet-mapping>
         <servlet-name>DeleteItemServlet</servlet-name>
         <url-pattern>/DeleteItemServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CreateItemServlet</servlet-name>
+        <url-pattern>/CreateItemServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

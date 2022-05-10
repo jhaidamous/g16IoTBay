@@ -35,6 +35,7 @@ ArrayList<Item> staffsearchlist = (ArrayList<Item>) session.getAttribute("search
     </header>
     <div class="mainsite">
     <h1>Store Catalog - Staff Portal</h1>
+    <a href='createItem.jsp' class="buttonn">"Add an item"</a>
     <h2>Search Items</h2>
     <form method="POST" action="/ISDAssignment/ItemViewServlet">
         <table class="table">
