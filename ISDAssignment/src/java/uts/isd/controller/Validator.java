@@ -11,6 +11,11 @@ public class Validator implements Serializable {
     private String namePattern = "[A-Za-z]+";//"([A-Z][a-z]+[\\s])+[A-Z][a-z]*";
     private String passwordPattern = "[a-z0-9]{5,}";
     private String phonePattern = "[A-Za-z0-9.@]+";
+    private String cvcPattern =  "[0-9]{3,4}$";
+//    private String expirydatePattern = "((0[1-9])|(1[0-2]))[\\/\\.\\-]*((0[8-9])|(1[1-9]))$";
+    private String monthPattern = "(0[1-9]|1[012])";
+    private String yearPattern = "^[12][0-9]{3}$";
+    private String cardnumPattern = "(?:4[0-9]{12}(?:[0-9]{3})?|5[1-5][0-9]{14})$";
 //    private String dobPattern = "^(0[1-9]|[12][0-9]|3[01])[- /.](0[1-9]|1[012])[- /.]((19|20)\\d\\d)$";
 
     public Validator() {
@@ -42,6 +47,26 @@ public class Validator implements Serializable {
         return validate(phonePattern, phone);
     }
     
+    public boolean validateCVC(int cvc){
+        return validate(cvcPattern, Integer.toString(cvc)); 
+   }
+    
+    public boolean validatecardnum(String cardnum){
+        return validate(cardnumPattern, cardnum);
+    }
+    
+//    public boolean validateexpirydate(String expirydate){
+//        return validate(expirydatePattern, expirydate);
+//    }
+    
+    public boolean validatemonth(String month){
+        return validate(monthPattern, month);
+    }
+     
+    public boolean validateyear(String year){
+        return validate(yearPattern, year);
+    }
+    
 //    public boolean validateDob (String dob){
 //        return validate(dobPattern, dob);
 //    }
@@ -56,5 +81,8 @@ public class Validator implements Serializable {
         session.setAttribute("phoneErr", "Enter phone");
         session.setAttribute("dobErr", "Enter DOB");
         session.setAttribute("registration", "");
+        session.setAttribute("cvcErr", "Enter CVC");
+        session.setAttribute("expirydateErr", "Enter Expiry Date");
+        session.setAttribute("cardnumErr", "Enter Card Number");
     }
 }

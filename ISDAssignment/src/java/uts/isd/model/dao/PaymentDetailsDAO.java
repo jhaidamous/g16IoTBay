@@ -23,13 +23,14 @@ public class PaymentDetailsDAO {
     private PreparedStatement updateSt;
     private PreparedStatement deleteSt;
 //    private String readQuery =  "SELECT custID, pay_det_num, cvc, cardnum, expirydate DISABLED FROM USERS, CUSTOMER_USER WHERE USERS.USERID=CUSTOMER_USER.USERID AND EMAIL=? AND PASSWORD=?";
-    private String updateQuery = "UPDATE iotadmin.PAYMENT_DETAILS SET custID=?, pay_det_num=?, cvc=?, cardnum=?, expirydate=?, DISABLED=? WHERE CUSTID=? AND PAY_DET_NUM=?";
+    private String updateQuery = "UPDATE iotadmin.PAYMENT_DETAILS SET cvc=?, cardnum=?, expirydate=? WHERE CUSTID=? AND PAY_DET_NUM=?";
     private String deleteQuery = "DELETE FROM iotadmin.PAYMENT_DETAILS WHERE CUSTID= ? AND PAY_DET_NUM=?";
     
     public PaymentDetailsDAO(Connection connection) throws SQLException {
         
         connection.setAutoCommit(true);
         st = connection.createStatement();
+        
 //        readSt =  connection.prepareStatement(readQuery);
         updateSt = connection.prepareStatement(updateQuery);
         deleteSt = connection.prepareStatement(deleteQuery);
@@ -38,17 +39,18 @@ public class PaymentDetailsDAO {
     //Create Operation: create a record of payment details
     public void createPaymentDetails(int custID, int cvc, String cardnum, String expirydate) throws SQLException {
         String columns = "INSERT INTO iotadmin.payment_details(custID,cvc,cardnum,expirydate)";
-        String values = "VALUES('"+custID+"','"+cvc+"','"+cardnum+"','"+expirydate+"')";
-        st.executeUpdate(columns+values);      
+        String values = "VALUES("+custID+","+cvc+",'"+cardnum+"','"+expirydate+"')";
+        st.executeUpdate(columns+values);     
+        System.out.print(custID+" "+ cvc+ " "+ cardnum+ " "+ expirydate);
     }
 //Read one payment detail by a cardno 
-    public PaymentDetails read(String cardnum) throws SQLException {
-        String fetch = " SELECT * FROM payment_details WHERE cardnum='"+cardnum+"'"; 
+    public PaymentDetails read(int custID, int pay_det_num) throws SQLException {
+        String fetch = " SELECT * FROM payment_details WHERE custID="+custID+" AND pay_det_num="+pay_det_num+""; 
         ResultSet rs = st.executeQuery(fetch);
+        rs.next();
         int cvc;
         String expirydate;
-        int pay_det_num;
-        int custID;
+        String cardnum;
         custID = Integer.parseInt(rs.getString(1));
         pay_det_num =  Integer.parseInt(rs.getString(2));
         cvc =   Integer.parseInt(rs.getString(3));
@@ -61,26 +63,27 @@ public class PaymentDetailsDAO {
         }
     //Update Operation: update payment details by custID + paydetnum
     public void update(int custID, int pay_det_num, int cvc, String cardnum, String expirydate) throws SQLException {
-        updateSt.setString(1, Integer.toString(custID));
-        updateSt.setString(2, Integer.toString(pay_det_num));
-        updateSt.setString(3, Integer.toString(cvc));
-        updateSt.setString(4, cardnum);
-        updateSt.setString(5, expirydate);
+        System.out.print(custID+" "+pay_det_num+" "+cvc+ cardnum + expirydate);
+        updateSt.setString(4, Integer.toString(custID));
+        updateSt.setString(5, Integer.toString(pay_det_num));
+        updateSt.setString(1, Integer.toString(cvc));
+        updateSt.setString(2, cardnum);
+        updateSt.setString(3, expirydate);
         int row = updateSt.executeUpdate();
         System.out.println("row "+row+" updated successfuly");
     }
 
     //Delete Operation: delete a payment details by custID and paydetnum
-    public void delete(int custID, int pay_det_num) throws SQLException {
+    public void delete(int custID) throws SQLException {
         deleteSt.setString(1, Integer.toString(custID));
-        deleteSt.setString(2, Integer.toString(pay_det_num));
+//        deleteSt.setString(2, Integer.toString(pay_det_num));
         int row = deleteSt.executeUpdate();
         System.out.println("row "+row+" deleted successfuly");
     }
 
     //Fetch All: Read all payment details by a custID // CHECK THIS
     public ArrayList<PaymentDetails> fetchPaymentDetails(int custID) throws SQLException {
-        String fetch = " SELECT * FROM payment_details WHERE custID='"+custID+"' "; 
+        String fetch = " SELECT * FROM payment_details WHERE custID="+custID+" "; 
         //fetch all the orderIDs which have the UserID, fetch all the Payments against the Orders.
         ResultSet rs = st.executeQuery(fetch);
         ArrayList<PaymentDetails> paymentDetails = new ArrayList<PaymentDetails>();     

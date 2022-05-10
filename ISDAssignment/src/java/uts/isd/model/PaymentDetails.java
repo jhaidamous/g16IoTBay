@@ -21,6 +21,7 @@ public PaymentDetails(int custID, int pay_det_num, int cvc, String cardnum, Stri
         this.pay_det_num = pay_det_num;
         this.cvc = cvc;
         this.cardnum = cardnum;
+        this.expirydate = expirydate;
     }
 
     public int getCustID() {

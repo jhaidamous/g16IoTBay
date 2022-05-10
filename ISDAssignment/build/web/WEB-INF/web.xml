@@ -20,7 +20,7 @@
         <servlet-name>UpdateAccServlet</servlet-name>
         <servlet-class>uts.isd.controller.UpdateAccServlet</servlet-class>
     </servlet>
-        <servlet>
+    <servlet>
         <servlet-name>PaymentDetailsServlet</servlet-name>
         <servlet-class>uts.isd.controller.PaymentDetailsServlet</servlet-class>
     </servlet>
@@ -31,6 +31,14 @@
     <servlet>
         <servlet-name>LogoutServlet</servlet-name>
         <servlet-class>uts.isd.controller.LogoutServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EditPaymentDetailsServlet</servlet-name>
+        <servlet-class>uts.isd.controller.EditPaymentDetailsServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>TransportPaymentDetailsServlet</servlet-name>
+        <servlet-class>uts.isd.controller.TransportPaymentDetailsServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>ConnServlet</servlet-name>
@@ -60,9 +68,17 @@
         <servlet-name>LogoutServlet</servlet-name>
         <url-pattern>/LogoutServlet</url-pattern>
     </servlet-mapping>
-        <servlet-mapping>
+    <servlet-mapping>
         <servlet-name>PaymentDetailsServlet</servlet-name>
         <url-pattern>/PaymentDetailsServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EditPaymentDetailsServlet</servlet-name>
+        <url-pattern>/EditPaymentDetailsServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>TransportPaymentDetailsServlet</servlet-name>
+        <url-pattern>/TransportPaymentDetailsServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

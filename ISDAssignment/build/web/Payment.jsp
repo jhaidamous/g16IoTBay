@@ -29,14 +29,16 @@
         </nav>
     </header>
     <div class="mainsite">
+        
+       
+        
     <h1>Welcome to the Payment Details</h1>
     <p>Create new payment details</p>
         <form method="POST" action="/ISDAssignment/PaymentDetailsServlet">
             <table class="table">
                 <tr><td>Card Number: </td><td><input type="text" name="cardnum" required="true" placeholder="5217 0000 1234 5678" maxlength="16"></td></tr>
                 <tr><td>CVC: </td><td><input type="text" name="cvc" required="true" placeholder="123" maxlength="3"></td></tr>
-                <tr><td>Expiry Date: </td><td><input type="text" name="expirydate" required="true" placeholder="MM/YYYY"></td></tr>
-                <!--<tr><td>Expiry Date: </td><td><input autocomplete="off" class="exp" id="month" maxlength="2" pattern="[0-9]*" inputmode="numerical" placeholder="MM" type="text" data-pattern-validate /><input autocomplete="off" class="exp" id="year" maxlength="2" pattern="[0-9]*" inputmode="numerical" placeholder="YY" type="text" data-pattern-validate /></div></td></tr>-->
+                <tr><td>Expiry Date: </td><td><input autocomplete="off" name="month" maxlength="2" pattern="[0-9]*" inputmode="numerical" placeholder="MM" type="text" data-pattern-validate /><input autocomplete="off" name="year" maxlength="4" pattern="[0-9]*" inputmode="numerical" placeholder="YYYY" type="text" data-pattern-validate /></div></td></tr>
                 <tr><td></td><td><input class="button" type="submit" value="Save Payment Detail"></td></tr>
             </table>
         </form>
@@ -47,19 +49,19 @@
      <% if (paymentdetails != null) {
             for (PaymentDetails details : paymentdetails) {%>
             <table class="table">
-                <tr><td>Card Number: </td><td></td><%=details.getCardnum()%></tr>
-                <tr><td>CVC: </td><td><input type="text" name="cvc" required="true" placeholder="123" maxlength="3"></td></tr>
-                <tr><td>Expiry Date: </td><td><input type="text" name="expirydate" required="true" placeholder="MM/YYYY"></td></tr>
-                <!--<tr><td></td><td><input class="button" type="submit" value="Search"></td></tr>-->
+                <tr><td>Card Number: </td><td><%=details.getCardnum()%></td></tr>
+                <tr><td>CVC: </td><td><%=details.getCvc()%></</td></tr>
+                <tr><td>Expiry Date: </td><td><%=details.getExpirydate()%></</td></tr>
+                <tr><td>
+                    <form method="POST" action="/ISDAssignment/TransportPaymentDetailsServlet">
+                        <input type="hidden" value="<%=details.getPay_det_num() %>" name="pay_det_num">
+                        <input class="buttonn" type="submit" value="Edit Payment Details">
+                    </form>
+                    </td></tr>
             </table>
         <% 
             } 
         }%>
-        <div class ="paymentdetails">
-        <form method="POST" action="EditPayment.jsp">
-            <input class="buttonn" type="submit" value="Edit Payment Details">
-        </form>
-        </div>
     </div>
     <footer class="bottomarea">
         <p id="clock" class="footer"></p>

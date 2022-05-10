@@ -36,15 +36,15 @@ public class PaymentDetailsServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession session = request.getSession();
-        int userID = Integer.parseInt(request.getParameter("userID")) ;
+        Customer customer = (Customer)session.getAttribute("customer");
         PaymentDetailsDAO paymentDetailsDAO = (PaymentDetailsDAO)session.getAttribute("paymentDetailsDAO");
         
         try {
-            ArrayList<PaymentDetails> paymentdetails = paymentDetailsDAO.fetchPaymentDetails(userID);
+            ArrayList<PaymentDetails> paymentdetails = paymentDetailsDAO.fetchPaymentDetails(customer.getUserID());
             session.setAttribute("paymentdetails", paymentdetails);
 //            request.getRequestDispatcher("store.jsp").include(request, response);
         } catch (NullPointerException ex) {
-            System.out.println(ex.getMessage() == null ? "Items not found in DB" : "Items found");
+            System.out.println(ex.getMessage() == null ? "Payment Details not found in DB" : "Payment Details found");
         } catch (SQLException ex) {
             Logger.getLogger(PaymentDetailsServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -55,19 +55,24 @@ public class PaymentDetailsServlet extends HttpServlet {
         HttpSession session = request.getSession();
         Customer customer = (Customer)session.getAttribute("customer"); 
         //get the posted details from the request, based on "name" appropriate field in the jsp form
-        int userID = Integer.parseInt(request.getParameter("userID")) ;
+//        int userID = Integer.parseInt(request.getParameter("userID")) ;
         int cvc = Integer.parseInt(request.getParameter("cvc"));                           
         String cardnum = request.getParameter("cardnum");
-        String expirydate = request.getParameter("expirydate");
+        String year = request.getParameter("year");
+        String month = request.getParameter("month");
+        String expirydate = year+ "-"+ month+"-"+"01";
         //getting the dao from the session (initalised in connservlet which is run on index.jsp)
         PaymentDetailsDAO paymentDetailsDAO = (PaymentDetailsDAO)session.getAttribute("paymentDetailsDAO");
         
         //try this code,
         try {
+            System.out.print(customer.getUserID());
+            if ((PaymentDetailsDAO)session.getAttribute("paymentDetailsDAO") == null)
+            {
+                System.out.print("Payment Details is Null");
+            }
             //create the payment details from the attributes we got above
             paymentDetailsDAO.createPaymentDetails(customer.getUserID(), cvc, cardnum, expirydate);
-            PaymentDetails paymentdetails = paymentDetailsDAO.read(cardnum);
-            session.setAttribute("paymentdetails", paymentdetails);
             request.getRequestDispatcher("Payment.jsp").include(request, response);
         } catch (NullPointerException ex) { //if there is error of type "x" do this
             System.out.println(ex.getMessage() == null ? "Unable to create Payment Details" : "Payment Details Created");

@@ -50,6 +50,7 @@
                 <tr><td>Phone: </td><td><%= customer.getPhone()%></td></tr>
         </table>
     <a href = "/ISDAssignment/EditAccount.jsp">Edit Account Details</a>
+    <a href = "/ISDAssignment/Payment.jsp">Payment Details</a>
      Access logs below 
     <div class="collection">
         <table class="table">
