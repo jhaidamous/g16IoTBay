@@ -11,6 +11,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import uts.isd.model.Customer;
+import uts.isd.model.Item;
 
 /**
  *
@@ -132,10 +133,32 @@ public class CustomerDAO {
     }
     //Fetch All: List all users
     public ArrayList<Customer> fetchUsers() throws SQLException {
-        String fetch = "SELECT EMAILADDRESS, PASSWORD, FIRSTNAME, LASTNAME, MIDDLENAME, PHONE, DOB, DISABLED FROM USERS, CUSTOMER_USER WHERE USERS.USERID=CUSTOMER_USER.CUSTID";
+        String fetch = "SELECT USERID, EMAILADDRESS, PASSWORD, FIRSTNAME, LASTNAME, MIDDLENAME, PHONE, DOB, DISABLED FROM USERS, CUSTOMER_USER WHERE USERS.USERID=CUSTOMER_USER.CUSTID";
         ResultSet rs = st.executeQuery(fetch);
         ArrayList<Customer> users = new ArrayList();
 
+        while (rs.next()) {
+            int userID = Integer.parseInt(rs.getString(1));
+            String emailaddress = rs.getString(2);
+            String password = rs.getString(3);
+            String firstname = rs.getString(4);
+            String lastname = rs.getString(5);
+            String middlename = rs.getString(6);
+            String phone = rs.getString(7);
+            String dob = rs.getString(8);
+            boolean disabled = Boolean.parseBoolean(rs.getString(9));
+            users.add(new Customer(userID, firstname, lastname, middlename, emailaddress, phone, dob, password, disabled));
+        }
+        return users;
+    }
+    public ArrayList<Customer> searchCustomers(String searchq) throws SQLException {
+        System.out.print(searchq.toLowerCase());
+        //String fetch = "SELECT USERID, EMAILADDRESS, PASSWORD, FIRSTNAME, LASTNAME, MIDDLENAME, PHONE, DOB, DISABLED FROM iotadmin.customer_user, iotadmin.users WHERE LOWER(firstname) LIKE '%"+searchq.toLowerCase()+"%' XOR LOWER(middlename) LIKE '%"+searchq.toLowerCase()+"%' XOR LOWER(lastname) LIKE '%"+searchq.toLowerCase()+"%' ";
+        String fetch = "Select * from users, customer_user where userid=custid and userid in (SELECT distinct(userid) FROM iotadmin.customer_user, iotadmin.users WHERE LOWER(firstname) LIKE '%"+searchq.toLowerCase()+"%' OR LOWER(middlename) LIKE '%"+searchq.toLowerCase()+"%' OR LOWER(lastname) LIKE '%"+searchq.toLowerCase()+"%')";
+
+        ResultSet rs = st.executeQuery(fetch);
+        ArrayList<Customer> users = new ArrayList<Customer>();
+        
         while (rs.next()) {
             int userID = Integer.parseInt(rs.getString(1));
             String emailaddress = rs.getString(2);

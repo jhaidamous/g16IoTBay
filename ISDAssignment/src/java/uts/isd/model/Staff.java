@@ -22,7 +22,7 @@ public class Staff implements Serializable{
     private String middlename;
     private String phone;
     private String dob;
-    private boolean disabled;
+    //private boolean disabled;
     private String role;
 
     public Staff() {
@@ -37,7 +37,7 @@ public class Staff implements Serializable{
         this.phone = phone;
         this.dob = dob;
         this.password = password;
-        this.disabled = disabled;
+        //this.disabled = disabled;
         this.role = role;
     }
 
@@ -114,14 +114,6 @@ public class Staff implements Serializable{
 
     public void setDob(String dob) {
         this.dob = dob;
-    }
-
-    public boolean isDisabled() {
-        return disabled;
-    }
-
-    public void setDisabled(boolean disabled) {
-        this.disabled = disabled;
     }
     
     public String getRole() {

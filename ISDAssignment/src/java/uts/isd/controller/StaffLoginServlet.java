@@ -21,8 +21,6 @@ import uts.isd.model.dao.*;
  */
 public class StaffLoginServlet extends HttpServlet {
 
-    private Object staff;
-
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -33,9 +31,17 @@ public class StaffLoginServlet extends HttpServlet {
         String password = request.getParameter("password");
         StaffDAO staffDAO = (StaffDAO) session.getAttribute("staffDAO");
         
-        Staff Staff = null;
+        Staff staff = null;
+        if (staffDAO == null) {
+            System.out.print("staffdao is null");
+        }
+
+        
         try {
-            Staff staff = staffDAO.login(emailaddress, password);
+            
+            System.out.print("here" + emailaddress + password);
+            
+            staff = staffDAO.login(emailaddress, password);
         }
         catch (NullPointerException ex) {
             System.out.println(ex.getMessage() == null ? "User does not exist" : "Customer already exists");
@@ -74,8 +80,8 @@ public class StaffLoginServlet extends HttpServlet {
                 if (staff != null) {
        
                     session.setAttribute("staff", staff);
-                    request.getRequestDispatcher("systemadmin.jsp").include(request, response);
-                } 
+                    String url = request.getContextPath() + "/systemadmin.jsp";
+                    response.sendRedirect(url);                } 
                 else {
 
                     session.setAttribute("logInErr", "Email or Password Incorrect");

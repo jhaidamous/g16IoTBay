@@ -23,7 +23,7 @@ public class StaffDAO {
 
     private Statement st;
     private PreparedStatement readSt;
-    private String readQuery =  "SELECT USERID, FIRSTNAME, LASTNAME, MIDDLENAME, EMAILADDRESS, PHONE, DOB, STAFF_ROLE, PASSWORD, DISABLED FROM USERS, STAFF_USER WHERE USERS.USERID=STAFF_USER.USERID AND EMAILADDRESS=? AND PASSWORD=?";
+    private String readQuery =  "SELECT USERID, FIRSTNAME, LASTNAME, MIDDLENAME, EMAILADDRESS, PHONE, DOB, STAFF_ROLE, PASSWORD FROM USERS, STAFF_USER WHERE USERS.USERID=STAFF_USER.STAFFID AND EMAILADDRESS=? AND PASSWORD=?";
  
     
     public StaffDAO (Connection connection) throws SQLException {
@@ -39,16 +39,17 @@ public class StaffDAO {
         ResultSet rs = readSt.executeQuery();
         
         while (rs.next()) {
-
+                String useremail = rs.getString(5);
+                String userpass = rs.getString(9);
                 int userID = Integer.parseInt(rs.getString(1));
                 String firstname = rs.getString(2);
                 String lastname = rs.getString(3);
                 String middlename = rs.getString(4);
                 String phone = rs.getString(6);
                 String dob = rs.getString(7);
-                boolean disabled = Boolean.parseBoolean(rs.getString(8));
-                String role = rs.getString(9);
-                return new Staff(userID, firstname, lastname, middlename, emailaddress, phone, dob, role, password);
+                //boolean disabled = Boolean.parseBoolean(rs.getString(8));
+                String role = rs.getString(8);
+                return new Staff(userID, firstname, lastname, middlename, useremail, phone, dob, role, userpass);
         }
         return null;
     }

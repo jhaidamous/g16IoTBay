@@ -27,6 +27,7 @@ public class ConnServlet extends HttpServlet {
     private LogsDAO logsDAO;
     private Connection conn;
     private PaymentDetailsDAO paymentDetailsDAO;
+    private StaffDAO staffDAO;
 //    private PaymentDAO paymentDAO;
     
     @Override //Create and instance of DBConnector for the deployment session
@@ -49,6 +50,7 @@ public class ConnServlet extends HttpServlet {
             customerDAO = new CustomerDAO(conn);
             itemDAO = new ItemDAO(conn);
             paymentDetailsDAO = new PaymentDetailsDAO(conn);
+            staffDAO = new StaffDAO(conn);
 //            paymentDAO = new PaymentDAO(conn);
         } catch (SQLException ex) {
             Logger.getLogger(ConnServlet.class.getName()).log(Level.SEVERE, null, ex);
@@ -58,6 +60,7 @@ public class ConnServlet extends HttpServlet {
         session.setAttribute("customerDAO", customerDAO);
         session.setAttribute("itemDAO", itemDAO);
         session.setAttribute("paymentDetailsDAO", paymentDetailsDAO);
+        session.setAttribute("staffDAO", staffDAO);
 //        session.setAttribute("paymentDAO", paymentDAO);
     }
 

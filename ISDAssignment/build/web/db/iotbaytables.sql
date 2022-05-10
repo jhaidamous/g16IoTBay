@@ -48,10 +48,10 @@ create table shipment_details (
 
 
 create table staff_user (
-    userID integer primary key not null,
+    staffID integer primary key not null,
     staff_role varchar(20) not null,
     password varchar(30) not null,
-    foreign key (userID) references users(userID)
+    foreign key (staffID) references users(userID)
 );
 
 create table user_logs (

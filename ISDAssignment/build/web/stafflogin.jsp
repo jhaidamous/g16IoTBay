@@ -4,6 +4,7 @@
     Author     : Steph
 --%>
 
+<%@page import="uts.isd.model.Staff"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="java.util.Random"%>
 
@@ -16,6 +17,7 @@
     <script type="text/javascript" src="js/index.js"></script>
     <link href="websystems.css" rel="stylesheet">
 </head>
+
 <html>
     <body class="bodyclass" onload="startTime()">
     <header class="toparea">
@@ -30,9 +32,10 @@
     <div class="mainsite">
         <h1>Welcome to IoTBay</h1>
         <p>Staff Login</p>
-        <form method="POST" action="systemadmin.jsp">
+        <form method="POST" action="/ISDAssignment/StaffLoginServlet">
             <table class="table">
-                <tr><td>Username: </td><td><input type="text" name="username" ></td></tr>
+                
+                <tr><td>Email Address: </td><td><input type="text" name="emailaddress" ></td></tr>
                 <tr><td>Password:</td><td><input type="password" name="password" ></td></tr>
                 <tr><td></td><td><input class="button" type="submit" value="Login"></td></tr>
             </table>

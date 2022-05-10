@@ -4,6 +4,8 @@
     Author     : g16
 --%>
 
+<%@page import="uts.isd.model.Customer"%>
+<%@page import="java.util.ArrayList"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="java.util.Random"%>
 <!DOCTYPE html>
@@ -13,7 +15,11 @@
     <link rel="stylesheet" href="css/layout_1.css">
     <script type="text/javascript" src="js/index.js"></script>
     <link href="websystems.css" rel="stylesheet">
+    <jsp:include page="/SearchServlet" flush="true" />
 </head>
+<% ArrayList<Customer> customers = (ArrayList<Customer>) session.getAttribute("customers"); 
+ArrayList<Customer> custsearchlist = (ArrayList<Customer>) session.getAttribute("custsearchlist");
+%>
 <html>
     <body class="bodyclass" onload="startTime()">
     <header class="toparea">
@@ -40,13 +46,32 @@
             </form>
             
      <h2>Search current records</h2>
-        <form method="POST" action="SystemAdmin.jsp">
+        <form method="POST" action="/ISDAssignment/SearchServlet">
             <table class="table">
-                <form method="POST" action="welcome.jsp">
-                <tr><td>Customer Name: </td><td><input type="text" name="name" required="true"></td></tr>
+                <tr><td>Customer Name: </td><td><input type="text" name="custsearch" required="true"></td></tr>
+                <tr><td></td><td><input type="hidden" value="custsearch" name="custsearch"></td></tr>
                 <tr><td></td><td><input class="button" type="submit" value="Search"></td></tr>
             </table>
+            
             </form>
+            <% if(custsearchlist == null) { %>
+            <h2>All Customer Records</h2>
+            <table class="table">
+                <tr><td>Email</td><td>Firstname</td><td>Middlename</td><td>Lastname</td><td>Phone</td><td>DOB</td></tr>
+                <% for (Customer customer : customers) { %>
+                <tr><td><%=customer.getEmailaddress()%></td><td><%=customer.getFirstname()%></td><td><%=customer.getMiddlename()%></td><td><%=customer.getLastname()%></td><td><%=customer.getPhone()%></td><td><%=customer.getDob()%></td></tr>
+                    <% }
+                } else { %> 
+            <h2>Search Results</h2>
+            <table class="table">
+                <tr><td>Email</td><td>Firstname</td><td>Middlename</td><td>Lastname</td><td>Phone</td><td>DOB</td></tr>
+                <% for (Customer customer : custsearchlist) { %>
+                <tr><td><%=customer.getEmailaddress()%></td><td><%=customer.getFirstname()%></td><td><%=customer.getMiddlename()%></td><td><%=customer.getLastname()%></td><td><%=customer.getPhone()%></td><td><%=customer.getDob()%></td></tr>
+                    <% } }%>
+                
+                    
+                
+            </table>
     </div>
     <footer class="bottomarea">
         <p id="clock" class="footer"></p>

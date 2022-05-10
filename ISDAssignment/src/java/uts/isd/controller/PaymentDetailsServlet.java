@@ -73,7 +73,9 @@ public class PaymentDetailsServlet extends HttpServlet {
             }
             //create the payment details from the attributes we got above
             paymentDetailsDAO.createPaymentDetails(customer.getUserID(), cvc, cardnum, expirydate);
-            request.getRequestDispatcher("Payment.jsp").include(request, response);
+            String url = request.getContextPath() + "/Payment.jsp";
+            response.sendRedirect(url);
+//            request.getRequestDispatcher("Payment.jsp").include(request, response);
         } catch (NullPointerException ex) { //if there is error of type "x" do this
             System.out.println(ex.getMessage() == null ? "Unable to create Payment Details" : "Payment Details Created");
         } catch (SQLException ex) {

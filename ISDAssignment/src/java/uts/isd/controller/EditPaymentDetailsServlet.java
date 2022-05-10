@@ -93,7 +93,7 @@ public class EditPaymentDetailsServlet extends HttpServlet {
                     paymentDetailsDAO.update(editdetails.getCustID(), editdetails.getPay_det_num(), cvc, cardnum, expirydate);
 //                    request.getRequestDispatcher("Payment.jsp").include(request, response);
                     String url = request.getContextPath() + "/Payment.jsp";
-                        response.sendRedirect(url);
+                    response.sendRedirect(url);
 
             }
            catch (NullPointerException ex) {
