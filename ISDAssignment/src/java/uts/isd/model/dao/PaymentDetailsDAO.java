@@ -74,9 +74,9 @@ public class PaymentDetailsDAO {
     }
 
     //Delete Operation: delete a payment details by custID and paydetnum
-    public void delete(int custID) throws SQLException {
+    public void delete(int custID, int pay_det_num) throws SQLException {
         deleteSt.setString(1, Integer.toString(custID));
-//        deleteSt.setString(2, Integer.toString(pay_det_num));
+        deleteSt.setString(2, Integer.toString(pay_det_num));
         int row = deleteSt.executeUpdate();
         System.out.println("row "+row+" deleted successfuly");
     }

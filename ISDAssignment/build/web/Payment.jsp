@@ -30,10 +30,8 @@
     </header>
     <div class="mainsite">
         
-       
-        
     <h1>Welcome to the Payment Details</h1>
-    <p>Create new payment details</p>
+    <h2>Create new payment details</h2>
         <form method="POST" action="/ISDAssignment/PaymentDetailsServlet">
             <table class="table">
                 <tr><td>Card Number: </td><td><input type="text" name="cardnum" required="true" placeholder="5217 0000 1234 5678" maxlength="16"></td></tr>
@@ -52,12 +50,20 @@
                 <tr><td>Card Number: </td><td><%=details.getCardnum()%></td></tr>
                 <tr><td>CVC: </td><td><%=details.getCvc()%></</td></tr>
                 <tr><td>Expiry Date: </td><td><%=details.getExpirydate()%></</td></tr>
-                <tr><td>
-                    <form method="POST" action="/ISDAssignment/TransportPaymentDetailsServlet">
-                        <input type="hidden" value="<%=details.getPay_det_num() %>" name="pay_det_num">
-                        <input class="buttonn" type="submit" value="Edit Payment Details">
-                    </form>
-                    </td></tr>
+                <tr>
+                    <td>
+                        <form method="POST" action="/ISDAssignment/TransportPaymentDetailsServlet">
+                            <input type="hidden" value="<%=details.getPay_det_num() %>" name="pay_det_num">
+                            <input class="buttonn" type="submit" value="Edit Payment Details">
+                        </form>
+                    </td>
+                    <td>
+                        <form method="POST" action="/ISDAssignment/DeletePaymentDetailsServlet">
+                            <input type="hidden" value="<%=details.getPay_det_num() %>" name="pay_det_num">
+                            <input class="buttonn" type="submit" value="Delete Payment Details">
+                        </form>
+                    </td>
+                </tr>
             </table>
         <% 
             } 

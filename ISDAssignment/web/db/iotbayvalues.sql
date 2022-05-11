@@ -26,10 +26,27 @@ INSERT INTO iotadmin.STAFF_USER(STAFFID, PASSWORD, STAFF_ROLE)
 VALUES ((SELECT USERID FROM iotadmin.USERS WHERE EMAILADDRESS = 'david.frisken@uts.com'),'12345','SYSTEM ADMIN'),
        ((SELECT USERID FROM iotadmin.USERS WHERE EMAILADDRESS = 'jake.doe@uts.com'),'12345','IoTBay Staff');
 
+-- Building Dummy Carts for John Smith, adding items to 2 orders..
+INSERT INTO iotadmin.cart(custID)
+VALUES (1),
+       (1);
+INSERT INTO iotadmin.line_item(itemID, item_quantity, cartID)
+VALUES (1, 2, 1),
+       (2, 1, 1),
+       (3, 1, 2),
+       (4, 3, 2);
+INSERT INTO iotadmin.ORDERS(order_date, order_status, custID, cartID)
+VALUES ('2022-01-01', 'Completed', 1, 1),
+       ('2022-05-01', 'Completed', 1, 2);
+INSERT INTO iotadmin.payment_details(custID, cvc, cardnum, expirydate)
+VALUES (1, 123, '5593898162202088','2024-05-01'),
+       (1, 455, '5593898162202066','2026-05-01');
+INSERT INTO iotadmin.payment(payment_error, payment_status, payment_date, pay_det_num, custID, orderID)
+VALUES ('None', 'Successful', '2022-01-01', 1, 1, 1),
+       ('Card Declined', 'Failed', '2022-05-01', 1, 1, 2),
+       ('None', 'Successful', '2022-05-02', 2, 1, 2);
+
 -- INSERT INTO iotadmin.USERS(FIRSTNAME, LASTNAME, MIDDLENAME, EMAILADDRESS, PHONE, DOB)
 -- VALUES ;
 -- INSERT INTO iotadmin.STAFF_USER(STAFFID, PASSWORD, STAFF_ROLE)
 -- VALUES ;
--- INSERT INTO iotadmin.ORDERS(tracking_number, arrival_date, order_date, order_status)
--- VALUES ('123','01/01/1990','01/01/1990','01/01/1990', 'Yes');
-

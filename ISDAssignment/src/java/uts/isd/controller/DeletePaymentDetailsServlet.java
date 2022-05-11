@@ -29,26 +29,28 @@ import uts.isd.model.dao.PaymentDetailsDAO;
  *
  * @author JHUTS
  */
-public class DeleteItemServlet extends HttpServlet {
+public class DeletePaymentDetailsServlet extends HttpServlet {
 
     // this method when we post the from payment.jsp to setvlet
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession session = request.getSession();
-        int itemID = Integer.parseInt((String)request.getParameter("itemID"));
-        ItemDAO itemDAO = (ItemDAO)session.getAttribute("itemDAO");
-        
+        int pay_det_num = Integer.parseInt((String)request.getParameter("pay_det_num"));
+        PaymentDetailsDAO paymentDetailsDAO = (PaymentDetailsDAO)session.getAttribute("paymentDetailsDAO");
+        Customer customer = (Customer) session.getAttribute("customer");
+
         //try this code,
         try {
 
-            itemDAO.deleteItem(itemID);
-            String url = request.getContextPath() + "/staffCatalog.jsp";
+            paymentDetailsDAO.delete(customer.getUserID(), pay_det_num);
+            String url = request.getContextPath() + "/Payment.jsp";
             response.sendRedirect(url);
+//            request.getRequestDispatcher("Payment.jsp").include(request, response);
         } catch (NullPointerException ex) { //if there is error of type "x" do this
-            System.out.println(ex.getMessage() == null ? "Unable to delete item" : "item deleted");
+            System.out.println(ex.getMessage() == null ? "Unable to delete payment details" : "payment details deleted");
         } catch (SQLException ex) {
-            Logger.getLogger(DeleteItemServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(DeletePaymentDetailsServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 }

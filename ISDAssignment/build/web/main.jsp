@@ -41,17 +41,21 @@
 //            }
         %>
     <div class="mainsite">
-    <h1>Welcome to IoTBay</h1>
+    <h1>IoTBay - My Account</h1>
     <p>
-        This is the main page... it doesn't do much right so here, have some details
         <table class="table">
-                <tr><td>Email: </td><td><%= customer.getEmailaddress()%></td></tr>                    
-                <tr><td>Name: </td><td><%= customer.getFirstname()%></td></tr>
-                <tr><td>Phone: </td><td><%= customer.getPhone()%></td></tr>
+            <tr><td>Email: </td><td><%= customer.getEmailaddress()%></td></tr>                    
+            <tr><td>Name: </td><td><%= customer.getFirstname()%></td></tr>
+            <tr><td>Phone: </td><td><%= customer.getPhone()%></td></tr>
         </table>
-    <a href = "/ISDAssignment/EditAccount.jsp">Edit Account Details</a>
-    <a href = "/ISDAssignment/Payment.jsp">Payment Details</a>
-     Access logs below 
+        <table class="table">
+            <tr>
+                <td><a class="buttonn" href = "/ISDAssignment/EditAccount.jsp">Edit Account</a></td>
+                <td><a class="buttonn" href = "/ISDAssignment/Payment.jsp">Payment Details</a></td>
+                <td><a class="buttonn" href = "/ISDAssignment/paymentHistory.jsp">Payment History</a></td>
+            </tr>
+        </table>
+    <h2> Access logs below </h2>
     <div class="collection">
         <table class="table">
          <% 

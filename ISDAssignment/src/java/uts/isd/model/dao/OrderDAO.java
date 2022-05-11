@@ -73,8 +73,22 @@ public class OrderDAO {
         return orders;
     }
     
-    
-    
-    
+//    public double calculateTotal(int orderID) throws SQLException {
+//        String fetch = "SELECT CATALOG_ITEM.item_price, LINE_ITEM.item_quantity "
+//                    + "FROM CATALOG_ITEM RIGHT OUTER JOIN LINE_ITEM "
+//                    + "ON CATALOG_ITEM.itemID= LINE_ITEM.itemID "
+//                    + "WHERE LINE_ITEM.itemID IN "
+//                    + "(SELECT LINE_ITEM.itemID FROM LINE_ITEM, CART WHERE LINE_ITEM.cartID = "
+//                    + "(SELECT ORDERS.cartID FROM ORDERS WHERE ORDERS.orderID = "+ orderID +" ))";
+//        ResultSet rs = st.executeQuery(fetch);
+//        double total = 0;
+//        while (rs.next()) {            
+//            int item_price = Integer.parseInt(rs.getString(1));
+//            int item_quantity =  Integer.parseInt(rs.getString(2));
+//            total += (item_price * item_quantity);
+//        }
+//        return total;
+//    }
+
 
 }

@@ -27,12 +27,12 @@ create table customer_user(
 
 create table payment_details (
     custID integer not null,
-    pay_det_num integer not null generated always as identity(start with 1, increment by 1),
+    pay_det_num integer primary key not null generated always as identity(start with 1, increment by 1), 
     cvc integer not null,
     cardnum varchar(16) unique not null,
-    expirydate date not null,
-    foreign key (custID) references customer_user(custID),
-    primary key(custID, pay_det_num)
+    expirydate date not null
+--     foreign key (custID) references customer_user(custID)
+--     primary key(custID, pay_det_num)
 );
 
 create table shipment_details (
@@ -42,8 +42,8 @@ create table shipment_details (
     suburb varchar(50),
     postcode varchar(6),
     states varchar(10),
-    country varchar(20),
-    foreign key (custID) references customer_user(custID)
+    country varchar(20)
+--     foreign key (custID) references customer_user(custID)
 );
 
 
@@ -77,10 +77,9 @@ create table user_logs (
 
 create table cart (
     cartID integer primary key not null generated always as identity(start with 1, increment by 1),
-    total_items float,
     shipping_price float,
-    custID integer not null,
-    foreign key (custID) references customer_user(custID)
+    custID integer not null
+--     foreign key (custID) references customer_user(custID)
 );
 
 create table orders (
@@ -89,7 +88,7 @@ create table orders (
     order_status varchar(15),
     custID integer not null,
     cartID integer not null,
-    foreign key (custID) references customer_user(custID),
+--     foreign key (custID) references customer_user(custID),
     foreign key (cartID) references cart(cartID)
 );
 
@@ -116,9 +115,14 @@ create table payment (
     paymentID integer primary key not null generated always as identity(start with 1, increment by 1),
     payment_error varchar(20),
     payment_status varchar(20),
-    paymentDate date,
+    payment_date date,
+    pay_det_num integer not null,
+    custID integer not null, 
     orderID integer not null,
+--     foreign key (custID, pay_det_num) references payment_details(custID, pay_det_num),
     foreign key (orderID) references orders(orderID)
+--     foreign key (custID) references customer_user(custID),
+--     foreign key (pay_det_num) references payment_details(pay_det_num)
 );
 
 create table line_item (
@@ -138,7 +142,7 @@ create table shipment
     ship_date date not null,
     ship_status varchar(50) not null,
     custID int not null,
-    foreign key (orderID) references orders(orderID),
-    foreign key (custID) references shipment_details(custID)
+    foreign key (orderID) references orders(orderID)
+--     foreign key (custID) references shipment_details(custID)
 
 );
