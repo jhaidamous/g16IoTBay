@@ -50,6 +50,7 @@
                 <tr><td>Phone: </td><td><input type="text" name="phone" placeholder="<%=(phoneErr != null ? phoneErr : "Enter phone")%>" required="true"></td></tr>
                 <tr><td>Date of Birth: </td><td><input type="text" name="dob" placeholder="hi" required="true"></td></tr>
                 <tr><td></td><td><input type="hidden" value="registration" name="registration"></td></tr>
+                <tr><td></td><td><input type="hidden" value="/welcome.jsp" name="respurll"></td></tr>
                 <tr><td></td><td><input class="button" type="submit" value="Sign Up"></td></tr>
             </table>
                 <span class="message"> <%=(existErr != null ? existErr : "")%></span>

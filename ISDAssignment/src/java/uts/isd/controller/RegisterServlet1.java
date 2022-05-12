@@ -23,6 +23,7 @@ public class RegisterServlet1 extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession session = request.getSession();
+        
         Validator validator = new Validator();
         Validator.clearRegister(session);
         String firstname = request.getParameter("firstname");
@@ -99,9 +100,17 @@ public class RegisterServlet1 extends HttpServlet {
                     customer = customerDAO.login(emailaddress, password);
                     session.setAttribute("customer", customer);
                     logsDAO.createLogs(customer.getUserID(),"Customer registered" );
-
-                    request.getRequestDispatcher("welcome.jsp").include(request, response);
+                    String respurll = request.getParameter("respurll");
+                    System.out.print(request.getParameter("respurll" + respurll));
+                    String url = request.getContextPath() + respurll;
+                    response.sendRedirect(url);
                 }
+
+                //if (respurl != null) {
+                    //String url = request.getContextPath() + respurl;
+                    //response.sendRedirect("systemadmin.jsp");
+                //}
+                
             }
            catch (NullPointerException ex) {
               System.out.println(ex.getMessage() == null ? "Customer was unable to be logged in" : "Customer Retrieved from DB");

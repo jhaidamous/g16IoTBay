@@ -161,14 +161,14 @@ public class CustomerDAO {
         
         while (rs.next()) {
             int userID = Integer.parseInt(rs.getString(1));
-            String emailaddress = rs.getString(2);
-            String password = rs.getString(3);
-            String firstname = rs.getString(4);
-            String lastname = rs.getString(5);
-            String middlename = rs.getString(6);
-            String phone = rs.getString(7);
-            String dob = rs.getString(8);
-            boolean disabled = Boolean.parseBoolean(rs.getString(9));
+            String emailaddress = rs.getString(5);
+            String password = rs.getString(10);
+            String firstname = rs.getString(2);
+            String lastname = rs.getString(3);
+            String middlename = rs.getString(4);
+            String phone = rs.getString(6);
+            String dob = rs.getString(7);
+            boolean disabled = Boolean.parseBoolean(rs.getString(11));
             users.add(new Customer(userID, firstname, lastname, middlename, emailaddress, phone, dob, password, disabled));
         }
         return users;

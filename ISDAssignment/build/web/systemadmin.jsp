@@ -33,16 +33,31 @@ ArrayList<Customer> custsearchlist = (ArrayList<Customer>) session.getAttribute(
     </header>
     <div class="mainsite">
     <h1>Welcome to System Admin Portal</h1>
+               <%
+            String existErr = (String) session.getAttribute("existErr");
+            String emailErr = (String) session.getAttribute("emailErr");
+            String passErr = (String) session.getAttribute("passErr");
+            String firstNameErr = (String) session.getAttribute("firstNameErr");
+            String lastNameErr = (String) session.getAttribute("lastNameErr");
+            String middleNameErr = (String) session.getAttribute("middleNameErr");
+            String dobErr = (String) session.getAttribute("dobErr");
+            String phoneErr = (String) session.getAttribute("phoneErr");
+        %>
     <p>Create new customer record</p>
-        <form method="POST" action="SystemAdmin.jsp">
+            <form method="POST" action="/ISDAssignment/RegisterServlet1">
             <table class="table">
-                <form method="POST" action="welcome.jsp">
-                <tr><td>Name: </td><td><input type="text" name="name" required="true"></td></tr>
-                <tr><td>Email: </td><td><input type="text" name="email" required="true"></td></tr>
-                <tr><td>Type: </td><td><input type="text" name="Type" required="true"></td></tr>
-                <tr><td>Address: </td><td><input type="text" name="Address" required="true"></td></tr>
-                <tr><td></td><td><input class="button" type="submit" value="Create Record"></td></tr>
+                <tr><td>Email: </td><td><input type="text" name="emailaddress" placeholder="<%=(emailErr != null ? emailErr : "Enter email")%>" required="true"></td></tr>
+                <tr><td>Password:</td><td><input type="password" name="password" placeholder="<%=(passErr != null ? passErr : "Enter password")%>" required="true"></td></tr>
+                <tr><td>First Name: </td><td><input type="text" name="firstname" placeholder="<%=(firstNameErr != null ? firstNameErr : "Enter first name")%>" required="true"></td></tr>
+                <tr><td>Last Name: </td><td><input type="text" name="lastname" placeholder="<%=(lastNameErr != null ? lastNameErr : "Enter last name")%>" required="true"></td></tr>
+                <tr><td>Middle Name: </td><td><input type="text" name="middlename" placeholder="<%=(middleNameErr != null ? middleNameErr : "Optional")%>" required="false"></td></tr>
+                <tr><td>Phone: </td><td><input type="text" name="phone" placeholder="<%=(phoneErr != null ? phoneErr : "Enter phone")%>" required="true"></td></tr>
+                <tr><td>Date of Birth: </td><td><input type="text" name="dob" placeholder="hi" required="true"></td></tr>
+                <tr><td></td><td><input type="hidden" value="registration" name="registration"></td></tr>
+                <tr><td></td><td><input type="hidden" value="/systemadmin.jsp" name="respurll"></td></tr>
+                <tr><td></td><td><input class="button" type="submit" value="Create"></td></tr>
             </table>
+                <span class="message"> <%=(existErr != null ? existErr : "")%></span>
             </form>
             
      <h2>Search current records</h2>
@@ -56,18 +71,22 @@ ArrayList<Customer> custsearchlist = (ArrayList<Customer>) session.getAttribute(
             </form>
             <% if(custsearchlist == null) { %>
             <h2>All Customer Records</h2>
+            
             <table class="table">
+                
                 <tr><td>Email</td><td>Firstname</td><td>Middlename</td><td>Lastname</td><td>Phone</td><td>DOB</td></tr>
                 <% for (Customer customer : customers) { %>
                 <tr><td><%=customer.getEmailaddress()%></td><td><%=customer.getFirstname()%></td><td><%=customer.getMiddlename()%></td><td><%=customer.getLastname()%></td><td><%=customer.getPhone()%></td><td><%=customer.getDob()%></td></tr>
                     <% }
                 } else { %> 
             <h2>Search Results</h2>
+            Your search results - <a href="systemadmin.jsp">Click here to view all customer records</a>
             <table class="table">
                 <tr><td>Email</td><td>Firstname</td><td>Middlename</td><td>Lastname</td><td>Phone</td><td>DOB</td></tr>
                 <% for (Customer customer : custsearchlist) { %>
                 <tr><td><%=customer.getEmailaddress()%></td><td><%=customer.getFirstname()%></td><td><%=customer.getMiddlename()%></td><td><%=customer.getLastname()%></td><td><%=customer.getPhone()%></td><td><%=customer.getDob()%></td></tr>
-                    <% } }%>
+                    <% } }
+                    session.setAttribute("custsearchlist", null); %>
                 
                     
                 
