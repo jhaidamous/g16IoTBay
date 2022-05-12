@@ -53,10 +53,6 @@
         <servlet-class>uts.isd.controller.UpdateItemServlet</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>DeleteItemServlet</servlet-name>
-        <servlet-class>uts.isd.controller.DeleteItemServlet</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>CreateItemServlet</servlet-name>
         <servlet-class>uts.isd.controller.CreateItemServlet</servlet-class>
     </servlet>
@@ -67,6 +63,18 @@
     <servlet>
         <servlet-name>PaymentHistoryServlet</servlet-name>
         <servlet-class>uts.isd.controller.PaymentHistoryServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AdmDelCustServlet</servlet-name>
+        <servlet-class>uts.isd.controller.AdmDelCustServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>TransferToUpdateAccountServlet</servlet-name>
+        <servlet-class>uts.isd.controller.TransferToUpdateAccountServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DisableAccServlet</servlet-name>
+        <servlet-class>uts.isd.controller.DisableAccServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>ConnServlet</servlet-name>
@@ -121,10 +129,6 @@
         <url-pattern>/UpdateItemServlet</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>DeleteItemServlet</servlet-name>
-        <url-pattern>/DeleteItemServlet</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
         <servlet-name>CreateItemServlet</servlet-name>
         <url-pattern>/CreateItemServlet</url-pattern>
     </servlet-mapping>
@@ -135,6 +139,18 @@
     <servlet-mapping>
         <servlet-name>PaymentHistoryServlet</servlet-name>
         <url-pattern>/PaymentHistoryServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AdmDelCustServlet</servlet-name>
+        <url-pattern>/AdmDelCustServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>TransferToUpdateAccountServlet</servlet-name>
+        <url-pattern>/TransferToUpdateAccountServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DisableAccServlet</servlet-name>
+        <url-pattern>/DisableAccServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

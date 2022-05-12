@@ -71,12 +71,13 @@ ArrayList<Customer> custsearchlist = (ArrayList<Customer>) session.getAttribute(
             </form>
             <% if(custsearchlist == null) { %>
             <h2>All Customer Records</h2>
-            
+            <form method="POST" action="/ISDAssignment/TransferToUpdateAccountServlet"> 
             <table class="table">
-                
-                <tr><td>Email</td><td>Firstname</td><td>Middlename</td><td>Lastname</td><td>Phone</td><td>DOB</td></tr>
+
+
+                <tr><td>Email</td><td>Firstname</td><td>Middlename</td><td>Lastname</td><td>Phone</td><td>DOB</td><td>Disabled?</td></tr>
                 <% for (Customer customer : customers) { %>
-                <tr><td><%=customer.getEmailaddress()%></td><td><%=customer.getFirstname()%></td><td><%=customer.getMiddlename()%></td><td><%=customer.getLastname()%></td><td><%=customer.getPhone()%></td><td><%=customer.getDob()%></td></tr>
+                <tr><td><%=customer.getEmailaddress()%></td><td><%=customer.getFirstname()%></td><td><%=customer.getMiddlename()%></td><td><%=customer.getLastname()%></td><td><%=customer.getPhone()%></td><td><%=customer.getDob()%></td><td><%= customer.isDisabled() %></td><td><input class="button" type="submit" value="Edit Account"></td><td><input type="hidden" value="<%= customer.getEmailaddress() %>" name="admCustEmail"></td><td><input type="hidden" value="<%= customer.getPassword()%>" name="admCustPass"></td></tr>
                     <% }
                 } else { %> 
             <h2>Search Results</h2>
@@ -84,13 +85,14 @@ ArrayList<Customer> custsearchlist = (ArrayList<Customer>) session.getAttribute(
             <table class="table">
                 <tr><td>Email</td><td>Firstname</td><td>Middlename</td><td>Lastname</td><td>Phone</td><td>DOB</td></tr>
                 <% for (Customer customer : custsearchlist) { %>
-                <tr><td><%=customer.getEmailaddress()%></td><td><%=customer.getFirstname()%></td><td><%=customer.getMiddlename()%></td><td><%=customer.getLastname()%></td><td><%=customer.getPhone()%></td><td><%=customer.getDob()%></td></tr>
+                <tr><td><%=customer.getEmailaddress()%></td><td><%=customer.getFirstname()%></td><td><%=customer.getMiddlename()%></td><td><%=customer.getLastname()%></td><td><%=customer.getPhone()%></td><td><%=customer.getDob()%></td><td><%= customer.isDisabled() %></td><td><input class="button" type="submit" value="Edit Account"></td><td><input type="hidden" value="<%= customer.getEmailaddress() %>" name="admCustEmail"></td><td><input type="hidden" value="<%= customer.getPassword()%>" name="admCustPass"></td></tr>
                     <% } }
                     session.setAttribute("custsearchlist", null); %>
                 
                     
                 
             </table>
+            </form>
     </div>
     <footer class="bottomarea">
         <p id="clock" class="footer"></p>

@@ -22,22 +22,30 @@ public class UpdateAccServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession session = request.getSession();
+        String admEditCust = request.getParameter("admEditCust");
         CustomerDAO customerDAO = (CustomerDAO) session.getAttribute("customerDAO");
         Customer customer = (Customer) session.getAttribute("customer");
         try {
             customerDAO.selfDelete(customer.getUserID());
+            if(admEditCust == null) {
+                session.invalidate();
+                request.getRequestDispatcher("index.jsp").include(request, response);
+            } 
+            else {
+                String url = request.getContextPath() + "/systemadmin.jsp";
+                response.sendRedirect(url);
+            }
         } catch (SQLException ex) {
             Logger.getLogger(UpdateAccServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
-        session.invalidate();
-        request.getRequestDispatcher("index.jsp").include(request, response);
-
+        
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession session = request.getSession();
+        String admEditCust = request.getParameter("admEditCust");
         Validator validator = new Validator();
         Validator.clearRegister(session);
         String firstname = request.getParameter("firstname");
@@ -86,18 +94,32 @@ public class UpdateAccServlet extends HttpServlet {
 //            error = true;
 //        }
         System.out.print(firstname +" "+ lastname+" "+  middlename+" "+ emailaddress+" "+ phone+" "+ dob+" "+ password);
-
+        
         if (error) {
-            request.getRequestDispatcher("EditAccount.jsp").include(request, response);
+            if(admEditCust == null) {
+                System.out.print("admEditCustisNull");
+                request.getRequestDispatcher("EditAccount.jsp").include(request, response);
+            } else {
+                request.getRequestDispatcher("admEditAcc.jsp").include(request, response);
+            }
         }
 
         else {
             try {
-                    customerDAO.update(customer.getUserID(), firstname, lastname, middlename, emailaddress, phone, dob, password);
-                    customer = customerDAO.login(emailaddress, password);
-                    session.setAttribute("customer", customer);
-                    request.getRequestDispatcher("main.jsp").include(request, response);
-
+                    if(admEditCust == null) {
+                        customerDAO.update(customer.getUserID(), firstname, lastname, middlename, emailaddress, phone, dob, password);
+                        customer = customerDAO.login(emailaddress, password);
+                        session.setAttribute("customer", customer);
+                        String url = request.getContextPath() + "/main.jsp";
+                        response.sendRedirect(url);
+                    } else {
+                        customerDAO.update(customer.getUserID(), firstname, lastname, middlename, emailaddress, phone, dob, password);
+                        customer = customerDAO.login(emailaddress, password);
+                        session.setAttribute("customer", null);
+                        session.setAttribute("admEditCust", null);
+                        String url = request.getContextPath() + "/systemadmin.jsp";
+                        response.sendRedirect(url);
+                    }
             }
            catch (NullPointerException ex) {
               System.out.println(ex.getMessage() == null ? "Customer was unable to be updated" : "Customer updated from DB");

@@ -69,7 +69,11 @@ public class LoginServlet extends HttpServlet {
 
         else {
             try {
-                if (customer != null) {
+                if (customer != null && customer.isDisabled() == true) {
+                    session.setAttribute("logInErr", "Your account is disabled");
+                    request.getRequestDispatcher("login.jsp").include(request, response);
+                }
+                else if (customer != null) {
        
                     session.setAttribute("customer", customer);
                     logsDAO.createLogs(customer.getUserID(),"Logged in successfully" );

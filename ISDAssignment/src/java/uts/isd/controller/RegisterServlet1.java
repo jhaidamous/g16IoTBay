@@ -82,9 +82,16 @@ public class RegisterServlet1 extends HttpServlet {
 //            error = true;
 //        }
         System.out.print(firstname +" "+ lastname+" "+  middlename+" "+ emailaddress+" "+ phone+" "+ dob+" "+ password);
+        String respurll = request.getParameter("respurll");
 
         if (error) {
             request.getRequestDispatcher("register.jsp").include(request, response);
+            if(respurll != null) {
+                String url = request.getContextPath() + respurll;
+                response.sendRedirect(url);
+                session.setAttribute("respurll", null);
+
+            }
         }
         
 
@@ -100,7 +107,6 @@ public class RegisterServlet1 extends HttpServlet {
                     customer = customerDAO.login(emailaddress, password);
                     session.setAttribute("customer", customer);
                     logsDAO.createLogs(customer.getUserID(),"Customer registered" );
-                    String respurll = request.getParameter("respurll");
                     System.out.print(request.getParameter("respurll" + respurll));
                     String url = request.getContextPath() + respurll;
                     response.sendRedirect(url);
