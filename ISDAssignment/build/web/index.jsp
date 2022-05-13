@@ -4,6 +4,7 @@
     Author     : g16
 --%>
 
+<%@page import="uts.isd.model.Customer"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="java.util.Random"%>
 <!DOCTYPE html>
@@ -14,6 +15,10 @@
     <script type="text/javascript" src="js/index.js"></script>
     <link href="websystems.css" rel="stylesheet">
 </head>
+        <% 
+            String name = "G16, ISD Autumn 2022";  
+            Customer customer = (Customer) session.getAttribute("customer");
+        %>
 <html>
     <body class="bodyclass" onload="startTime()">
     <header class="toparea">
@@ -22,15 +27,20 @@
         </div>
         <nav class="navclass">
         <a href="index.jsp">Home</a>
+        <a href="store.jsp">Store</a>
+        <% if (customer == null) { %>
         <a href="login.jsp">Login</a>
         <a href="register.jsp">Register</a>
+        <% } else { %>
+        <a href="main.jsp">My Account</a>
+        <a href="logout.jsp">Logout</a>
+        <% } %>
+        
         </nav>
     </header>
     <div class="mainsite">
         <h1>Welcome to IoTBay</h1>
-        <% 
-            String name = "G16, ISD Autumn 2022";        
-        %>
+
         <p>Group: <%= name%> </p>
         <p>Random ID: <%= new Random().nextInt(999999) %></p>
     </div>

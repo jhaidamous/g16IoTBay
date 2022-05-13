@@ -1,30 +1,113 @@
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-/**
- * Author:  JHUTS
- * Created: 02/05/2022
- */
-
 INSERT INTO iotadmin.catalog_item(item_name,item_price,item_stock,item_status,cost_per_item,item_category,item_image_path)
 VALUES ('Open/Close Detection Door Sensor',149,10,'In Stock',70,'Sensors','images/items/doorsensor.png'),
        ('9-IN-1 Compact Weather Sensor',2499,10,'In Stock',1500,'Sensors','images/items/weathersensor.png'),
        ('Raspberry Pi 4 With Display Kit',349,10,'In Stock',200,'IOT Board','images/items/raspberrykit.png'),
-       ('Industrial IOT Mini-Computer Based on Raspberry Pi 4',115,10,'In Stock',50,'IOT Board','images/items/industrialpi.png');
+       ('Industrial IOT Mini-Computer Based on Raspberry Pi 4',115,10,'In Stock',50,'IOT Board','images/items/industrialpi.png'),
+       ('MILESIGHT UG65 HELIUM HOTSPOT',215,10,'In Stock',40,'IOT Board','images/items/Helium.png'),
+       ('SENSECAP SENSOR HUB 4G INDUSTRIAL-GRADE',105,15,'In Stock',50,'Sensors','images/items/sense.png'),
+       ('Sound Sensor',15,10,'In Stock',5,'Sensor','images/items/sound.png'),
+       ('Hall Sensor for Velocity Measurement',5,10,'In Stock',2,'Sensor','images/items/hall.png'),
+       ('SPARKFUN REDBOT MAINBOARD',5,10,'In Stock',2,'Robotics','images/items/robot.png'),
+       ('TG451 INDUSTRIAL CELLULAR 4G/3G WIFI IOT GATEWAY',50,10,'In Stock',20,'Networking','images/items/network.png'),
+       ('MILESIGHT UR75 5G INDUSTRIAL CELLULAR ROUTER DUAL SIM WIFI',500,10,'In Stock',200,'Networking','images/items/router.png'),
+       ('EMAX NIGHTHAWK 250 II ALL CARBON FIBER QUADCOPTER',70,10,'In Stock',15,'Robotics','images/items/quad.png'),
+       ('CYTRON DC GEARED MOTOR',70,10,'In Stock',15,'Robotics','images/items/gear.png'),
+       ('USB 3.2 GEN1 TO GIGABIT ETHERNET CONVERTER',70,10,'In Stock',15,'Networking','images/items/convert.png'),
+       ('SOLLAE 8-PORT ETHERNET REMOTE I/O CONTROLLER',70,10,'In Stock',15,'Networking','images/items/remote.png'),
+       ('NETVOX LORAWAN WIRELESS REED SWITCH ',70,10,'In Stock',15,'Sensors','images/items/switch.png'),
+       ('HUMIDITY SENSOR',40,10,'In Stock',15,'Sensors','images/items/hummid.png'),
+       ('MINI-COMPUTER BASED ON RASPBERRY PI',70,10,'In Stock',15,'IOT Board','images/items/mini.png'),
+       ('STARTER SENSOR SET',70,10,'In Stock',15,'Sensors','images/items/sensor.png'),
+       ('RANGE EXTENDER DONGLE',70,10,'In Stock',15,'Networking','images/items/ext.png');
+
 
 INSERT INTO iotadmin.USERS(FIRSTNAME, LASTNAME, MIDDLENAME, EMAILADDRESS, PHONE, DOB)
-VALUES ('John','Smith','M','john.smith@uts.com','0499999999','01/01/1990');
+VALUES ('John','Smith','M','john.smith@uts.com','0499997799','01/01/1993'),
+       ('Lee','Frisken','M','lee.frisken@uts.com','0400999999','01/01/1994'),
+       ('Jake','Doee','H','jake.doee@uts.com','0499069999','01/01/1996'),
+       ('Jono','Haidy','H','jono.haidy@uts.com','0499899999','01/01/1999'),
+       ('Mohamed','Almeddine','H','mohamed.a@uts.com','0499899999','01/01/1999'),
+       ('Anas','Navid','H','anas.navid@uts.com','0499899999','01/07/1999'),
+       ('hello','there','M','hello.there@uts.com','0499899999','09/01/1999'),
+       ('Preeti','Singh','H','preeti.singh@uts.com','0499899999','01/01/1999'),
+       ('Asek','Ali','K','asek.ali@uts.com','0499899999','01/04/1999'),
+       ('Ahmed','Gazi','H','ahmed.gaz@uts.com','0499899999','01/01/1999'),
+       ('Clein','Hoho','H','clein.hoho@uts.com','0499899999','09/01/1999'),
+       ('Marvin','Boni','J','marvin.boni@uts.com','0499899999','01/02/1999'),
+       ('Vanessa','Haidamous','H','vanessa.h@uts.com','0499899999','01/01/1999'),
+       ('Sam','Ayoub','M','sam.a@uts.com','0499899999','01/01/1999'),
+       ('Same','haa','H','sami.a@uts.com','0499899999','01/01/1999'),
+       ('Thanh','Tran','I','thanh.a@uts.com','0499899999','01/01/1999'),
+       ('Gavin','Chan','I','gavin.a@uts.com','0499899999','01/01/1999'),
+       ('Joe','Biden','I','joe.a@uts.com','0499899999','01/01/1999'),
+       ('Kelly','Lewis','I','kelly.d@uts.com','0499899999','01/01/1999'),
+       ('June','Wells','I','june.w@uts.com','0499899999','01/01/1999');
 INSERT INTO iotadmin.CUSTOMER_USER(CUSTID, PASSWORD, DISABLED)
-VALUES ((SELECT USERID FROM iotadmin.USERS WHERE EMAILADDRESS = 'john.smith@uts.com'),'pass123',false);
+VALUES ((SELECT USERID FROM iotadmin.USERS WHERE EMAILADDRESS = 'john.smith@uts.com'),'pass123',false),
+       ((SELECT USERID FROM iotadmin.USERS WHERE EMAILADDRESS = 'lee.frisken@uts.com'),'pass123',false),
+       ((SELECT USERID FROM iotadmin.USERS WHERE EMAILADDRESS = 'jake.doee@uts.com'),'pass123',false),
+       ((SELECT USERID FROM iotadmin.USERS WHERE EMAILADDRESS = 'jono.haidy@uts.com'),'pass123',false),
+       ((SELECT USERID FROM iotadmin.USERS WHERE EMAILADDRESS = 'mohamed.a@uts.com'),'pass123',false),
+       ((SELECT USERID FROM iotadmin.USERS WHERE EMAILADDRESS = 'anas.navid@uts.com'),'pass123',false),
+       ((SELECT USERID FROM iotadmin.USERS WHERE EMAILADDRESS = 'hello.there@uts.com'),'pass123',false),
+       ((SELECT USERID FROM iotadmin.USERS WHERE EMAILADDRESS = 'preeti.singh@uts.com'),'pass123',false),
+       ((SELECT USERID FROM iotadmin.USERS WHERE EMAILADDRESS = 'asek.ali@uts.com'),'pass123',false),
+       ((SELECT USERID FROM iotadmin.USERS WHERE EMAILADDRESS = 'ahmed.gaz@uts.com'),'pass123',false),
+       ((SELECT USERID FROM iotadmin.USERS WHERE EMAILADDRESS = 'clein.hoho@uts.com'),'pass123',false),
+       ((SELECT USERID FROM iotadmin.USERS WHERE EMAILADDRESS = 'marvin.boni@uts.com'),'pass123',false),
+       ((SELECT USERID FROM iotadmin.USERS WHERE EMAILADDRESS = 'vanessa.h@uts.com'),'pass123',false),
+       ((SELECT USERID FROM iotadmin.USERS WHERE EMAILADDRESS = 'sam.a@uts.com'),'pass123',false),
+       ((SELECT USERID FROM iotadmin.USERS WHERE EMAILADDRESS = 'thanh.a@uts.com'),'12345',false),
+       ((SELECT USERID FROM iotadmin.USERS WHERE EMAILADDRESS = 'gavin.a@uts.com'),'12345',false),
+       ((SELECT USERID FROM iotadmin.USERS WHERE EMAILADDRESS = 'sami.a@uts.com'),'12345',false),
+       ((SELECT USERID FROM iotadmin.USERS WHERE EMAILADDRESS = 'joe.a@uts.com'),'12345',false),
+       ((SELECT USERID FROM iotadmin.USERS WHERE EMAILADDRESS = 'kelly.d@uts.com'),'12345',false),
+       ((SELECT USERID FROM iotadmin.USERS WHERE EMAILADDRESS = 'june.w@uts.com'),'12345',false);
 
 INSERT INTO iotadmin.USERS(FIRSTNAME, LASTNAME, MIDDLENAME, EMAILADDRESS, PHONE, DOB)
-VALUES ('David','Frisken','M','david.frisken@uts.com','0499999999','01/01/1990'),
-       ('Jake','Doe','H','jake.doe@uts.com','0499999999','01/01/1990');
+VALUES ('Jake','Doe','H','jake.doe@uts.com','0499999939','01/05/1970'),
+       ('Alex','Toland','H','alex.tol@uts.com','0499891999','01/05/1970'),
+       ('David','Lewis','D','david.fris@uts.com','0499299999','01/02/1990'),
+       ('Steve','Ayo','H','steve.ayo@uts.com','049765921999','01/09/1990'),
+       ('Navi','Smith','L','navi.doe@uts.com','04909723999','12/01/1980'),
+       ('Anas','Naser','H','anas.naser@uts.com','0493919999','01/05/1970'),
+       ('Moon','Kwon','D','moon.kwon@uts.com','0499990009','05/01/1999'),
+       ('Sun','Lepd','H','sun.lepd@uts.com','04956799999','01/01/1990'),
+       ('George','Charlie','H','george.charlie@uts.com','0499876999','12/11/2010'),
+       ('Amelia','Budiawan','K','amelia.budi@uts.com','04999987999','07/06/1950'),
+       ('Penelope','Harvey', 'K','pen.har@uts.com','04999987999','07/06/1950'),
+       ('Linsey','Howard','R','linesey.howy@uts.com','04999987999','07/06/1950'),
+       ('Scott','Morrison','H','scotty.marketing@uts.com','04999987999','07/06/1950'),
+       ('Julia','Guillard','K','julia.guillard@uts.com','04999987999','07/06/2004'),
+       ('Donald','Trump','H','donny.trump@uts.com','04999987999','09/06/1980'),
+       ('Melody','Mole','U','melody.mole@uts.com','04999987999','08/06/1950'),
+       ('Bianca','Metol','H','bianca.metol@uts.com','04999987999','03/06/1950'),
+       ('Jyoti','Singh','L','jyoti.singh@uts.com','04999987999','05/06/1950'),
+       ('Leslie','Neo','T','leslie.neo@uts.com','04999987999','07/06/1989'),
+       ('Les','Neo','T','les.neo@uts.com','04999987999','07/06/1989');
+
+
 INSERT INTO iotadmin.STAFF_USER(STAFFID, PASSWORD, STAFF_ROLE)
-VALUES ((SELECT USERID FROM iotadmin.USERS WHERE EMAILADDRESS = 'david.frisken@uts.com'),'12345','SYSTEM ADMIN'),
-       ((SELECT USERID FROM iotadmin.USERS WHERE EMAILADDRESS = 'jake.doe@uts.com'),'12345','IoTBay Staff');
+VALUES ((SELECT USERID FROM iotadmin.USERS WHERE EMAILADDRESS = 'david.fris@uts.com'),'12345','SYSTEM ADMIN'),
+       ((SELECT USERID FROM iotadmin.USERS WHERE EMAILADDRESS = 'jake.doe@uts.com'),'12345','IoTBay Staff'),
+       ((SELECT USERID FROM iotadmin.USERS WHERE EMAILADDRESS = 'alex.tol@uts.com'),'12345','IoTBay Staff'),
+       ((SELECT USERID FROM iotadmin.USERS WHERE EMAILADDRESS = 'steve.ayo@uts.com'),'12345','IoTBay Staff'),
+       ((SELECT USERID FROM iotadmin.USERS WHERE EMAILADDRESS = 'navi.doe@uts.com'),'12345','IoTBay Staff'),
+       ((SELECT USERID FROM iotadmin.USERS WHERE EMAILADDRESS = 'anas.naser@uts.com'),'12345','IoTBay Staff'),
+       ((SELECT USERID FROM iotadmin.USERS WHERE EMAILADDRESS = 'moon.kwon@uts.com'),'12345','IoTBay Staff'),
+       ((SELECT USERID FROM iotadmin.USERS WHERE EMAILADDRESS = 'sun.lepd@uts.com'),'12345','IoTBay Staff'),
+       ((SELECT USERID FROM iotadmin.USERS WHERE EMAILADDRESS = 'george.charlie@uts.com'),'12345','IoTBay Staff'),
+       ((SELECT USERID FROM iotadmin.USERS WHERE EMAILADDRESS = 'amelia.budi@uts.com'),'12345','IoTBay Staff'),
+       ((SELECT USERID FROM iotadmin.USERS WHERE EMAILADDRESS = 'pen.har@uts.com'),'12345','IoTBay Staff'),
+       ((SELECT USERID FROM iotadmin.USERS WHERE EMAILADDRESS = 'linesey.howy@uts.com'),'12345','IoTBay Staff'),
+       ((SELECT USERID FROM iotadmin.USERS WHERE EMAILADDRESS = 'scotty.marketing@uts.com'),'12345','IoTBay Staff'),
+       ((SELECT USERID FROM iotadmin.USERS WHERE EMAILADDRESS = 'julia.guillard@uts.com'),'12345','IoTBay Staff'),
+       ((SELECT USERID FROM iotadmin.USERS WHERE EMAILADDRESS = 'donny.trump@uts.com'),'12345','IoTBay Staff'),
+       ((SELECT USERID FROM iotadmin.USERS WHERE EMAILADDRESS = 'melody.mole@uts.com'),'12345','IoTBay Staff'),
+       ((SELECT USERID FROM iotadmin.USERS WHERE EMAILADDRESS = 'bianca.metol@uts.com'),'12345','IoTBay Staff'),
+       ((SELECT USERID FROM iotadmin.USERS WHERE EMAILADDRESS = 'jyoti.singh@uts.com'),'12345','IoTBay Staff'),
+       ((SELECT USERID FROM iotadmin.USERS WHERE EMAILADDRESS = 'leslie.neo@uts.com'),'12345','IoTBay Staff'),
+       ((SELECT USERID FROM iotadmin.USERS WHERE EMAILADDRESS = 'les.neo@uts.com'),'12345','IoTBay Staff');
 
 -- Building Dummy Carts for John Smith, adding items to 2 orders..
 INSERT INTO iotadmin.cart(custID)
@@ -38,14 +121,51 @@ VALUES (1, 2, 1),
 INSERT INTO iotadmin.ORDERS(order_date, order_status, custID, cartID)
 VALUES ('2022-01-01', 'Completed', 1, 1),
        ('2022-05-01', 'Completed', 1, 2);
+
+
 INSERT INTO iotadmin.payment_details(custID, cvc, cardnum, expirydate)
 VALUES (1, 123, '5593898162202088','2024-05-01'),
-       (1, 455, '5593898162202066','2026-05-01');
+       (2, 455, '5533898162202066','2026-05-01'),
+       (3, 455, '5593898167202066','2026-05-01'),
+       (4, 455, '5808428162202066','2026-05-01'),
+       (5, 455, '9503898169202066','2026-05-01'),
+       (6, 455, '5589389856202066','2026-05-01'),
+       (7, 455, '4493898163202066','2026-05-01'),
+       (8, 455, '3393898169202066','2026-05-01'),
+       (9, 455, '2293898169202066','2026-05-01'),
+       (10, 455, '1193898162207066','2026-05-01'),
+       (11, 455, '0593898162202066','2026-05-01'),
+       (12, 455, '9593898162202066','2026-05-01'),
+       (13, 455, '8593898162202066','2026-05-01'),
+       (14, 455, '7593898162202066','2026-05-01'),
+       (15, 455, '6593898162202066','2026-05-01'),
+       (16, 455, '0009428162202066','2026-05-01'),
+       (17, 455, '1593898162202066','2026-05-01'),
+       (18, 455, '2593898162202066','2026-05-01'),
+       (19, 455, '3593828162202066','2026-05-01'),
+       (20, 455, '4593848162202066','2026-05-01');
 INSERT INTO iotadmin.payment(payment_error, payment_status, payment_date, pay_det_num, custID, orderID)
 VALUES ('None', 'Successful', '2022-01-01', 1, 1, 1),
        ('Card Declined', 'Failed', '2022-05-01', 1, 1, 2),
-       ('None', 'Successful', '2022-05-02', 2, 1, 2);
-
+       ('None', 'Successful', '2022-05-02', 2, 1, 2),
+       ('None', 'Successful', '2022-01-01', 1, 2, 1),
+       ('Card Declined', 'Failed', '2022-05-01', 1, 2, 2),
+       ('None', 'Successful', '2022-05-02', 2, 2, 2),
+       ('None', 'Successful', '2022-01-01', 1, 3, 1),
+       ('Card Declined', 'Failed', '2022-05-01', 1, 3, 2),
+       ('None', 'Successful', '2022-05-02', 2, 3, 2),
+       ('None', 'Successful', '2022-01-01', 1, 4, 1),
+       ('Card Declined', 'Failed', '2022-05-01', 1, 4, 2),
+       ('None', 'Successful', '2022-05-02', 2, 4, 2),
+       ('None', 'Successful', '2022-01-01', 1, 5, 1),
+       ('Card Declined', 'Failed', '2022-05-01', 1, 5, 2),
+       ('None', 'Successful', '2022-05-02', 2, 5, 2),
+       ('None', 'Successful', '2022-01-01', 1, 6, 1),
+       ('Card Declined', 'Failed', '2022-05-01', 1, 6, 2),
+       ('None', 'Successful', '2022-05-02', 2, 6, 2),
+       ('None', 'Successful', '2022-01-01', 1, 7, 1),
+       ('Card Declined', 'Failed', '2022-05-01', 1, 7, 2),
+       ('None', 'Successful', '2022-05-02', 2, 7, 2);
 -- INSERT INTO iotadmin.USERS(FIRSTNAME, LASTNAME, MIDDLENAME, EMAILADDRESS, PHONE, DOB)
 -- VALUES ;
 -- INSERT INTO iotadmin.STAFF_USER(STAFFID, PASSWORD, STAFF_ROLE)

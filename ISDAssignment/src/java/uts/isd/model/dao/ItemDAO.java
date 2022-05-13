@@ -21,11 +21,11 @@ import uts.isd.model.User;
 public class ItemDAO {
     private Statement st;
     
-    public ItemDAO(Connection connection) throws SQLException {
-        connection.setAutoCommit(true);
-        st = connection.createStatement();
-    }
-    
+public ItemDAO(Connection connection) throws SQLException {
+    connection.setAutoCommit(true);
+    st = connection.createStatement();
+}
+
     //Create Operation: create an item
     public void createItem(String item_name, double item_price, int item_stock, String item_status, double cost_per_item, String item_category) throws SQLException {
         String columns = "INSERT INTO iotadmin.catalog_item(item_name,item_price,item_stock,item_status,cost_per_item,item_category)";
@@ -59,10 +59,10 @@ public class ItemDAO {
         while (rs.next()) {            
             int itemID = Integer.parseInt(rs.getString(1));
             String item_name =  rs.getString(2);
-            String item_price = rs.getString(3);
-            String item_stock = rs.getString(4);
+            double item_price = Double.parseDouble(rs.getString(3));
+            int item_stock = Integer.parseInt(rs.getString(4));
             String item_status = rs.getString(5);
-            String cost_per_item = rs.getString(6);
+            double cost_per_item = Double.parseDouble(rs.getString(6));
             String item_category = rs.getString(7);
             String item_image_path = rs.getString(8);
             items.add(new Item(itemID,item_name,item_price,item_stock,item_status,cost_per_item,item_category,item_image_path));
@@ -75,10 +75,10 @@ public class ItemDAO {
         ResultSet rs = st.executeQuery(fetch);
         rs.next();
         String item_name =  rs.getString(2);
-        String item_price = rs.getString(3);
-        String item_stock = rs.getString(4);
+        double item_price = Double.parseDouble(rs.getString(3));
+        int item_stock = Integer.parseInt(rs.getString(4));
         String item_status = rs.getString(5);
-        String cost_per_item = rs.getString(6);
+        double cost_per_item = Double.parseDouble(rs.getString(6));
         String item_category = rs.getString(7);
         String item_image_path = rs.getString(8);
         Item editItem = new Item(itemID,item_name,item_price,item_stock,item_status,cost_per_item,item_category,item_image_path);
@@ -104,10 +104,10 @@ public class ItemDAO {
         while (rs.next()) {            
             int itemID = Integer.parseInt(rs.getString(1));
             String item_name =  rs.getString(2);
-            String item_price = rs.getString(3);
-            String item_stock = rs.getString(4);
+            double item_price = Double.parseDouble(rs.getString(3));
+            int item_stock = Integer.parseInt(rs.getString(4));
             String item_status = rs.getString(5);
-            String cost_per_item = rs.getString(6);
+            double cost_per_item = Double.parseDouble(rs.getString(6));
             String item_category = rs.getString(7);
             String item_image_path = rs.getString(8);
             items.add(new Item(itemID,item_name,item_price,item_stock,item_status,cost_per_item,item_category,item_image_path));
@@ -125,10 +125,10 @@ public class ItemDAO {
         while (rs.next()) {            
             int itemID = Integer.parseInt(rs.getString(1));
             String item_name =  rs.getString(2);
-            String item_price = rs.getString(3);
-            String item_stock = rs.getString(4);
+            double item_price = Double.parseDouble(rs.getString(3));
+            int item_stock = Integer.parseInt(rs.getString(4));
             String item_status = rs.getString(5);
-            String cost_per_item = rs.getString(6);
+            double cost_per_item = Double.parseDouble(rs.getString(6));
             String item_category = rs.getString(7);
             String item_image_path = rs.getString(8);
             items.add(new Item(itemID,item_name,item_price,item_stock,item_status,cost_per_item,item_category,item_image_path));
