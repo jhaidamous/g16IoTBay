@@ -94,6 +94,20 @@ public class CustomerDAO {
         
     }
     
+    public boolean custExists(String email) throws SQLException {
+        String fetch = "SELECT EMAILADDRESS FROM iotadmin.users";
+        ResultSet rs = st.executeQuery(fetch);
+        while (rs.next()){ 
+            String custemail =  rs.getString(1);
+            if (custemail.equalsIgnoreCase(email))  {
+                return true;
+            
+            }
+        }
+        
+        return false;
+    }
+    
     
     //needs some work on USERID and the SQL query needs to hit both tables -- and password
     //Update Operation: update user

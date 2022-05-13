@@ -10,7 +10,7 @@
 <%@page import="java.util.Random"%>
 <!DOCTYPE html>
 <head>
-    <title>IoTBay - Staff</title>
+    <title>Staff - My Account</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <link rel="stylesheet" href="css/layout_1.css">
     <script type="text/javascript" src="js/index.js"></script>
@@ -30,7 +30,9 @@
     </header>
     <div class="mainsite">
     <h1>Welcome to Staff Portal</h1>
-    <a href='staffCatalog.jsp' class="buttonn">"Edit Store Catalog"</a>
+    <table class="table">
+        <tr><td><a href='staffCatalog.jsp' class="buttonn">"Edit Store Catalog"</a></td></tr>
+    </table>
     <footer class="bottomarea">
         <p id="clock" class="footer"></p>
     </footer>

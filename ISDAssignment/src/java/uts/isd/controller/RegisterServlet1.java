@@ -59,7 +59,7 @@ public class RegisterServlet1 extends HttpServlet {
             session.setAttribute("firstNameErr", "Error: Name format is incorrect");
             error = true;
         }
-        if (middlename != null) {
+        if (middlename != null && !middlename.equals("")) {
             if (!validator.validateName(middlename)) {
             session.setAttribute("middleNameErr", "Error: Name format is incorrect");
             error = true;
@@ -85,9 +85,8 @@ public class RegisterServlet1 extends HttpServlet {
         String respurll = request.getParameter("respurll");
 
         if (error) {
-            request.getRequestDispatcher("register.jsp").include(request, response);
             if(respurll != null) {
-                String url = request.getContextPath() + respurll;
+                String url = request.getContextPath() + "/register.jsp";
                 response.sendRedirect(url);
                 session.setAttribute("respurll", null);
 
@@ -97,7 +96,7 @@ public class RegisterServlet1 extends HttpServlet {
 
         else {
             try {
-                if (customer != null) {
+                if (customer != null || customerDAO.custExists(emailaddress) == true) {
                     session.setAttribute("existErr", "Customer already exists in the Database!");
                     request.getRequestDispatcher("register.jsp").include(request, response);
                 } 

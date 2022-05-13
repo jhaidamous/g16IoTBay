@@ -12,7 +12,7 @@
 <%@page import="java.util.Random"%>
 <!DOCTYPE html>
 <head>
-    <title>IoTBay - Staff Catalog</title>
+    <title>Staff - Item Catalog</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <link rel="stylesheet" href="css/layout_1.css">
     <script type="text/javascript" src="js/index.js"></script>
@@ -36,18 +36,24 @@ ArrayList<Categories> categories = (ArrayList<Categories>)session.getAttribute("
         </nav>
     </header>
     <div class="mainsite">
+
     <h1>Store Catalog - Staff Portal</h1>
-    <a href='createItem.jsp' class="buttonn">"Add an item"</a>
+        <table class="table">
+
+            <tr><td><a href='createItem.jsp' class="buttonn">"Add an item"</a></td></tr>
+        </table>
+
     <h2>Search Items</h2>
     <form method="POST" action="/ISDAssignment/ItemViewServlet">
         <table class="table">
-            <tr><td>Item Name: </td><td><input type="text" name="searchq" required="true"></td></tr>
+            <tr><td>Item Name: </td><td><input type="text" name="searchq" required="true"></td><td><input class="button" type="submit" value="Search"></td></tr>
             <tr><td></td><td><input type="hidden" value="regsearch" name="regsearch"></td></tr>
-            <tr><td></td><td><input type="hidden" value="/staffCatalog.jsp" name="respurl"></td></tr>
-            <tr><td></td><td><input class="button" type="submit" value="Search"></td></tr>
+            <tr><td></td><td><input type="hidden" value="/storeSearch.jsp" name="respurl"></td></tr>
         </table>
     </form>
+     <div class="adjust">
     <form method="POST" action="/ISDAssignment/ItemViewServlet" id="categoryform">
+        
         <label for="category">Category:</label>
         <select name="searchq" id="category" form="categoryform">
             <option>Category...</option>
@@ -58,9 +64,10 @@ ArrayList<Categories> categories = (ArrayList<Categories>)session.getAttribute("
             }
             %>
         </select>
-    <input type="hidden" value="/staffCatalog.jsp" name="respurl">
+    <input type="hidden" value="/storeSearch.jsp" name="respurl">
     <input class="button" type="submit" value="Category Search">
     </form>
+        </div>
     <table class="table">
             <%
             if (staffsearchlist != null && staffsearchlist.size() > 0) {

@@ -9,7 +9,7 @@
 <%@page import="uts.isd.model.*" %>
 <!DOCTYPE html>
 <head>
-    <title>IoTBay - Edit Account</title>
+    <title>Admin - Edit Account</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <link rel="stylesheet" href="css/layout_1.css">
     <script type="text/javascript" src="js/index.js"></script>

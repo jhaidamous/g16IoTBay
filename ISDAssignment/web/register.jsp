@@ -43,17 +43,17 @@
         <form method="POST" action="/ISDAssignment/RegisterServlet1">
             <table class="table">
                 <tr><td>Email: </td><td><input type="text" name="emailaddress" placeholder="<%=(emailErr != null ? emailErr : "Enter email")%>" required="true"></td></tr>
-                <tr><td>Password:</td><td><input type="password" name="password" placeholder="<%=(passErr != null ? passErr : "Enter password")%>" required="true"></td></tr>
+                <tr><td>Password:</td><td><input type="password" name="password" placeholder="<%=(passErr != null ? passErr : "Minimum 5 letters/numbers")%>" required="true"></td></tr>
                 <tr><td>First Name: </td><td><input type="text" name="firstname" placeholder="<%=(firstNameErr != null ? firstNameErr : "Enter first name")%>" required="true"></td></tr>
                 <tr><td>Last Name: </td><td><input type="text" name="lastname" placeholder="<%=(lastNameErr != null ? lastNameErr : "Enter last name")%>" required="true"></td></tr>
-                <tr><td>Middle Name: </td><td><input type="text" name="middlename" placeholder="<%=(middleNameErr != null ? middleNameErr : "Optional")%>" required="false"></td></tr>
+                <tr><td>Middle Name: </td><td><input type="text" name="middlename" placeholder="<%=(middleNameErr != null ? middleNameErr : "Optional")%>" ></td></tr>
                 <tr><td>Phone: </td><td><input type="text" name="phone" placeholder="<%=(phoneErr != null ? phoneErr : "Enter phone")%>" required="true"></td></tr>
-                <tr><td>Date of Birth: </td><td><input type="text" name="dob" placeholder="hi" required="true"></td></tr>
+                <tr><td>Date of Birth: </td><td><input type="text" name="dob" placeholder="YYYY-MM-DD" required="true"></td></tr>
                 <tr><td></td><td><input type="hidden" value="registration" name="registration"></td></tr>
                 <tr><td></td><td><input type="hidden" value="/welcome.jsp" name="respurll"></td></tr>
                 <tr><td></td><td><input class="button" type="submit" value="Sign Up"></td></tr>
             </table>
-                <span class="message"> <%=(existErr != null ? existErr : "")%></span>
+                <p><span class="message"> <%=(existErr != null ? existErr : "")%></span></p>
         </form>
     </div>
     <footer class="bottomarea">

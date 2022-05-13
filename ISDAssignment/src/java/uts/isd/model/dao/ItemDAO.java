@@ -28,8 +28,8 @@ public ItemDAO(Connection connection) throws SQLException {
 
     //Create Operation: create an item
     public void createItem(String item_name, double item_price, int item_stock, String item_status, double cost_per_item, String item_category) throws SQLException {
-        String columns = "INSERT INTO iotadmin.catalog_item(item_name,item_price,item_stock,item_status,cost_per_item,item_category)";
-        String values = "VALUES('"+item_name+"',"+item_price+","+item_stock+",'"+item_status+"',"+cost_per_item+",'"+item_category+"')";
+        String columns = "INSERT INTO iotadmin.catalog_item(item_name,item_price,item_stock,item_status,cost_per_item,item_category,item_image_path)";
+        String values = "VALUES('"+item_name+"',"+item_price+","+item_stock+",'"+item_status+"',"+cost_per_item+",'"+item_category+"','images/items/comingsoon.png')";
         st.executeUpdate(columns+values);      
     }
     

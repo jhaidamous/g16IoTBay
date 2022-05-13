@@ -11,7 +11,7 @@
 <%@page import="uts.isd.model.*" %>
 <!DOCTYPE html>
 <head>
-    <title>IoTBay - Main</title>
+    <title>IoTBay - My Account</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <link rel="stylesheet" href="css/layout_1.css">
     <script type="text/javascript" src="js/index.js"></script>

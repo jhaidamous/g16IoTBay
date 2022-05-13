@@ -10,7 +10,7 @@
 <%@page import="java.util.Random"%>
 <!DOCTYPE html>
 <head>
-    <title>IoTBay - Payment Details</title>
+    <title>My Account - Payments</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <link rel="stylesheet" href="css/layout_1.css">
     <script type="text/javascript" src="js/index.js"></script>

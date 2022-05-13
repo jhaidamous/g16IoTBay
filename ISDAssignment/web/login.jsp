@@ -43,13 +43,17 @@
                 <tr><td>Password:</td><td><input type="password" name="password" placeholder="<%=(passErr != null ? passErr : "Enter password")%>" required="true"></td></tr>
                 <tr><td></td><td><input class="button" type="submit" value="Login"></td></tr>
             </table>
-            <span class="message"> <%=(logInErr != null ? logInErr : "")%></span>
+                <p><span class="message"> <%=(logInErr != null ? logInErr : "")%></span></p>
    
         </form>
-    </div>
-        <div class ="stafflogin">
+                <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
             <form method="POST" action="stafflogin.jsp">
-                <input class="button" type="submit" value="Staff Login">
+                            <table class="table">
+                                <tr></tr><tr></tr><tr></tr><tr></tr><tr></tr><tr></tr><tr></tr>
+
+                                <td><input class="button" type="submit" value="Staff Login"></td>
+                            </table>
+
             </form>
         </div>
     <footer class="bottomarea">
