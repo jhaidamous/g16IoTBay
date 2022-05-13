@@ -11,7 +11,7 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
-import uts.isd.model.Calculator;
+import unit.test.Calculator;
 
  
 
