@@ -20,6 +20,11 @@
             String emailErr = (String) session.getAttribute("emailErr");
             String passErr = (String) session.getAttribute("passErr");
             String logInErr = (String) session.getAttribute("logInErr");
+            session.setAttribute("passErr", null);
+            session.setAttribute("emailErr", null);
+
+            session.setAttribute("logInErr", null);
+
         %>
 
 

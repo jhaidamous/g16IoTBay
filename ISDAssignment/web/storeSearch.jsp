@@ -97,11 +97,15 @@
         $<%=item.getItem_price()%>
     </div>
             <% }
+            session.setAttribute("searchItems", null);
+
             }
             else { %>
             <p>Your search produced no results - <a href="store.jsp">Click here to go back to store</a></p>
             <%
-            } %>
+            } 
+            session.setAttribute("searchItems", null);
+%>
             </div>
             </p>
     <footer class="bottomarea">

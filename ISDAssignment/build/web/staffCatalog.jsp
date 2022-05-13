@@ -69,11 +69,12 @@ ArrayList<Categories> categories = (ArrayList<Categories>)session.getAttribute("
     </form>
         </div>
     <table class="table">
+        <tr><td></td><td>Item Name</td><td>Price</td><td>Stock</td><td>Status</td><td>Supplier Price</td><td>Category</td></tr>
             <%
             if (staffsearchlist != null && staffsearchlist.size() > 0) {
                 items = staffsearchlist; 
                 %>
-            Your search results - <a href="staffCatalog.jsp">Click here view all items</a>
+                <p>Your search results - <a href="staffCatalog.jsp">Click here view all items</a></p>
             <%
             }
             for (Item item : items) { %>

@@ -32,6 +32,9 @@
             String emailErr = (String) session.getAttribute("emailErr");
             String passErr = (String) session.getAttribute("passErr");
             String logInErr = (String) session.getAttribute("logInErr");
+            session.setAttribute("logInErr", null);
+            session.setAttribute("passErr", null);
+            session.setAttribute("emailErr", null);
         %>
 
     <div class="mainsite">
