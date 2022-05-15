@@ -30,35 +30,82 @@ import uts.isd.model.dao.PaymentDetailsDAO;
  * @author JHUTS
  */
 public class CreateItemServlet extends HttpServlet {
-    
+
     // this method when we post the from payment.jsp to setvlet
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        HttpSession session = request.getSession();
-        String itemname = (String)request.getParameter("itemname");
-        double itemprice = Double.parseDouble((String)request.getParameter("itemprice"));
-        int itemstock = Integer.parseInt((String)request.getParameter("itemstock"));
-        String itemstatus = (String)request.getParameter("itemstatus");
-        double costperitem = Double.parseDouble((String)request.getParameter("costperitem"));
-        String itemcategory = (String)request.getParameter("itemcategory");
-        //get the posted details from the request, based on "name" appropriate field in the jsp form
-//        int userID = Integer.parseInt(request.getParameter("userID")) ;
-        //getting the dao from the session (initalised in connservlet which is run on index.jsp)
-        ItemDAO itemDAO = (ItemDAO)session.getAttribute("itemDAO");
         
-        //try this code,
-        try {
+        
+        HttpSession session = request.getSession();
+        ItemDAO itemDAO = (ItemDAO) session.getAttribute("itemDAO");
 
-            //create the payment details from the attributes we got above
-            itemDAO.createItem(itemname, itemprice, itemstock, itemstatus, costperitem, itemcategory);
-            String url = request.getContextPath() + "/staffCatalog.jsp";
+        String itemname = (String) request.getParameter("itemname");
+        String itemstatus = (String) request.getParameter("itemstatus");
+        String itemcategory = (String) request.getParameter("itemcategory");
+        
+        double itemprice = 0;
+        double costperitem = 0;
+        int itemstock = 0;
+        boolean error = false;
+
+        try {
+            itemprice = Double.parseDouble((String)request.getParameter("itemprice"));
+            costperitem = Double.parseDouble((String)request.getParameter("costperitem"));
+        }
+        catch (NumberFormatException ex) {
+            session.setAttribute("priceErr", "Error: Price format is incorrect");
+            error = true;
+        }
+        
+        try {
+            itemstock = Integer.parseInt((String)request.getParameter("itemstock"));
+        } 
+        catch (NumberFormatException e) {
+            session.setAttribute("stockErr", "Error: Stock format is incorrect");
+            error = true;
+        }
+        
+        Validator validator = new Validator();
+        Validator.clearItems(session);
+        
+        
+        if (!validator.validatePrice(itemprice)) {
+            session.setAttribute("priceErr", "Error: Price format is incorrect");
+            error = true;
+        }
+        if (!validator.validatePrice(costperitem)) {
+            session.setAttribute("priceErr", "Error: Price format is incorrect");
+            error = true;
+        }        
+        if (!validator.validateStock(itemstock)) {
+            session.setAttribute("stockErr", "Error: Stock format is incorrect");
+            error = true;
+        }       
+        
+        if (!validator.validateItemName(itemname)) {
+            session.setAttribute("itemNameErr", "Error: Item name format is incorrect");
+            error = true;
+        }
+        
+        if (error) {
+            request.getRequestDispatcher("login.jsp").include(request, response);
+            String url = request.getContextPath() + "/createItem.jsp";
             response.sendRedirect(url);
-//            request.getRequestDispatcher("Payment.jsp").include(request, response);
-        } catch (NullPointerException ex) { //if there is error of type "x" do this
-            System.out.println(ex.getMessage() == null ? "Unable to create Payment Details" : "Payment Details Created");
-        } catch (SQLException ex) {
-            Logger.getLogger(PaymentDetailsServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        else {
+            try {
+
+                //create the payment details from the attributes we got above
+                itemDAO.createItem(itemname, itemprice, itemstock, itemstatus, costperitem, itemcategory);
+                String url = request.getContextPath() + "/staffCatalog.jsp";
+                response.sendRedirect(url);
+    //            request.getRequestDispatcher("Payment.jsp").include(request, response);
+            } catch (NullPointerException ex) { //if there is error of type "x" do this
+                System.out.println(ex.getMessage() == null ? "Unable to create Item " : "Payment Details Created");
+            } catch (SQLException ex) {
+                Logger.getLogger(PaymentDetailsServlet.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }
 }

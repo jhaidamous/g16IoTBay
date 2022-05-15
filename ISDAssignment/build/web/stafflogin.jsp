@@ -16,18 +16,15 @@
     <link rel="stylesheet" href="css/layout_1.css">
     <script type="text/javascript" src="js/index.js"></script>
     <link href="websystems.css" rel="stylesheet">
-</head>         <%
-            String emailErr = (String) session.getAttribute("emailErr");
-            String passErr = (String) session.getAttribute("passErr");
-            String logInErr = (String) session.getAttribute("logInErr");
-            session.setAttribute("passErr", null);
-            session.setAttribute("emailErr", null);
-
-            session.setAttribute("logInErr", null);
-
-        %>
-
-
+</head>         
+<%
+    String emailErr = (String) session.getAttribute("emailErr");
+    String passErr = (String) session.getAttribute("passErr");
+    String logInErr = (String) session.getAttribute("logInErr");
+    session.setAttribute("passErr", null);
+    session.setAttribute("emailErr", null);
+    session.setAttribute("logInErr", null);
+%>
 <html>
     <body class="bodyclass" onload="startTime()">
     <header class="toparea">
@@ -36,7 +33,6 @@
         </div>
         <nav class="navclass">
         <a href="index.jsp">Home</a>
-        <a href="register.jsp">Register</a>
         </nav>
     </header>
     <div class="mainsite">
@@ -49,8 +45,7 @@
                 <tr><td>Password:</td><td><input type="password" name="password" placeholder="<%=(passErr != null ? passErr : "Enter password")%>" required="true"></td></tr>
                 <tr><td></td><td><input class="button" type="submit" value="Login"></td></tr>
             </table>
-                            <p><span class="message"> <%=(logInErr != null ? logInErr : "")%></span></p>
-
+            <p><span class="message"> <%=(logInErr != null ? logInErr : "")%></span></p>
         </form>
     </div>
     <footer class="bottomarea">

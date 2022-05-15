@@ -4,6 +4,7 @@
     Author     : g16
 --%>
 
+<%@page import="uts.isd.model.Staff"%>
 <%@page import="uts.isd.model.PaymentDetails"%>
 <%@page import="java.util.ArrayList"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -17,6 +18,15 @@
     <link href="websystems.css" rel="stylesheet">
     <jsp:include page="/PaymentDetailsServlet" flush="true" />
 </head>
+<%
+    Staff staff = (Staff) session.getAttribute("staff");
+    String priceErr = (String)session.getAttribute("priceErr");
+    String itemNameErr = (String)session.getAttribute("itemNameErr");
+    String stockErr = (String)session.getAttribute("stockErr");
+    session.setAttribute("stockErr", null);
+    session.setAttribute("itemNameErr", null);
+    session.setAttribute("priceErr", null);
+%>
 <html>
     <body class="bodyclass" onload="startTime()">
     <header class="toparea">
@@ -24,16 +34,19 @@
             <a href="index.jsp"><img id="logo" src="images/logocropped.png" alt="Website logo, IoTBay"></a><!--logo generated using https://www.freelogodesign.org/-->
         </div>
         <nav class="navclass">
-        <a href="index.jsp">Home</a>
-        <a href="login.jsp">Login</a>
+            <a href="index.jsp">Home</a>
+            <% if  (staff != null) { %>
+            <a href="staffCatalog.jsp">Store Catalog</a>
+            <a href="logout.jsp">Logout</a>
+            <% } else { %>
+            <% }%>
         </nav>
     </header>
     <div class="mainsite">
-        
-       
-        
-    <h1>Create a Catalog Item</h1>
-    <p>Create new payment details</p>
+    <% if(staff == null) { %>
+   <p>You do not have access to this page.</p>
+   <%} else { %>    
+   <h1>Create a Catalog Item</h1>
         <form method="POST" action="/ISDAssignment/CreateItemServlet">
             <table class="table">
                 <tr><td>Item Name: </td><td><input type="text" name="itemname""></td></tr>
@@ -51,8 +64,12 @@
                     </td></tr>
                 <tr><td></td><td><input class="button" type="submit" value="Create Item"></td></tr>
             </table>
+            <p><%=(priceErr != null ? priceErr : "")%></p>
+            <p><%=(itemNameErr != null ? itemNameErr : "")%></p>
+            <p><%=(stockErr != null ? stockErr : "")%></p>
         </form>
     </div>
+    <% } %>
     <footer class="bottomarea">
         <p id="clock" class="footer"></p>
     </footer>

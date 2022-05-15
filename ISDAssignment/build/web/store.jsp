@@ -21,13 +21,8 @@
 <%
     ArrayList<Item> items = (ArrayList<Item>) session.getAttribute("items");
     ArrayList<Categories> categories = (ArrayList<Categories>) session.getAttribute("categories");
-
-    User user = new User();
-    if ((User) session.getAttribute("login") == null) {
-        user = new User("dont try navigate to main", "cause you're not logged in", "not", "logged", "and it wont work");
-    } else {
-        user = (User) session.getAttribute("login");
-    }
+    Customer customer = (Customer) session.getAttribute("customer");
+    Staff staff = (Staff) session.getAttribute("staff");
 %>
 <html>
     <body class="bodyclass" onload="startTime()">
@@ -37,7 +32,17 @@
             </div>
             <nav class="navclass">
                 <a href="index.jsp">Home</a>
+                <a href="store.jsp">Store</a>
+                <% if (customer != null) { %>
+                <a href="main.jsp">My Account</a> 
                 <a href="logout.jsp">Logout</a>
+                <% } else if  (staff != null) { %>
+                <a href="staffmain.jsp">Staff Portal</a> 
+                <a href="logout.jsp">Logout</a>
+                <% } else { %>
+                <a href="login.jsp">Login</a>
+                <a href="register.jsp">Register</a>
+                <% }%>
             </nav>
         </header>
         <div class="mainsite">
@@ -58,7 +63,7 @@
                     <select name="searchq" id="category" form="categoryform">
                         <option>Category...</option>
                         <%
-                for (Categories category : categories) {%>
+                            for (Categories category : categories) {%>
                         <option value="<%=category.getName()%>"><%=category.getName()%></option>
                         <%
                             }
@@ -74,27 +79,25 @@
             </div>
             <div class="ac-center box">
                 <%
-        for (Item item : items) {%>
+                    for (Item item : items) {%>
                 <div class="ac">
                     <div class="img-cover">
                         <img src="<%=item.getItem_image_path()%>" height="250px" width="250px   " alt="" />
                     </div>
                     <div class="price"><%=item.getItem_name()%></div>
-                    
-
-
                     $<%=item.getItem_price()%>
                     <form>
-                    <input class="button" type="submit" value="Add to Cart">
-                        </form>
+                        <input class="button" type="submit" value="Add to Cart">
+                    </form>
                 </div>
                 <%
-        }%>
+                    }%>
             </div>
+        </div>
             <!--<p>Designed by: Jona //than H, Stephen B, Navid C, Anas A, Stephen N, Vu H</p>-->   
 
-    <footer class="bottomarea">
-        <p><span id="clock" class="footer"></span></p>
-    </footer>
+            <footer class="bottomarea">
+                <p id="clock" class="footer"></p>
+            </footer>
     </body>
 </html>

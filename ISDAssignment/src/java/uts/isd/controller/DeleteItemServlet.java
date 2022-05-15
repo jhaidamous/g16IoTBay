@@ -36,9 +36,9 @@ public class DeleteItemServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession session = request.getSession();
-        int itemID = Integer.parseInt((String)request.getParameter("itemID"));
-        ItemDAO itemDAO = (ItemDAO)session.getAttribute("itemDAO");
-        
+        int itemID = Integer.parseInt((String) request.getParameter("itemID"));
+        ItemDAO itemDAO = (ItemDAO) session.getAttribute("itemDAO");
+
         //try this code,
         try {
 

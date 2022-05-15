@@ -34,6 +34,7 @@
         <p id="clock" class="footer"></p>
     </footer>
     </body>
+    <% session.invalidate();%>
 
 </html>
 

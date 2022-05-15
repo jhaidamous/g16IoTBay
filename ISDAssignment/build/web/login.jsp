@@ -51,11 +51,11 @@
         </form>
                 <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
             <form method="POST" action="stafflogin.jsp">
-                            <table class="table">
-                                <tr></tr><tr></tr><tr></tr><tr></tr><tr></tr><tr></tr><tr></tr>
+                <table class="table">
+                    <tr></tr><tr></tr><tr></tr><tr></tr><tr></tr><tr></tr><tr></tr>
 
-                                <td><input class="button" type="submit" value="Staff Login"></td>
-                            </table>
+                    <td><input class="button" type="submit" value="Staff Login"></td>
+                </table>
 
             </form>
         </div>

@@ -91,6 +91,9 @@ public ItemDAO(Connection connection) throws SQLException {
     }
         
     public void updateItem(int itemID, String itemname, Double itemprice, int itemstock, String itemstatus, Double costperitem, String itemcategory) throws SQLException {
+        if (itemstock == 0) {
+            itemstatus = "Out of Stock";
+        }
         String fetch = "UPDATE iotadmin.CATALOG_ITEM SET item_name='"+itemname+"', item_price="+itemprice+", item_stock="+itemstock+", item_status='"+itemstatus+"', cost_per_item="+costperitem+", item_category='"+itemcategory+"' WHERE itemID="+itemID+"";
         st.executeUpdate(fetch);
     }

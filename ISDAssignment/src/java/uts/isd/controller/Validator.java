@@ -12,6 +12,8 @@ public class Validator implements Serializable {
     private String passwordPattern = "[a-z0-9]{5,}";
     private String phonePattern = "[A-Za-z0-9.@]+";
     private String cvcPattern =  "[0-9]{3,4}$";
+    private String stockPattern = ".*";
+    private String pricePattern = ".*";
 //    private String expirydatePattern = "((0[1-9])|(1[0-2]))[\\/\\.\\-]*((0[8-9])|(1[1-9]))$";
     private String monthPattern = "(0[1-9]|1[012])";
     private String yearPattern = "^[12][0-9]{3}$";
@@ -42,6 +44,10 @@ public class Validator implements Serializable {
     public boolean validatePassword(String password) {
         return validate(passwordPattern, password);
     }
+
+    public boolean validatePrice(double price) {
+        return validate(pricePattern, Double.toString(price));
+    }
     
     public boolean validatePhone(String phone){
         return validate(phonePattern, phone);
@@ -53,6 +59,14 @@ public class Validator implements Serializable {
     
     public boolean validatecardnum(String cardnum){
         return validate(cardnumPattern, cardnum);
+    }    
+    
+    public boolean validateStock(int stock){
+        return validate(stockPattern, Integer.toString(stock));
+    }
+    
+    public boolean validateItemName(String name) {
+        return validate(namePattern, name);
     }
     
 //    public boolean validateexpirydate(String expirydate){
@@ -84,5 +98,11 @@ public class Validator implements Serializable {
         session.setAttribute("cvcErr", "Enter CVC");
         session.setAttribute("expirydateErr", "Enter Expiry Date");
         session.setAttribute("cardnumErr", "Enter Card Number");
+    }
+    
+    public static void clearItems(HttpSession session) {
+        session.setAttribute("priceErr", "");
+        session.setAttribute("stockErr", "");
+        session.setAttribute("itemNameErr", "");
     }
 }

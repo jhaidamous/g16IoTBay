@@ -26,13 +26,12 @@ import uts.isd.model.dao.ItemDAO;
  * @author JHUTS
  */
 public class ItemViewServlet extends HttpServlet {
-    
-    
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession session = request.getSession();
-        ItemDAO itemDAO = (ItemDAO)session.getAttribute("itemDAO");
+        ItemDAO itemDAO = (ItemDAO) session.getAttribute("itemDAO");
 
         try {
             ArrayList<Item> items = itemDAO.fetchItems();
@@ -46,22 +45,22 @@ public class ItemViewServlet extends HttpServlet {
             Logger.getLogger(ItemViewServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
     @Override
-     protected void doPost(HttpServletRequest request, HttpServletResponse response)
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession session = request.getSession();
         String respurl = request.getParameter("respurl");
         String searchq = request.getParameter("searchq");
         String regsearch = request.getParameter("regsearch");
-        ItemDAO itemDAO = (ItemDAO)session.getAttribute("itemDAO");
+        ItemDAO itemDAO = (ItemDAO) session.getAttribute("itemDAO");
         System.out.print(request.getRequestURL());
         try {
             if (regsearch != null) {
                 System.out.print(searchq);
                 ArrayList<Item> searchItems = itemDAO.searchItems(searchq);
                 session.setAttribute("searchItems", searchItems);
-                }
-            else {
+            } else {
                 System.out.print(searchq + "here");
                 ArrayList<Item> searchItems = itemDAO.searchCategories(searchq);
                 session.setAttribute("searchItems", searchItems);
@@ -70,7 +69,7 @@ public class ItemViewServlet extends HttpServlet {
             response.sendRedirect(url);
         } catch (NullPointerException ex) {
             System.out.println(ex.getMessage() == null ? "Items not found in DB" : "Items found");
-            String url = request.getContextPath() + "/storeSearch.jsp";
+            String url = request.getContextPath() + respurl;
             response.sendRedirect(url);
         } catch (SQLException ex) {
             Logger.getLogger(ItemViewServlet.class.getName()).log(Level.SEVERE, null, ex);

@@ -40,6 +40,8 @@ public class LogoutServlet extends HttpServlet {
 
         try {
             logsDAO.createLogs(customer.getUserID(), "Logged out");
+            session.setAttribute("customer", null);
+            session.setAttribute("staff", null);
             session.invalidate();
 //            request.getRequestDispatcher("store.jsp").include(request, response);
         } catch (NullPointerException ex) {
